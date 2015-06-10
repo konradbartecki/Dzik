@@ -104,7 +104,7 @@
                 </DataTemplate>
             </HubSection>
             
-            <HubSection IsHeaderInteractive="True" DataContext="{Binding Section3Items}" d:DataContext="{Binding Groups[3], Source={d:DesignData Source=../LecznaHub.Shared/DataModel/SampleData.json, Type=data:SampleDataSource}}"
+            <HubSection IsHeaderInteractive="True" DataContext="{Binding Groups[0]}" d:DataContext="{Binding Groups[0], Source={d:DesignData Source=Model/SampleData.json, Type=data:SampleDataSource}}"
                         x:Uid="Section3Header" Header="Section 3" Padding="40,40,40,32">
                 <DataTemplate>
                     <GridView
