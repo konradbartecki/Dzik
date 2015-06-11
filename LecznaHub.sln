@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LecznaHub.Core", "LecznaHub
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LecznaHub.TestApp", "LecznaHub.TestApp\LecznaHub.TestApp.csproj", "{E8BFC25B-D8C0-49D9-897E-4A69031A7945}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IsoDecoder", "IsoDecoder\IsoDecoder.vcxproj", "{10BAF934-9011-4BD8-A970-1A62DA50B2B4}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		LecznaHub.Shared\LecznaHub.Shared.projitems*{9b42b335-4366-468f-a6bb-5bf17ea50c92}*SharedItemsImports = 4
@@ -144,6 +146,24 @@ Global
 		{E8BFC25B-D8C0-49D9-897E-4A69031A7945}.Release|x86.ActiveCfg = Release|x86
 		{E8BFC25B-D8C0-49D9-897E-4A69031A7945}.Release|x86.Build.0 = Release|x86
 		{E8BFC25B-D8C0-49D9-897E-4A69031A7945}.Release|x86.Deploy.0 = Release|x86
+		{10BAF934-9011-4BD8-A970-1A62DA50B2B4}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{10BAF934-9011-4BD8-A970-1A62DA50B2B4}.Debug|ARM.ActiveCfg = Debug|ARM
+		{10BAF934-9011-4BD8-A970-1A62DA50B2B4}.Debug|ARM.Build.0 = Debug|ARM
+		{10BAF934-9011-4BD8-A970-1A62DA50B2B4}.Debug|x64.ActiveCfg = Debug|x64
+		{10BAF934-9011-4BD8-A970-1A62DA50B2B4}.Debug|x64.Build.0 = Debug|x64
+		{10BAF934-9011-4BD8-A970-1A62DA50B2B4}.Debug|x64.Deploy.0 = Debug|x64
+		{10BAF934-9011-4BD8-A970-1A62DA50B2B4}.Debug|x86.ActiveCfg = Debug|Win32
+		{10BAF934-9011-4BD8-A970-1A62DA50B2B4}.Debug|x86.Build.0 = Debug|Win32
+		{10BAF934-9011-4BD8-A970-1A62DA50B2B4}.Debug|x86.Deploy.0 = Debug|Win32
+		{10BAF934-9011-4BD8-A970-1A62DA50B2B4}.Release|Any CPU.ActiveCfg = Release|Win32
+		{10BAF934-9011-4BD8-A970-1A62DA50B2B4}.Release|ARM.ActiveCfg = Release|ARM
+		{10BAF934-9011-4BD8-A970-1A62DA50B2B4}.Release|ARM.Build.0 = Release|ARM
+		{10BAF934-9011-4BD8-A970-1A62DA50B2B4}.Release|x64.ActiveCfg = Release|x64
+		{10BAF934-9011-4BD8-A970-1A62DA50B2B4}.Release|x64.Build.0 = Release|x64
+		{10BAF934-9011-4BD8-A970-1A62DA50B2B4}.Release|x64.Deploy.0 = Release|x64
+		{10BAF934-9011-4BD8-A970-1A62DA50B2B4}.Release|x86.ActiveCfg = Release|Win32
+		{10BAF934-9011-4BD8-A970-1A62DA50B2B4}.Release|x86.Build.0 = Release|Win32
+		{10BAF934-9011-4BD8-A970-1A62DA50B2B4}.Release|x86.Deploy.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
+using HtmlAgilityPack;
+using LecznaHub.Core.Helpers;
 using LecznaHub.Core.Model;
 
 namespace LecznaHub.Core.Providers
@@ -79,38 +83,87 @@ namespace LecznaHub.Core.Providers
         {
             
         }
-        
+
+        class Leczna24WebArticleDownloader : Downloader
+        {
+            public Leczna24WebArticleDownloader(Uri feedUri) : base(feedUri)
+            {
+            }
+
+            public override StreamReader OverrideStreamReader(Stream dataStream)
+            {
+                return new StreamReader(dataStream, new IsoEncoding(), true);
+            }
+        }
+
+        public override Downloader CreateNewDownloader()
+        {
+            return new Leczna24WebArticleDownloader(new Uri(this.UniqueID));
+        }
+
+        protected override string ConvertEncoding(string data)
+        {
+            //data = "Żółć";
+
+            //Encoding iso = new IsoEncoding();
+            //Encoding utf16 = Encoding.Unicode;
+            //byte[] isoBytes = iso.GetBytes(data);
+            //byte[] utf16Bytes = Encoding.Convert(iso, utf16, isoBytes);
+
+            ////char[] utfchars = new char[utf8.GetCharCount(utf8Bytes, 0, utf8Bytes.Length)];
+            ////utf8.GetChars(utf8Bytes, 0, utfchars.Length, utfchars, 0);
+            ////string utfstring = new string(utfchars);
+            ////char[] utfchars = new char[utf8.GetCharCount(utf8Bytes, 0, utf8Bytes.Length)];
+            //string utfstring = utf16.GetString(utf16Bytes, 0, utf16Bytes.Length);
+
+            //return utfstring;
+
+            return base.ConvertEncoding(data);
+        }
+
         protected override string GetHeadline()
         {
             return
-                WebPageXDocument.Elements("h2")
-                    .Where(elements => (string)elements.Attribute("class") == "artykul_lead")
-                    .Select(elements => elements.Value).FirstOrDefault();
+                HtmlDocument.DocumentNode
+                    .Descendants()
+                    .FirstOrDefault(x => x.Name == "h2" && x.Attributes["class"].Value == "artykul_lead").ToString();
         }
 
         protected override string GetImagePath()
         {
-            return
-                WebPageXDocument.Elements("h2")
-                    .Where(elements => (string) elements.Attribute("class") == "noprint informacje_content_img")
-                    .Select(elements => elements.Attribute("style").Value).FirstOrDefault();
+            return HtmlDocument.DocumentNode
+                    .Descendants()
+                    .FirstOrDefault(x => x.Attributes["class"].Value == "noprint informacje_content_img").ToString();
+            //    .Where(elements => (string) elements.Attribute("class") == "noprint informacje_content_img")
+            //    .Select(elements => elements.Attribute("style").Value).FirstOrDefault();
         }
 
         protected override string PrepareHtmlPage()
         {
             this.IsPrepared = true;
-            return
-                WebPageXDocument.Elements("h2")
-                    .Where(elements => (string)elements.Attribute("class") == "artykul_tresc")
-                    .Select(elements => elements.Value).FirstOrDefault();
+            return HtmlDocument.DocumentNode
+                    .Descendants()
+                    .FirstOrDefault(x => x.Attributes["class"].Value == "artykul_tresc").ToString();
+            //    .Where(elements => (string)elements.Attribute("class") == "artykul_tresc")
+            //    .Select(elements => elements.Value).FirstOrDefault();
         }
 
         protected override string GetTitle()
         {
-            return
-                WebPageXDocument.Elements("h1")
-                    .Where(elements => (string)elements.Attribute("class") == "artykul_tytul")
-                    .Select(elements => elements.Value).FirstOrDefault();
+            string s;
+
+            foreach (HtmlNode node in HtmlDocument.DocumentNode.Descendants())
+            {
+                if (node.Attributes.Contains("class") && (node.GetAttributeValue("class", "") == "artykul_lead"))
+                {
+                    s = node.InnerText;
+                    return s;
+                }
+            }
+            return "nope";
+            //return HtmlDocument.DocumentNode
+            //        .Descendants()
+            //        .FirstOrDefault(x => x.Attributes["class"].Value == "artykul_tytul").ToString();
         }
     }
 }

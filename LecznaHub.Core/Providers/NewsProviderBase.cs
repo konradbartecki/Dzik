@@ -18,7 +18,7 @@ namespace LecznaHub.Core.Providers
         /// </summary>
         internal Uri NewsFeedUri;
 
-        public async Task<NewsCollection> GetNewsAsync()
+        public virtual async Task<NewsCollection> GetNewsAsync()
         {
             //Download news as string
             Downloader downloader = new Downloader(NewsFeedUri);
