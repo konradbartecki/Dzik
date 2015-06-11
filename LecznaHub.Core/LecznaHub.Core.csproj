@@ -35,12 +35,17 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <Content Include="Model\SampleWebArticle.xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Downloader.cs" />
-    <Compile Include="Model\NewsGroups.cs" />
+    <Compile Include="Model\NewsDataSource.cs" />
+    <Compile Include="Model\NewsCollection.cs" />
+    <Compile Include="Model\NewsItemBase.cs" />
+    <Compile Include="Model\WebArticleBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\Leczna24.cs" />
+    <Compile Include="Providers\NewsProviderBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

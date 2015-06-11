@@ -103,7 +103,7 @@ namespace LecznaHub
         /// <param name="e">Defaults about the click event.</param>
         private void ItemView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var itemId = ((NewsItem)e.ClickedItem).UniqueId;
+            var itemId = ((NewsItemBase)e.ClickedItem).UniqueId;
             if (!Frame.Navigate(typeof(ItemPage), itemId))
             {
                 throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));

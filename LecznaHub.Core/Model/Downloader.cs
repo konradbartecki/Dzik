@@ -17,7 +17,7 @@ namespace LecznaHub.Core.Model
 
         private WebRequest request { get; set; }
 
-        public async Task<string> GetNewsAsync()
+        public async Task<string> GetPageAsync()
         {
             WebResponse response = await request.GetResponseAsync();
             // Get the stream containing content returned by the server.

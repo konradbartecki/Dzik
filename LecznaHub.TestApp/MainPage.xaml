@@ -9,8 +9,40 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Button x:Name="button" Content="Download" HorizontalAlignment="Left" Margin="10,582,0,0" VerticalAlignment="Top" Click="button_Click"/>
-        <Button x:Name="button1" Content="Download + Parse&#xD;&#xA;" HorizontalAlignment="Left" Margin="124,582,0,0" VerticalAlignment="Top" Click="button1_Click"/>
+        <Button x:Name="button" Content="Download" HorizontalAlignment="Left" Margin="10,-2,0,0" VerticalAlignment="Top" Click="button_Click" d:LayoutOverrides="VerticalAlignment"/>
+        <Button x:Name="button1" Content="Download + Parse&#xD;&#xA;" HorizontalAlignment="Left" Margin="210,0,0,0" VerticalAlignment="Top" Click="button1_Click" d:LayoutOverrides="VerticalAlignment" Height="37" Width="180"/>
+        <RichTextBlockOverflow x:Name="richTextBlockOverflow" Margin="0,155,0,0"/>
+        <RichTextBlock Margin="10,155,10,0" ScrollViewer.VerticalScrollBarVisibility="Auto" Canvas.ZIndex="5" IsTextSelectionEnabled="False" OverflowContentTarget="{Binding OverflowContentTarget, ElementName=richTextBlockOverflow}">
+            <Paragraph FontWeight="Bold" FontSize="18.667" Margin="0,0,0,15">
+                <Run Text="Będą pieniądze na osiedlowe inwestycje. Zgłoś pomysł!" FontWeight="Bold"/>
+            </Paragraph>
+            <Paragraph FontSize="14.667" Margin="0,0,0,15">
+                <Run Text="Nowe place zabaw, ławki, boiska - to przykłady inwestycji, które mogą powstać w przyszłym roku z inicjatywy mieszkańców Łęcznej. Na realizację pomysłów gmina zabezpieczy 232 tysiące złotych."/>
+            </Paragraph>
+            <Paragraph FontSize="13.333" Margin="0,0,0,10">
+                <Run Text="Łęczyński budżet partycypacyjny na rok 2016 jest projektem pilotażowym. Propozycje do budżetu składają mieszkańcy Łęcznej, przez co stają się zaangażowani i współodpowiedzialni za rozwój swojego osiedla."/>
+            </Paragraph>
+            <Paragraph FontSize="13.333" Margin="0,0,0,10">
+                <Run Text="Po weryfikacji wniosków pod kątem formalnym tj. sprawdzeniu zgodności z miejscowym planem zagospodarowania przestrzennego, zgodności z prawem, możliwości realizacji, terminowości, kosztów generowanych w kolejnych latach oraz gospodarności trafiają one do rad osiedli, które dokonają wyboru projektów do realizacji w 2016 roku."/>
+            </Paragraph>
+            <Paragraph Foreground="White" FontStyle="Normal" FontSize="13.333" Margin="100,0,0,10">
+                <Run FontStyle="Italic" FontSize="13.333" Text="Dajemy mieszkańcom realną szansę na kształtowanie budżetu, jednocześnie znacząco wzmacniając rolę rad osiedli. To co zostanie ustalone w ramach budżetu partycypacyjnego będzie wpisywane do budżetu i realizowane bez ingerencji radnych &amp;#8211; zapewnia Teodor Kosiarski Burmistrz Łęcznej."/>
+            </Paragraph>
+            <Paragraph FontSize="13.333" Margin="0,0,0,10">
+                <Run Text="Przy okazji należy dodać, że z podobnego wsparcia o nazwie fundusz sołecki od kilku lat korzystają już mieszkańcy wsi."/>
+            </Paragraph>
+            <Paragraph FontSize="13.333" Margin="0,0,0,10">
+                <Run Text="Pomysły do budżetu partypacyjnego poparte 5 podpisami należy składać do ratusza najpóźniej do 15 lipca na formularzu dostępnym m.in.poniżej."/>
+            </Paragraph>
+            <Paragraph FontSize="13.333" Margin="0,0,0,10">
+                <Run FontSize="13.333" Text="Pobierz: [LINK] Wniosek o ujęcie zadania w budżecie partycypacyjnym"/>
+            </Paragraph>
+            <Paragraph FontSize="13.333" Margin="0,0,0,10">
+                <Run Text="Co zaproponują mieszkańcy Łęcznej? Przekonamy się już niedługo."/>
+            </Paragraph>
+        </RichTextBlock>
+        <Image x:Name="image" Height="150" VerticalAlignment="Top" Source="http://leczna24.pl/f/s/skatepark_remont_640153_bg.jpg" Stretch="Fill"/>
+        <TextBlock x:Name="textBlock" Margin="26,0,0,73" TextWrapping="Wrap" Text="&quot;" VerticalAlignment="Bottom" FontSize="160" HorizontalAlignment="Left" Height="140" Width="93" FontFamily="Segoe UI Emoji"/>
 
     </Grid>
 </Page>

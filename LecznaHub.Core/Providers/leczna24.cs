@@ -9,42 +9,37 @@ using LecznaHub.Core.Model;
 
 namespace LecznaHub.Core.Providers
 {
-    public static class Leczna24
+    public class Leczna24 : NewsProviderBase
     {
-        private static readonly Uri uri = new Uri("http://leczna24.pl/rss/informacje_utf8.php");
-
-        public static async Task<NewsGroups> GetNewsAsync()
+        public Leczna24()
         {
-            //Download news as string
-            Downloader downloader = new Downloader(uri);
-            string news = await downloader.GetNewsAsync();
-
-            return GetNewsFromText(news);
+            this.NewsFeedUri = new Uri("http://leczna24.pl/rss/informacje_utf8.php");
         }
-        
+
         //Read as XML and select all items
-        public static NewsGroups GetNewsFromText(string news)
+        public override NewsCollection GetNewsFromDownloadedData(string data)
         {
-            XDocument newsXmlDocument = XDocument.Parse(news);
+            //TODO: Reuse (if needed) XML RSS reading
+            XDocument newsXmlDocument = XDocument.Parse(data);
             var XmlItems = newsXmlDocument.Descendants("item");
             //Cast items into model
-            NewsGroups group = new NewsGroups("Leczna24 news");
+            NewsCollection collection = new NewsCollection("Leczna24 news");
             foreach (XElement item in XmlItems)
             {
                 string id = item.Element("link").Value;
                 string title = item.Element("title").Value;
                 string description = item.Element("description").Value;
 
-                group.Items.Add(new Leczna24NewsItem(id, title, description));
+                collection.Items.Add(new Leczna24NewsItem(id, title, description));
             }
-            return group;
+            return collection;
         }
 
     }
 
 
 
-    public class Leczna24NewsItem : NewsItem
+    public class Leczna24NewsItem : NewsItemBase
     {
         /// <summary>
         /// Łęczna24 news class
@@ -54,9 +49,10 @@ namespace LecznaHub.Core.Providers
         /// <param name="imagePath">Not used because img path is contained in description</param>
         /// <param name="description">Contains longer description about news</param>
         public Leczna24NewsItem(string uniqueId, string title, string description)
-            : base (uniqueId, title, GetImagePath(description), GetDescription(description))
+            : base (uniqueId, title, GetImagePath(description), GetDescription(description), new Leczna24WebArticle(uniqueId))
         {
-
+            //Will pass UniqueID and Title parameter back to base class 
+            //but we will manipulate ImagePath and Description
         }
 
         private static string GetImagePath(string data)
@@ -74,6 +70,47 @@ namespace LecznaHub.Core.Providers
             string s = data.Remove(0, i);
             s = s.Replace("<br /> ", "");
             return s;
+        }
+    }
+
+    public class Leczna24WebArticle : WebArticleBase
+    {
+        public Leczna24WebArticle(string uniqueId) : base(uniqueId)
+        {
+            
+        }
+        
+        protected override string GetHeadline()
+        {
+            return
+                WebPageXDocument.Elements("h2")
+                    .Where(elements => (string)elements.Attribute("class") == "artykul_lead")
+                    .Select(elements => elements.Value).FirstOrDefault();
+        }
+
+        protected override string GetImagePath()
+        {
+            return
+                WebPageXDocument.Elements("h2")
+                    .Where(elements => (string) elements.Attribute("class") == "noprint informacje_content_img")
+                    .Select(elements => elements.Attribute("style").Value).FirstOrDefault();
+        }
+
+        protected override string PrepareHtmlPage()
+        {
+            this.IsPrepared = true;
+            return
+                WebPageXDocument.Elements("h2")
+                    .Where(elements => (string)elements.Attribute("class") == "artykul_tresc")
+                    .Select(elements => elements.Value).FirstOrDefault();
+        }
+
+        protected override string GetTitle()
+        {
+            return
+                WebPageXDocument.Elements("h1")
+                    .Where(elements => (string)elements.Attribute("class") == "artykul_tytul")
+                    .Select(elements => elements.Value).FirstOrDefault();
         }
     }
 }
