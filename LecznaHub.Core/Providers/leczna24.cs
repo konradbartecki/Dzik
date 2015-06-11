@@ -101,69 +101,62 @@ namespace LecznaHub.Core.Providers
             return new Leczna24WebArticleDownloader(new Uri(this.UniqueID));
         }
 
-        protected override string ConvertEncoding(string data)
-        {
-            //data = "Żółć";
-
-            //Encoding iso = new IsoEncoding();
-            //Encoding utf16 = Encoding.Unicode;
-            //byte[] isoBytes = iso.GetBytes(data);
-            //byte[] utf16Bytes = Encoding.Convert(iso, utf16, isoBytes);
-
-            ////char[] utfchars = new char[utf8.GetCharCount(utf8Bytes, 0, utf8Bytes.Length)];
-            ////utf8.GetChars(utf8Bytes, 0, utfchars.Length, utfchars, 0);
-            ////string utfstring = new string(utfchars);
-            ////char[] utfchars = new char[utf8.GetCharCount(utf8Bytes, 0, utf8Bytes.Length)];
-            //string utfstring = utf16.GetString(utf16Bytes, 0, utf16Bytes.Length);
-
-            //return utfstring;
-
-            return base.ConvertEncoding(data);
-        }
-
-        protected override string GetHeadline()
-        {
-            return
-                HtmlDocument.DocumentNode
-                    .Descendants()
-                    .FirstOrDefault(x => x.Name == "h2" && x.Attributes["class"].Value == "artykul_lead").ToString();
-        }
-
-        protected override string GetImagePath()
-        {
-            return HtmlDocument.DocumentNode
-                    .Descendants()
-                    .FirstOrDefault(x => x.Attributes["class"].Value == "noprint informacje_content_img").ToString();
-            //    .Where(elements => (string) elements.Attribute("class") == "noprint informacje_content_img")
-            //    .Select(elements => elements.Attribute("style").Value).FirstOrDefault();
-        }
-
-        protected override string PrepareHtmlPage()
-        {
-            this.IsPrepared = true;
-            return HtmlDocument.DocumentNode
-                    .Descendants()
-                    .FirstOrDefault(x => x.Attributes["class"].Value == "artykul_tresc").ToString();
-            //    .Where(elements => (string)elements.Attribute("class") == "artykul_tresc")
-            //    .Select(elements => elements.Value).FirstOrDefault();
-        }
-
         protected override string GetTitle()
         {
             string s;
 
-            foreach (HtmlNode node in HtmlDocument.DocumentNode.Descendants())
+            foreach (HtmlNode node in DownloadedHtmlDocument.DocumentNode.Descendants())
             {
                 if (node.Attributes.Contains("class") && (node.GetAttributeValue("class", "") == "artykul_lead"))
                 {
-                    s = node.InnerText;
-                    return s;
+                    return node.InnerText;
                 }
             }
-            return "nope";
+            return "Unable to download article title";
             //return HtmlDocument.DocumentNode
             //        .Descendants()
             //        .FirstOrDefault(x => x.Attributes["class"].Value == "artykul_tytul").ToString();
+        }
+
+        protected override string GetHeadline()
+        {
+            foreach (HtmlNode node in DownloadedHtmlDocument.DocumentNode.Descendants())
+            {
+                if (node.Attributes.Contains("class") && (node.GetAttributeValue("class", "") == "artykul_lead"))
+                {
+                    return node.InnerText;
+                }
+            }
+            return "Unable to download article headline";
+        }
+
+        protected override string GetImagePath()
+        {
+            foreach (HtmlNode node in DownloadedHtmlDocument.DocumentNode.Descendants())
+            {
+                if (node.Attributes.Contains("class") && (node.GetAttributeValue("class", "") == "noprint informacje_content_img"))
+                {
+                    return node.InnerText;
+                }
+            }
+            return "Unable to download article image";
+            //    .Where(elements => (string) elements.Attribute("class") == "noprint informacje_content_img")
+            //    .Select(elements => elements.Attribute("style").Value).FirstOrDefault();
+        }
+
+        protected override string GetArticleBody()
+        {            
+            foreach (HtmlNode node in DownloadedHtmlDocument.DocumentNode.Descendants())
+            {
+                if (node.Attributes.Contains("class") && (node.GetAttributeValue("class", "") == "artykul_tresc"))
+                {
+                    this.IsPrepared = true;
+                    return node.InnerHtml;
+                }
+            }
+            return "Unable to download article body";
+            //    .Where(elements => (string)elements.Attribute("class") == "artykul_tresc")
+            //    .Select(elements => elements.Value).FirstOrDefault();
         }
     }
 }

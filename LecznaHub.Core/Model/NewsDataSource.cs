@@ -44,7 +44,7 @@ namespace LecznaHub.Core.Model
 
         public static async Task<NewsItemBase> GetItemAsync(string uniqueId)
         {
-            //await _sampleDataSource.GetNewsDataAsync();
+            await _sampleDataSource.GetNewsDataAsync();
             // Simple linear search is acceptable for small data sets
             var matches =
                 _sampleDataSource.Groups.SelectMany(group => group.Items)
@@ -62,10 +62,26 @@ namespace LecznaHub.Core.Model
         {
             foreach (var provider in NewsProvidersList)
             {
-                this.Groups.Add(await provider.GetNewsAsync());
+                //Download new collection of news
+                NewsCollection newsCollection = await provider.GetNewsAsync();
+                //Check if news from this provider are already stored
+                if (this.Groups.Any(x => x.Title == newsCollection.Title))
+                {
+                    //Search for collection of news and replace
+                    for (int i = 0; i < this.Groups.Count; i++)
+                    {
+                        if (Groups[i].Title == newsCollection.Title)
+                            Groups[i] = newsCollection;
+                    }
+                }
+                else
+                {
+                    //We do not have collection of news from this provider in groups
+                    //so we will add this
+                    this.Groups.Add(newsCollection);
+                }
+
             }
-            //commented because I've implememted multiple providers support above
-            //this.Groups.Add(await Leczna24.GetNewsAsync());
             Debug.WriteLine("Reading news done");
 
         }

@@ -38,7 +38,6 @@
     <Content Include="Model\SampleWebArticle.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\ByteConvert.cs" />
     <Compile Include="Helpers\IsoEncoding.cs" />
     <Compile Include="Model\Downloader.cs" />
     <Compile Include="Model\NewsDataSource.cs" />

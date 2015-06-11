@@ -58,6 +58,7 @@ namespace LecznaHub
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
             //throw new NotImplementedException();
             var item = await NewsDataSource.GetItemAsync((string)e.NavigationParameter);
+            this.webView.NavigateToString(item.WebArticle.ToString());
             this.DefaultViewModel["Item"] = item;
         }
 

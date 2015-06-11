@@ -41,7 +41,7 @@
         <!--TODO: Content should be placed within the following grid 
                   to show details for the current item -->
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
-            <WebView></WebView>
+            <WebView x:Name="webView"></WebView>
 
         </Grid>
     </Grid>

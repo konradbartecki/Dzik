@@ -23,11 +23,9 @@ namespace LecznaHub.Core.Model
         public string Title { get; private set; }
         public string Headline { get; private set; }
         public string ImagePath { get; private set; }
-        protected HtmlDocument HtmlDocument { get; set; }
-        /// <summary>
-        /// Also contains all data that can be used to build WebArticle like title, headline, etc.
-        /// </summary>
-        public string HtmlPage { get; private set; }
+        protected HtmlDocument DownloadedHtmlDocument { get; set; }
+        public string ArticleBody { get; private set; }
+        public string FormattedHtmlDocument { get; private set; }
 
         /// <summary>
         /// Override this class if you need custom downloader with custom encoding
@@ -41,21 +39,28 @@ namespace LecznaHub.Core.Model
         public async Task DownloadAsync()
         {
             Downloader downloader = CreateNewDownloader();
-            HtmlPage = await downloader.GetPageAsync();
-            //var webdl = new HtmlWeb();
-            //var HtmlDocument = await webdl.LoadFromWebAsync(UniqueID, Encoding.GetEncoding("iso-8859-2"));
-            HtmlPage = ConvertEncoding(HtmlPage);
+            string download = await downloader.GetPageAsync();
 
-            HtmlDocument = new HtmlDocument();
-            HtmlDocument.LoadHtml(HtmlPage);
-            //WebPageXDocument = XDocument.Parse(HtmlPage);
+            DownloadedHtmlDocument = new HtmlDocument();
+            DownloadedHtmlDocument.LoadHtml(download);
 
             Title = GetTitle();
             Headline = GetHeadline();
             ImagePath = GetImagePath();
-            HtmlPage = PrepareHtmlPage();
+            ArticleBody = GetArticleBody();
+            FormattedHtmlDocument = BuildHtmlPage();
 
 
+
+        }
+
+        public string BuildHtmlPage()
+        {
+            //HtmlDocument htmldoc = new HtmlDocument();
+            return String.Format("<html><head></head><body><h1>{0}</h1><h2>{1}</h2>{2}</body></html>",
+                this.Title, this.Headline, this.ArticleBody);
+            //var node = HtmlNode.CreateNode("");
+            //htmldoc.DocumentNode.AppendChild(node);
 
         }
 
@@ -63,13 +68,15 @@ namespace LecznaHub.Core.Model
 
         protected abstract string GetImagePath();
 
-        protected abstract string PrepareHtmlPage();
+        protected abstract string GetArticleBody();
 
         protected abstract string GetTitle();
 
-        protected virtual string ConvertEncoding(string data)
+        public override string ToString()
         {
-            return data;
+            if (string.IsNullOrWhiteSpace(FormattedHtmlDocument))
+                return "";
+            return FormattedHtmlDocument;
         }
     }
 }
