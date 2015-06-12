@@ -7,15 +7,17 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using HtmlAgilityPack;
 using LecznaHub.Core.Helpers;
+using LecznaHub.Core.Providers;
 
 namespace LecznaHub.Core.Model
 {
     public abstract class WebArticleBase
     {
-        public WebArticleBase(string uniqueId)
+        protected WebArticleBase(string uniqueId, NewsProviderBase provider)
         {
             this.UniqueID = uniqueId;
             this.IsPrepared = false;
+            this.Provider = provider;
         }
 
         public bool IsPrepared { get; protected set; }
@@ -26,6 +28,7 @@ namespace LecznaHub.Core.Model
         protected HtmlDocument DownloadedHtmlDocument { get; set; }
         public string ArticleBody { get; private set; }
         public string FormattedHtmlDocument { get; private set; }
+        public NewsProviderBase Provider { get; private set; }
 
         /// <summary>
         /// Override this class if you need custom downloader with custom encoding
@@ -57,8 +60,8 @@ namespace LecznaHub.Core.Model
         public string BuildHtmlPage()
         {
             //HtmlDocument htmldoc = new HtmlDocument();
-            return String.Format("<html><head></head><body><h1>{0}</h1><h2>{1}</h2>{2}</body></html>",
-                this.Title, this.Headline, this.ArticleBody);
+            return String.Format("<img src=\"{3}\" style=\"width:100%;\"><h1>{0}</h1><h2>{1}</h2>{2}",
+                this.Title, this.Headline, this.ArticleBody, this.ImagePath);
             //var node = HtmlNode.CreateNode("");
             //htmldoc.DocumentNode.AppendChild(node);
 

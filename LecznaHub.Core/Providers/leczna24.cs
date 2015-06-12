@@ -15,9 +15,9 @@ namespace LecznaHub.Core.Providers
 {
     public class Leczna24 : NewsProviderBase
     {
-        public Leczna24()
+        public Leczna24() : base ("Łęczna24", "http://leczna24.pl", new Uri("http://leczna24.pl/rss/informacje_utf8.php"))
         {
-            this.NewsFeedUri = new Uri("http://leczna24.pl/rss/informacje_utf8.php");
+
         }
 
         //Read as XML and select all items
@@ -34,7 +34,7 @@ namespace LecznaHub.Core.Providers
                 string title = item.Element("title").Value;
                 string description = item.Element("description").Value;
 
-                collection.Items.Add(new Leczna24NewsItem(id, title, description));
+                collection.Items.Add(new Leczna24NewsItem(id, title, description, this));
             }
             return collection;
         }
@@ -52,8 +52,8 @@ namespace LecznaHub.Core.Providers
         /// <param name="title">News title</param>
         /// <param name="imagePath">Not used because img path is contained in description</param>
         /// <param name="description">Contains longer description about news</param>
-        public Leczna24NewsItem(string uniqueId, string title, string description)
-            : base (uniqueId, title, GetImagePath(description), GetDescription(description), new Leczna24WebArticle(uniqueId))
+        public Leczna24NewsItem(string uniqueId, string title, string description, NewsProviderBase provider)
+            : base (uniqueId, title, GetImagePath(description), GetDescription(description), new Leczna24WebArticle(uniqueId, provider), provider)
         {
             //Will pass UniqueID and Title parameter back to base class 
             //but we will manipulate ImagePath and Description
@@ -79,7 +79,7 @@ namespace LecznaHub.Core.Providers
 
     public class Leczna24WebArticle : WebArticleBase
     {
-        public Leczna24WebArticle(string uniqueId) : base(uniqueId)
+        public Leczna24WebArticle(string uniqueId, NewsProviderBase provider) : base(uniqueId, provider)
         {
             
         }
@@ -107,7 +107,7 @@ namespace LecznaHub.Core.Providers
 
             foreach (HtmlNode node in DownloadedHtmlDocument.DocumentNode.Descendants())
             {
-                if (node.Attributes.Contains("class") && (node.GetAttributeValue("class", "") == "artykul_lead"))
+                if (node.Attributes.Contains("class") && (node.GetAttributeValue("class", "") == "artykul_tytul"))
                 {
                     return node.InnerText;
                 }
@@ -136,7 +136,11 @@ namespace LecznaHub.Core.Providers
             {
                 if (node.Attributes.Contains("class") && (node.GetAttributeValue("class", "") == "noprint informacje_content_img"))
                 {
-                    return node.InnerText;
+                    string s = node.GetAttributeValue("style", "");
+                    s = s.Replace("background-image: url(", "");
+                    s = s.Replace(");", "");
+                    s = this.Provider.ProviderNamespace + s;
+                    return s;
                 }
             }
             return "Unable to download article image";

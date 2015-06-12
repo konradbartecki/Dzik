@@ -39,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\IsoEncoding.cs" />
+    <Compile Include="Helpers\WebViewerHelper.cs" />
     <Compile Include="Model\Downloader.cs" />
     <Compile Include="Model\NewsDataSource.cs" />
     <Compile Include="Model\NewsCollection.cs" />

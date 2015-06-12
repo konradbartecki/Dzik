@@ -13,10 +13,27 @@ namespace LecznaHub.Core.Providers
     /// </summary>
     public abstract class NewsProviderBase
     {
+        public NewsProviderBase(string name, string providerNamespace, Uri newsFeedUri)
+        {
+            this.Name = name;
+            this.NewsFeedUri = newsFeedUri;
+            this.ProviderNamespace = providerNamespace;
+        }
+
+        public string Name { get; private set; }
+        /// <summary>
+        /// Root of the website: ex. "http://leczna24.pl"
+        /// </summary>
+        public string ProviderNamespace { get; private set; }
         /// <summary>
         /// This Uri contains address of where will news be downloaded from. Most likely address of RSS
         /// </summary>
-        internal Uri NewsFeedUri;
+        public Uri NewsFeedUri { get; private set; }
+
+
+        //internal Uri NewsFeedUri;
+
+        //public string ProviderNamespace;
 
         public virtual async Task<NewsCollection> GetNewsAsync()
         {

@@ -15,6 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Common\WebViewerHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Config.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\SampleDataSource.cs" />
     <Content Include="$(MSBuildThisFileDirectory)Model\SampleData.json" />
