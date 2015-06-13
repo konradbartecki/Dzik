@@ -1,0 +1,26 @@
+﻿html {
+     -ms-text-size-adjust:125%;
+}
+body
+{
+  /*background-color:black;
+  color: white;*/
+  /*font-family:'Segoe UI';*/
+  font-size:11px;
+  margin:0;
+  padding:0;
+  display: block;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+}
+h1{
+  font-size: 15px;
+}
+h2{
+  font-size: 13px;
+}
+img{
+    width: 100%;
+    max-width: 100%;
+}

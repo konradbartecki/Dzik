@@ -62,9 +62,9 @@
                     <ImageBrush ImageSource="Assets/MediumGray.png" Stretch="UniformToFill" />
                 </HubSection.Background>
             </HubSection>
-            
+         
             <!-- SECTION 1 and 2 of hubs - we don't need this now but may come in handy in the future -->            
-            <HubSection Width="500" x:Uid="Section1Header" Header="Section 1">
+            <!--<HubSection Width="500" x:Uid="Section1Header" Header="Section 1">
                 <DataTemplate>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -82,8 +82,9 @@
                                    x:Uid="Section1DescriptionText" Text="Lorem ipsum dolor sit amet, consectetuer ising elit, sed diam nonummy nibh uismod tincidunt ut laoreet suscipit lobortis ni ut wisi quipexerci quis consequat minim veniam, quis nostrud exerci tation ullam corper. Lorem ipsum dolor sit amet, consectetuer ising elit, sed diam nonummy nibh uismod tincidunt ut laoreet suscipit lobortis ni ut wisi quipexerci quis consequat minim veniam, quis nostrud exerci tation ullam corper. "/>
                     </Grid>
                 </DataTemplate>
-            </HubSection>
-            <HubSection Width="520" x:Uid="Section2Header" Header="Section 2">
+            </HubSection>-->
+            
+            <!--<HubSection Width="520" x:Uid="Section2Header" Header="Section 2">
                 <DataTemplate>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -102,9 +103,9 @@
                                    x:Uid="LongText" Text="Lorem ipsum dolor sit amet, consectetuer ising elit, sed diam nonummy nibh uismod tincidunt ut laoreet suscipit lobortis ni ut wisi quipexerci quis consequat minim veniam, quis nostrud exerci tation ullam corper. Lorem ipsum dolor sit amet, consectetuer ising elit, sed diam nonummy nibh uismod tincidunt ut laoreet suscipit lobortis ni ut wisi quipexerci quis consequat minim veniam, quis nostrud exerci tation ullam corper."/>
                     </Grid>
                 </DataTemplate>
-            </HubSection>
+            </HubSection>-->
             
-            <HubSection IsHeaderInteractive="True" DataContext="{Binding Groups[0]}" d:DataContext="{Binding Groups[0], Source={d:DesignData Source=Model/SampleData.json, Type=data:SampleDataSource}}"
+            <HubSection IsHeaderInteractive="False" DataContext="{Binding Groups[0]}" d:DataContext="{Binding Groups[0], Source={d:DesignData Source=Model/SampleData.json, Type=data:SampleDataSource}}"
                         x:Uid="Section3Header" Header="Section 3" Padding="40,40,40,32">
                 <DataTemplate>
                     <GridView
@@ -121,9 +122,9 @@
                     </GridView>
                 </DataTemplate>
             </HubSection>
-            <HubSection x:Uid="Section4Header" Header="Section 4">
+            <!--<HubSection x:Uid="Section4Header" Header="Section 4">
                 <DataTemplate>
-                    <!-- width of 400 -->
+                    --><!-- width of 400 --><!--
                     <StackPanel Orientation="Vertical">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -150,7 +151,7 @@
                         </Grid>
                     </StackPanel>
                 </DataTemplate>
-            </HubSection>
+            </HubSection>-->
         </Hub>
     </Grid>
 </Page>

@@ -74,12 +74,12 @@ namespace LecznaHub
         /// </summary>
         /// <param name="sender">The Hub that contains the HubSection whose header was clicked.</param>
         /// <param name="e">Event data that describes how the click was initiated.</param>
-        void Hub_SectionHeaderClick(object sender, HubSectionHeaderClickEventArgs e)
-        {
-            HubSection section = e.Section;
-            var group = section.DataContext;
-            this.Frame.Navigate(typeof(SectionPage), ((SampleDataGroup)group).UniqueId);
-        }
+        //void Hub_SectionHeaderClick(object sender, HubSectionHeaderClickEventArgs e)
+        //{
+        //    HubSection section = e.Section;
+        //    var group = section.DataContext;
+        //    this.Frame.Navigate(typeof(SectionPage), ((SampleDataGroup)group).UniqueId);
+        //}
 
         /// <summary>
         /// Invoked when an item within a section is clicked.
@@ -91,7 +91,7 @@ namespace LecznaHub
         {
             // Navigate to the appropriate destination page, configuring the new page
             // by passing required information as a navigation parameter
-            var itemId = ((SampleDataItem)e.ClickedItem).UniqueId;
+            var itemId = ((NewsItemBase)e.ClickedItem).UniqueId;
             this.Frame.Navigate(typeof(ItemPage), itemId);
         }
         #region NavigationHelper registration

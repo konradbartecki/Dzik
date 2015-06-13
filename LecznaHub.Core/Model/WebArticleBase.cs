@@ -15,13 +15,13 @@ namespace LecznaHub.Core.Model
     {
         protected WebArticleBase(string uniqueId, NewsProviderBase provider)
         {
-            this.UniqueID = uniqueId;
+            this.UniqueId = uniqueId;
             this.IsPrepared = false;
             this.Provider = provider;
         }
 
         public bool IsPrepared { get; protected set; }
-        public string UniqueID { get; private set; }
+        public string UniqueId { get; private set; }
         public string Title { get; private set; }
         public string Headline { get; private set; }
         public string ImagePath { get; private set; }
@@ -36,7 +36,7 @@ namespace LecznaHub.Core.Model
         /// <returns></returns>
         public virtual Downloader CreateNewDownloader()
         {
-            return new Downloader(new Uri(this.UniqueID));
+            return new Downloader(new Uri(this.UniqueId));
         }
 
         public async Task DownloadAsync()
@@ -60,7 +60,7 @@ namespace LecznaHub.Core.Model
         public string BuildHtmlPage()
         {
             //HtmlDocument htmldoc = new HtmlDocument();
-            return String.Format("<img src=\"{3}\" style=\"width:100%;\"><h1>{0}</h1><h2>{1}</h2>{2}",
+            return String.Format("<img src=\"{3}\");\"><h1>{0}</h1><h2>{1}</h2>{2}",
                 this.Title, this.Headline, this.ArticleBody, this.ImagePath);
             //var node = HtmlNode.CreateNode("");
             //htmldoc.DocumentNode.AppendChild(node);
@@ -77,9 +77,7 @@ namespace LecznaHub.Core.Model
 
         public override string ToString()
         {
-            if (string.IsNullOrWhiteSpace(FormattedHtmlDocument))
-                return "";
-            return FormattedHtmlDocument;
+            return string.IsNullOrWhiteSpace(FormattedHtmlDocument) ? "" : FormattedHtmlDocument;
         }
     }
 }

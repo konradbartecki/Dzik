@@ -5,9 +5,11 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Xml.Linq;
+using Windows.ApplicationModel.Calls;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Popups;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -52,20 +54,29 @@ namespace LecznaHub.TestApp
 
         private async void button_Click(object sender, RoutedEventArgs e)
         {
-            Downloader downloader = new Downloader(new Uri("http://leczna24.pl/rss/informacje_utf8.php"));
-            string s = await downloader.GetNewsAsync();
+            //Downloader downloader = new Downloader(new Uri("http://leczna24.pl/rss/informacje_utf8.php"));
+            //string s = await downloader.GetNewsAsync();
 
-            XDocument feedDocument = XDocument.Parse(s);
-            var news = feedDocument.Descendants("item");
+            //XDocument feedDocument = XDocument.Parse(s);
+            //var news = feedDocument.Descendants("item");
 
-            MessageDialog msgDialog = new MessageDialog("Done", "Downloader");
-            msgDialog.ShowAsync();
+            //MessageDialog msgDialog = new MessageDialog("Done", "Downloader");
+            //msgDialog.ShowAsync();
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
+        private async void button1_Click(object sender, RoutedEventArgs e)
         {
-            NewsDataSource defaultDataSource = new NewsDataSource();
-            defaultDataSource.GetNewsDataAsync();
+            //NewsDataSource defaultDataSource = new NewsDataSource();
+            //defaultDataSource.GetNewsDataAsync();
+            var statusBar = StatusBar.GetForCurrentView();
+            var progressind = statusBar.ProgressIndicator;
+            progressind.Text = "Downloading...";
+            await progressind.ShowAsync();
+        }
+
+        private void button2_Click(object sender, RoutedEventArgs e)
+        { 
+            PhoneCallManager.ShowPhoneCallUI("+48721238100", "Konrad");
         }
     }
 }

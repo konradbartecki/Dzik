@@ -17,7 +17,7 @@
     -->
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
         DataContext="{Binding Item}"
-        d:DataContext="{Binding Groups[0].Items[0], Source={d:DesignData Source=../LecznaHub.Shared/DataModel/SampleData.json, Type=data:SampleDataSource}}">
+        d:DataContext="{Binding Groups[0].Items[0], Source={d:DesignData Source=Model/SampleData.json, Type=data:SampleDataSource}}">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
@@ -27,12 +27,16 @@
             <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        
+        
 
         <!--
             TODO: Content should be placed within the following grid 
                   to show details for the current item
         -->
-        <Grid Grid.Row="1" x:Name="contentRegion"/>
+        <Grid Grid.Row="1" x:Name="contentRegion">
+            <WebView x:Name="webView" Margin="0"/>
+        </Grid>
 
         <!-- Back button and page title -->
         <Grid>
@@ -46,7 +50,7 @@
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"/>
-            <TextBlock x:Name="pageTitle" Text="{Binding Title}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+            <TextBlock x:Name="pageTitle" Text="{Binding NewsProvider.Name}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
     </Grid>

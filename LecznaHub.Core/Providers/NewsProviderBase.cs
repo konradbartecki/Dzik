@@ -13,7 +13,7 @@ namespace LecznaHub.Core.Providers
     /// </summary>
     public abstract class NewsProviderBase
     {
-        public NewsProviderBase(string name, string providerNamespace, Uri newsFeedUri)
+        protected NewsProviderBase(string name, string providerNamespace, Uri newsFeedUri)
         {
             this.Name = name;
             this.NewsFeedUri = newsFeedUri;

@@ -36,6 +36,7 @@
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
     <Content Include="Model\SampleWebArticle.xml" />
+    <Content Include="Assets\css\WebArticle.css" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\IsoEncoding.cs" />

@@ -11,8 +11,9 @@
     <Grid>
         <Button x:Name="button" Content="Download" HorizontalAlignment="Left" Margin="10,-2,0,0" VerticalAlignment="Top" Click="button_Click" d:LayoutOverrides="VerticalAlignment"/>
         <Button x:Name="button1" Content="Download + Parse&#xD;&#xA;" HorizontalAlignment="Left" Margin="210,0,0,0" VerticalAlignment="Top" Click="button1_Click" d:LayoutOverrides="VerticalAlignment" Height="37" Width="180"/>
-        <RichTextBlockOverflow x:Name="richTextBlockOverflow" Margin="0,155,0,0"/>
-        <RichTextBlock Margin="10,155,10,0" ScrollViewer.VerticalScrollBarVisibility="Auto" Canvas.ZIndex="5" IsTextSelectionEnabled="False" OverflowContentTarget="{Binding OverflowContentTarget, ElementName=richTextBlockOverflow}">
+        <Button x:Name="button2" Content="Call" HorizontalAlignment="Left" Margin="281,54,0,0" VerticalAlignment="Top" Click="button2_Click"/>
+        <!--<RichTextBlockOverflow x:Name="richTextBlockOverflow" Margin="0,155,0,0"/>-->
+        <!--<RichTextBlock Margin="10,155,10,0" ScrollViewer.VerticalScrollBarVisibility="Auto" Canvas.ZIndex="5" IsTextSelectionEnabled="False" OverflowContentTarget="{Binding OverflowContentTarget, ElementName=richTextBlockOverflow}">
             <Paragraph FontWeight="Bold" FontSize="18.667" Margin="0,0,0,15">
                 <Run Text="Będą pieniądze na osiedlowe inwestycje. Zgłoś pomysł!" FontWeight="Bold"/>
             </Paragraph>
@@ -40,9 +41,9 @@
             <Paragraph FontSize="13.333" Margin="0,0,0,10">
                 <Run Text="Co zaproponują mieszkańcy Łęcznej? Przekonamy się już niedługo."/>
             </Paragraph>
-        </RichTextBlock>
-        <Image x:Name="image" Height="150" VerticalAlignment="Top" Source="http://leczna24.pl/f/s/skatepark_remont_640153_bg.jpg" Stretch="Fill"/>
-        <TextBlock x:Name="textBlock" Margin="26,0,0,73" TextWrapping="Wrap" Text="&quot;" VerticalAlignment="Bottom" FontSize="160" HorizontalAlignment="Left" Height="140" Width="93" FontFamily="Segoe UI Emoji"/>
+        </RichTextBlock>-->
+        <!--<Image x:Name="image" Height="150" VerticalAlignment="Top" Source="http://leczna24.pl/f/s/skatepark_remont_640153_bg.jpg" Stretch="Fill"/>-->
+        <!--<TextBlock x:Name="textBlock" Margin="26,0,0,73" TextWrapping="Wrap" Text="&quot;" VerticalAlignment="Bottom" FontSize="160" HorizontalAlignment="Left" Height="140" Width="93" FontFamily="Segoe UI Emoji"/>-->
 
     </Grid>
 </Page>

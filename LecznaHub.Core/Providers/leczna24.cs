@@ -41,8 +41,6 @@ namespace LecznaHub.Core.Providers
 
     }
 
-
-
     public class Leczna24NewsItem : NewsItemBase
     {
         /// <summary>
@@ -98,9 +96,10 @@ namespace LecznaHub.Core.Providers
 
         public override Downloader CreateNewDownloader()
         {
-            return new Leczna24WebArticleDownloader(new Uri(this.UniqueID));
+            return new Leczna24WebArticleDownloader(new Uri(this.UniqueId));
         }
 
+        //sorry for not using LINQ but I had some problems with it - probably because of HtmlAgilityPack
         protected override string GetTitle()
         {
             string s;

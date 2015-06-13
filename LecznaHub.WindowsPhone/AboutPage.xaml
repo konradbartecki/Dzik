@@ -1,0 +1,100 @@
+﻿<Page
+    x:Class="LecznaHub.AboutPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LecznaHub"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    
+    <Page.Resources>
+        <Style x:Key="HyperlinkButtonDefaultStyle" TargetType="HyperlinkButton">
+            <Setter Property="FontSize" Value="18.14"></Setter>
+            <Setter Property="Foreground" Value="{StaticResource PhoneAccentBrush}"></Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid x:Name="LayoutRoot">
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title Panel -->
+
+        <!--TODO: Content should be placed within the following grid-->
+        <Pivot x:Name="aboutPivot" Title="Łęczna" Margin="0,0,19,26.667" d:LayoutOverrides="Height, TopPosition, BottomPosition">
+            <PivotItem x:Name="pivotItemAbout" Header="about">
+                <ScrollViewer>
+                    <StackPanel Margin="0,0,0,24">
+                        <TextBlock
+                            Style="{StaticResource TextStyleExtraLargeFontSize}"
+                            Text="Łęczna"
+                            Foreground="{StaticResource PhoneAccentBrush}" />
+                        <TextBlock x:Name="author"
+                            Style="{StaticResource TextStyleLargeFontSize}"
+                            Text="by Konrad Bartecki" />
+                        <HyperlinkButton x:Name="hyperlinkButton"
+                            NavigateUri="http://www.bartecki.org/"              
+                            HorizontalAlignment="Left"
+                            Content="www.bartecki.org" 
+                            Style="{StaticResource HyperlinkButtonDefaultStyle}"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,18,0,0">
+                            <TextBlock
+                                Style="{StaticResource TextStyleMediumFontSize}"
+                                Text="Version:" />
+                            <TextBlock
+                                Margin="5,0,0,0"
+                                Style="{StaticResource TextStyleMediumFontSize}"
+                                x:Name="_versionText"
+                                Text="1.0.0.0"/>
+                        </StackPanel>
+                        <HyperlinkButton
+                            HorizontalAlignment="Left"
+                            Tag="Review"
+                            Click="HyperlinkButton_Click"
+                            Content="Review this app"
+                            Style="{StaticResource HyperlinkButtonDefaultStyle}"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </PivotItem>
+            <PivotItem x:Name="pivotItemLegal" Header="legal">
+                <Grid/>
+            </PivotItem>
+            <PivotItem x:Name="pivotItemChangelog" Header="what's new?">
+                <ScrollViewer>
+                    <shared:WebXamlBlock
+            Margin="0,24,12,24"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Left"
+            XamlUri="http://www.4thandmayor.com/app/changelog.xaml">
+                        <shared:WebXamlBlock.FallbackContent>
+                            <StackPanel>
+                                <TextBlock
+                        TextWrapping="Wrap"
+                        Style="{StaticResource PhoneTextLargeStyle}">Information about the latest version can be found out at:</TextBlock>
+                                <TextBlock
+                        Text=" " />
+                                <HyperlinkButton
+                        HorizontalAlignment="Left"
+                        Style="{StaticResource AccentHyperlink}"
+                        FontSize="{StaticResource PhoneFontSizeMediumLarge}"
+                        NavigateUri="http://www.4thandmayor.com/"
+                        Content="http://www.4thandmayor.com/"
+                        TargetName="_self" />
+                            </StackPanel>
+                        </shared:WebXamlBlock.FallbackContent>
+                    </shared:WebXamlBlock>
+                </ScrollViewer>
+            </PivotItem>
+        </Pivot>
+    </Grid>
+</Page>

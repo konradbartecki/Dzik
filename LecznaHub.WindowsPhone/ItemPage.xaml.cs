@@ -60,7 +60,7 @@ namespace LecznaHub
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
             //throw new NotImplementedException();
             var item = await NewsDataSource.GetItemAsync((string)e.NavigationParameter);
-            var html = WebViewerHelper.WrapHtml(item.WebArticle.ToString(), App.Current.RequestedTheme, ActualWidth, ActualHeight);
+            var html = WebViewerHelper.WrapHtml(item.WebArticle.ToString(), ThemeToStringHelper.GetCurrentThemeToString(), ActualWidth, ActualHeight);
             this.webView.NavigateToString(html);
             this.DefaultViewModel["Item"] = item;
         }
