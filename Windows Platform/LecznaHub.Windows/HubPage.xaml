@@ -38,7 +38,7 @@
                 <EntranceThemeTransition/>
             </TransitionCollection>
         </Grid.ChildrenTransitions>
-        <Hub SectionHeaderClick="Hub_SectionHeaderClick">
+        <Hub>
             <Hub.Header>
                 <!-- Back button and page title -->
                 <Grid>

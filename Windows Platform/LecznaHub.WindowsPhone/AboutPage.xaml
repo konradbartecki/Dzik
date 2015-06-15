@@ -60,7 +60,6 @@
                         <HyperlinkButton
                             HorizontalAlignment="Left"
                             Tag="Review"
-                            Click="HyperlinkButton_Click"
                             Content="Review this app"
                             Style="{StaticResource HyperlinkButtonDefaultStyle}"/>
                     </StackPanel>
@@ -71,7 +70,7 @@
             </PivotItem>
             <PivotItem x:Name="pivotItemChangelog" Header="what's new?">
                 <ScrollViewer>
-                    <shared:WebXamlBlock
+                    <!--<shared:WebXamlBlock
             Margin="0,24,12,24"
             VerticalAlignment="Top"
             HorizontalContentAlignment="Left"
@@ -92,7 +91,7 @@
                         TargetName="_self" />
                             </StackPanel>
                         </shared:WebXamlBlock.FallbackContent>
-                    </shared:WebXamlBlock>
+                    </shared:WebXamlBlock>-->
                 </ScrollViewer>
             </PivotItem>
         </Pivot>
