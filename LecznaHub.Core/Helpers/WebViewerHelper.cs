@@ -8,7 +8,7 @@ namespace LecznaHub.Shared.Common
 {
     public static class WebViewerHelper
     {
-        public static string HtmlHeader(double viewportWidth, double height, string theme, string font) //adapt parametres
+        public static string HtmlHeader(string theme, string font) //adapt parametres
         {
             var head = new StringBuilder();
             head.Append("<head>");
@@ -54,10 +54,10 @@ namespace LecznaHub.Shared.Common
         /// </summary>
         /// <param name="htmlSubString">"Article html to be embeeded into styled web page</param>
         /// <param name="requestedBackgroundColor">"black" or "white"</param>
-        /// <param name="viewportWidth">WebView control's width</param>
-        /// <param name="height">WebView control's width</param>
+        /// 
+        /// 
         /// <returns></returns>
-        public static string WrapHtml(string htmlSubString, string requestedBackgroundColor , double viewportWidth, double height)
+        public static string WrapHtml(string htmlSubString, string requestedBackgroundColor)
         {
             var html = new StringBuilder();
             html.Append("<html>");
@@ -76,7 +76,7 @@ namespace LecznaHub.Shared.Common
                 font = "black";
             }
 
-            html.Append(HtmlHeader(viewportWidth, height, theme, font));
+            html.Append(HtmlHeader(theme, font));
             html.Append("<body><article class=\"content\">");
             html.Append(htmlSubString);
             html.Append("</article></body>");

@@ -9,12 +9,12 @@
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dip">
+        android:paddingLeft="5dip">
         <TextView
             android:id="@+id/Text1"
             android:layout_width="wrap_content"
             android:layout_height="26dip"
-            android:paddingLeft="60dip"
+            android:paddingLeft="62dip"
             android:textSize="20dip"
             android:textStyle="italic"
             local:MvxBind="Text Title" />
@@ -23,13 +23,14 @@
             android:layout_width="wrap_content"
             android:layout_height="36dip"
             android:textSize="14dip"
-            android:paddingLeft="60dip"
+            android:paddingLeft="63dip"
             local:MvxBind="Text Description" />
     </LinearLayout>
     <Mvx.MvxImageView
         android:id="@+id/Image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentLeft="true"
+        android:scaleType="centerCrop"
         local:MvxBind="ImageUrl ImagePath" />
 </RelativeLayout>

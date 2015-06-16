@@ -1,4 +1,12 @@
-﻿using System;
+﻿// Konrad Bartecki (C) 2015
+// konradbartecki@outlook.com
+// bartecki.org
+// 
+// This class consists of both native and MvvmCross ViewModel stuff so it could be a bit of a mess
+// TODO: Cleanup this mess, unify stuff into MvvmCross
+//
+
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -7,6 +15,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Xml.Linq;
 using Cirrious.MvvmCross.ViewModels;
 using LecznaHub.Core.Model;
@@ -23,7 +32,20 @@ namespace LecznaHub.Core.ViewModel
         public void Init()
         {
             Task.Run((Func<Task>) GetNewsDataAsync).Wait();
-        }          
+        }
+
+        public ICommand ShowItemCommand
+        {
+            get
+            {
+                return new MvxCommand<NewsItemBase>((item) => DoShowItem(item));
+            }
+        }
+
+        public void DoShowItem(NewsItemBase item)
+        {
+            this.ShowViewModel<DetailViewModel>(item);
+        }
 
         private List<NewsProviderBase> NewsProvidersList = new List<NewsProviderBase>
         {

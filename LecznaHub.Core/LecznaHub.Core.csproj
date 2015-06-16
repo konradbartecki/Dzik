@@ -43,6 +43,7 @@
     <Compile Include="Helpers\IsoEncoding.cs" />
     <Compile Include="Helpers\WebViewerHelper.cs" />
     <Compile Include="Model\Downloader.cs" />
+    <Compile Include="ViewModel\DetailViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="Model\NewsCollection.cs" />
     <Compile Include="Model\NewsItemBase.cs" />
