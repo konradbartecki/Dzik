@@ -102,7 +102,6 @@ namespace LecznaHub.Core.Providers
         //sorry for not using LINQ but I had some problems with it - probably because of HtmlAgilityPack
         protected override string GetTitle()
         {
-            string s;
 
             foreach (HtmlNode node in DownloadedHtmlDocument.DocumentNode.Descendants())
             {

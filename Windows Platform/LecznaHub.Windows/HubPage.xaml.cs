@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using LecznaHub.Data;
+using LecznaHub.Core.ViewModel;
 using LecznaHub.Common;
 using LecznaHub.Core.Model;
 
@@ -65,7 +66,7 @@ namespace LecznaHub
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
-            var sampleDataGroup = await NewsDataSource.GetGroupsAsync();
+            var sampleDataGroup = await MainViewModel.GetGroupsAsync();
             this.DefaultViewModel["Groups"] = sampleDataGroup;
         }
 

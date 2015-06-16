@@ -4,21 +4,33 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Cirrious.MvvmCross.ViewModels;
+using LecznaHub.Core.Model;
 using LecznaHub.Core.Providers;
 
-namespace LecznaHub.Core.Model
+namespace LecznaHub.Core.ViewModel
 {
-    public class NewsDataSource
+    public class MainViewModel : MvxViewModel
     {
+        /// <summary>
+        /// Init task for MvvmCross
+        /// </summary>
+        /// <returns></returns>
+        public void Init()
+        {
+            Task.Run((Func<Task>) GetNewsDataAsync).Wait();
+        }          
+
         private List<NewsProviderBase> NewsProvidersList = new List<NewsProviderBase>
         {
             new Leczna24()
         }; 
 
-        private static NewsDataSource _sampleDataSource = new NewsDataSource();
+        private static MainViewModel _sampleViewModel = new MainViewModel();
 
         private ObservableCollection<NewsCollection> _groups = new ObservableCollection<NewsCollection>();
         public ObservableCollection<NewsCollection> Groups
@@ -26,11 +38,11 @@ namespace LecznaHub.Core.Model
             get { return this._groups; }
         }
 
-        public static async Task<IEnumerable<NewsCollection>> GetGroupsAsync()
+        public static async Task<ObservableCollection<NewsCollection>> GetGroupsAsync()
         {
-            await _sampleDataSource.GetNewsDataAsync();
+            await _sampleViewModel.GetNewsDataAsync();
 
-            return _sampleDataSource.Groups;
+            return _sampleViewModel.Groups;
         }
 
         //public static async Task<NewsGroups> GetGroupAsync(string uniqueId)
@@ -44,10 +56,10 @@ namespace LecznaHub.Core.Model
 
         public static async Task<NewsItemBase> GetItemAsync(string uniqueId)
         {
-            await _sampleDataSource.GetNewsDataAsync();
+            await _sampleViewModel.GetNewsDataAsync();
             // Simple linear search is acceptable for small data sets
             var matches =
-                _sampleDataSource.Groups.SelectMany(group => group.Items)
+                _sampleViewModel.Groups.SelectMany(group => group.Items)
                     .Where((item) => item.UniqueId.Equals(uniqueId));
             if (matches.Count() == 1)
             {

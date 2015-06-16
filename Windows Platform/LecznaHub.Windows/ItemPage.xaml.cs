@@ -12,6 +12,7 @@ using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+using LecznaHub.Core.ViewModel;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
@@ -68,7 +69,7 @@ namespace LecznaHub
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
-            var item = await NewsDataSource.GetItemAsync((string)e.NavigationParameter);
+            var item = await MainViewModel.GetItemAsync((string)e.NavigationParameter);
             webView.Source = new Uri(item.UniqueId);
             //commented because temporarily we want to test out how displaying arcitles will look if we will navigate to actual web page
             //var html = WebViewerHelper.WrapHtml(item.WebArticle.ToString(), App.Current.RequestedTheme, ActualWidth, ActualHeight);

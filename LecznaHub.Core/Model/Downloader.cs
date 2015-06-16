@@ -47,4 +47,21 @@ namespace LecznaHub.Core.Model
             return new StreamReader(dataStream);
         }
     }
+
+    public static class BytesDownloader
+    {
+
+        public static byte[] DownloadBytes(string url)
+        {
+            WebRequest request = WebRequest.Create(new Uri(url));
+            request.GetResponseAsync().RunSynchronously();
+            using (WebResponse respone = request.GetResponseAsync().Result)
+            using (Stream dataStream = respone.GetResponseStream())
+            using (var memoryStream = new MemoryStream())
+            {
+                dataStream.CopyTo(memoryStream);
+                return memoryStream.ToArray();
+            }
+        }
+    }
 }

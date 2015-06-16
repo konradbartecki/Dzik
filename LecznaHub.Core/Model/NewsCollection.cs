@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 namespace LecznaHub.Core.Model
 {
     /// <summary>
-    /// Generic group data model.
+    /// Collection of news items from given provider
     /// </summary>
     public class NewsCollection
     {
         public NewsCollection(string title)
         {
+            //Contains name of news provider
             this.Title = title;
             this.Items = new ObservableCollection<NewsItemBase>();
         }

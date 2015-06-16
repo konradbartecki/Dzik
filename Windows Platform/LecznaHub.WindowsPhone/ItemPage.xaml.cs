@@ -3,8 +3,8 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using LecznaHub.Common;
-using LecznaHub.Core.Model;
 using LecznaHub.Data;
+using LecznaHub.Core.ViewModel;
 using LecznaHub.Shared.Common;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
@@ -59,7 +59,7 @@ namespace LecznaHub
         {
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
             //throw new NotImplementedException();
-            var item = await NewsDataSource.GetItemAsync((string)e.NavigationParameter);
+            var item = await MainViewModel.GetItemAsync((string)e.NavigationParameter);
             var html = WebViewerHelper.WrapHtml(item.WebArticle.ToString(), ThemeToStringHelper.GetCurrentThemeToString(), ActualWidth, ActualHeight);
             this.webView.NavigateToString(html);
             this.DefaultViewModel["Item"] = item;

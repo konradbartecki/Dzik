@@ -143,6 +143,26 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Cirrious.CrossCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e16445fd9b451819, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmCross.HotTuna.CrossCore.3.5.1\lib\win81\Cirrious.CrossCore.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Cirrious.CrossCore.WindowsCommon, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmCross.HotTuna.CrossCore.3.5.1\lib\win81\Cirrious.CrossCore.WindowsCommon.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e16445fd9b451819, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.5.1\lib\win81\Cirrious.MvvmCross.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.Localization, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmCross.HotTuna.CrossCore.3.5.1\lib\win81\Cirrious.MvvmCross.Localization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Cirrious.MvvmCross.WindowsCommon, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmCross.HotTuna.MvvmCrossLibraries.3.5.1\lib\win81\Cirrious.MvvmCross.WindowsCommon.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1-beta3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>

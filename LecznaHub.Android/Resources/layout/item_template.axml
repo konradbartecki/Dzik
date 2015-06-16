@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+    <LinearLayout
+        android:id="@+id/Text"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dip">
+        <TextView
+            android:id="@+id/Text1"
+            android:layout_width="wrap_content"
+            android:layout_height="26dip"
+            android:paddingLeft="60dip"
+            android:textSize="20dip"
+            android:textStyle="italic"
+            local:MvxBind="Text Title" />
+        <TextView
+            android:id="@+id/Text2"
+            android:layout_width="wrap_content"
+            android:layout_height="36dip"
+            android:textSize="14dip"
+            android:paddingLeft="60dip"
+            local:MvxBind="Text Description" />
+    </LinearLayout>
+    <Mvx.MvxImageView
+        android:id="@+id/Image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        local:MvxBind="ImageUrl ImagePath" />
+</RelativeLayout>

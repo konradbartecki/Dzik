@@ -5,6 +5,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using LecznaHub.Common;
 using LecznaHub.Core.Model;
+using LecznaHub.Core.ViewModel;
 using LecznaHub.Data;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
@@ -65,7 +66,7 @@ namespace LecznaHub
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
-            var myDataGroups = await NewsDataSource.GetGroupsAsync();
+            var myDataGroups = await MainViewModel.GetGroupsAsync();
             this.DefaultViewModel["Groups"] = myDataGroups;
         }
 
