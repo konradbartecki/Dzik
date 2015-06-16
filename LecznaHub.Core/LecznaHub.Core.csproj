@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Helpers\AsyncHelpers.cs" />
     <Compile Include="Helpers\IsoEncoding.cs" />
     <Compile Include="Helpers\WebViewerHelper.cs" />
     <Compile Include="Model\Downloader.cs" />

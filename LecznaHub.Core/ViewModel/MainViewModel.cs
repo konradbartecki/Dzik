@@ -44,7 +44,12 @@ namespace LecznaHub.Core.ViewModel
 
         public void DoShowItem(NewsItemBase item)
         {
-            this.ShowViewModel<DetailViewModel>(item);
+            base.ShowViewModel<DetailViewModel>(new DetailParameter() {Id = item.UniqueId});
+        }
+
+        public class DetailParameter
+        {
+            public string Id { get; set; }
         }
 
         private List<NewsProviderBase> NewsProvidersList = new List<NewsProviderBase>

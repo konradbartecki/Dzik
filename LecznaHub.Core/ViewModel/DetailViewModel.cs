@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Cirrious.MvvmCross.ViewModels;
+using LecznaHub.Core.Helpers;
 using LecznaHub.Core.Model;
 using LecznaHub.Shared.Common;
 
@@ -12,17 +13,19 @@ namespace LecznaHub.Core.ViewModel
 {
     public class DetailViewModel : MvxViewModel
     {
-        DetailViewModel(NewsItemBase item)
-        {
-            Init(item.UniqueId);
-        }
+        //public DetailViewModel(string uniqueId)
+        //{
+        //    Init(uniqueId);
+        //}
 
-        void Init(string uniqueId)
+        public void Init(MainViewModel.DetailParameter parameter)
         {
+            if (string.IsNullOrEmpty(parameter.Id)) return;
             try
             {
-                Item = MainViewModel.GetItemAsync(uniqueId).Result;
-                HtmlText = WebViewerHelper.WrapHtml(Item.WebArticle.ToString(), "black");
+                //Item = MainViewModel.GetItemAsync(parameter.Id).Result;
+                this.Item = AsyncHelpers.RunSync<NewsItemBase>(() => MainViewModel.GetItemAsync(parameter.Id));
+                this.HtmlText = WebViewerHelper.WrapHtml(Item.WebArticle.ToString(), "black");
             }
             catch (Exception e)
             {
@@ -32,7 +35,12 @@ namespace LecznaHub.Core.ViewModel
         }
 
         public NewsItemBase Item { get; set; }
-        public string HtmlText { get; set; }
 
+        public string HtmlText
+        {
+            get;
+            set;
+        }
+        
     }
 }
