@@ -11,52 +11,32 @@ using Android.Util;
 using Android.Views;
 using Android.Webkit;
 using Android.Widget;
+using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Droid.Views;
 using LecznaHub.Android.Controls;
+using LecznaHub.Core.ViewModel;
 
 namespace LecznaHub.Android.Views
 {
-    [Activity(Label = "View for DetailView")]
+    //Todo: make dynamic activity label from vm.item.providername
+    [Activity(Label = "£êczna24.pl")]
     public class DetailView : MvxActivity
     {
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            SetContentView(Resource.Layout.MainView);
+            SetContentView(Resource.Layout.DetailView);
 
-        }
+            var web_view = FindViewById<WebView>(Resource.Id.webView1);
+            web_view.Settings.JavaScriptEnabled = true;
 
-        public class BindableWebView : WebView
-        {
-            private string _text;
+            //var nativeWebview = this.FindViewById<WebView>(Resource.Id.webView2);
+            //var set = this.CreateBindingSet<DetailView, DetailViewModel>();
+            // for non-default properties use 'For':s
+            //set.Bind(localWebView).For(wb => wb.Text).To(vm => vm.HtmlText);
+            //set.Apply();
 
-            public BindableWebView(Context context, IAttributeSet attrs)
-                : base(context, attrs)
-            {
-            }
-
-            public string Text
-            {
-                get { return _text; }
-                set
-                {
-                    if (string.IsNullOrEmpty(value)) return;
-
-                    _text = value;
-
-                    LoadData(_text, "text/html", "utf-8");
-                    UpdatedHtmlContent();
-                }
-            }
-
-            public event EventHandler HtmlContentChanged;
-
-            private void UpdatedHtmlContent()
-            {
-                var handler = HtmlContentChanged;
-                if (handler != null)
-                    handler(this, EventArgs.Empty);
-            }
         }
     }
 }

@@ -15,7 +15,7 @@ using Cirrious.MvvmCross.Droid.Views;
 
 namespace LecznaHub.Android.Views
 {
-    [Activity(Label = "View for SecondViewModel")]
+    [Activity(Label = "Wiadomoœci")]
     public class MainView : MvxActivity
     {
         protected override void OnCreate(Bundle bundle)

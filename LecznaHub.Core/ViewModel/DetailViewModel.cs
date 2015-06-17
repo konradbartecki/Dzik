@@ -15,12 +15,13 @@ namespace LecznaHub.Core.ViewModel
     {
         //public DetailViewModel(string uniqueId)
         //{
-        //    Init(uniqueId);
+        //    Init(new MainViewModel.DetailParameter() {Id = uniqueId});
         //}
 
         public void Init(MainViewModel.DetailParameter parameter)
         {
-            if (string.IsNullOrEmpty(parameter.Id)) return;
+            if (string.IsNullOrEmpty(parameter.Id))
+                return;
             try
             {
                 //Item = MainViewModel.GetItemAsync(parameter.Id).Result;

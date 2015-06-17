@@ -23,7 +23,7 @@ namespace LecznaHub.Android.Controls
 
                 _text = value;
 
-                LoadData(_text, "text/html", "utf-8");
+                LoadData(_text, "text/html; charset=UTF-8", null);
                 UpdatedHtmlContent();
             }
         }

@@ -17,6 +17,7 @@
             android:paddingLeft="62dip"
             android:textSize="20dip"
             android:textStyle="italic"
+            android:textColor="#FFFFFF"
             local:MvxBind="Text Title" />
         <TextView
             android:id="@+id/Text2"
