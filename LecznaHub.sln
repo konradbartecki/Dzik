@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LecznaHub.Windows", "Window
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LecznaHub.Android", "LecznaHub.Android\LecznaHub.Android.csproj", "{86D49DA4-032A-4F72-A4BE-D1B4E466B641}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LecznaHub.BackgroundTasks", "LecznaHub.BackgroundTasks\LecznaHub.BackgroundTasks.csproj", "{C32D30F6-FA95-4C84-A2F0-298031555D91}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Windows Platform\LecznaHub.WindowsUniversal\LecznaHub.Shared.projitems*{9b42b335-4366-468f-a6bb-5bf17ea50c92}*SharedItemsImports = 4
@@ -120,6 +122,22 @@ Global
 		{86D49DA4-032A-4F72-A4BE-D1B4E466B641}.Release|x86.ActiveCfg = Release|Any CPU
 		{86D49DA4-032A-4F72-A4BE-D1B4E466B641}.Release|x86.Build.0 = Release|Any CPU
 		{86D49DA4-032A-4F72-A4BE-D1B4E466B641}.Release|x86.Deploy.0 = Release|Any CPU
+		{C32D30F6-FA95-4C84-A2F0-298031555D91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C32D30F6-FA95-4C84-A2F0-298031555D91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C32D30F6-FA95-4C84-A2F0-298031555D91}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{C32D30F6-FA95-4C84-A2F0-298031555D91}.Debug|ARM.Build.0 = Debug|Any CPU
+		{C32D30F6-FA95-4C84-A2F0-298031555D91}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C32D30F6-FA95-4C84-A2F0-298031555D91}.Debug|x64.Build.0 = Debug|Any CPU
+		{C32D30F6-FA95-4C84-A2F0-298031555D91}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C32D30F6-FA95-4C84-A2F0-298031555D91}.Debug|x86.Build.0 = Debug|Any CPU
+		{C32D30F6-FA95-4C84-A2F0-298031555D91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C32D30F6-FA95-4C84-A2F0-298031555D91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C32D30F6-FA95-4C84-A2F0-298031555D91}.Release|ARM.ActiveCfg = Release|Any CPU
+		{C32D30F6-FA95-4C84-A2F0-298031555D91}.Release|ARM.Build.0 = Release|Any CPU
+		{C32D30F6-FA95-4C84-A2F0-298031555D91}.Release|x64.ActiveCfg = Release|Any CPU
+		{C32D30F6-FA95-4C84-A2F0-298031555D91}.Release|x64.Build.0 = Release|Any CPU
+		{C32D30F6-FA95-4C84-A2F0-298031555D91}.Release|x86.ActiveCfg = Release|Any CPU
+		{C32D30F6-FA95-4C84-A2F0-298031555D91}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -128,5 +146,6 @@ Global
 		{820B7B44-EEED-461E-9D69-CBAAC9718FF3} = {2A8DD4F0-CA39-427E-8BF3-446959549EA9}
 		{A6858D66-E3B7-4505-98A1-48752B0F7A8D} = {2A8DD4F0-CA39-427E-8BF3-446959549EA9}
 		{9B42B335-4366-468F-A6BB-5BF17EA50C92} = {2A8DD4F0-CA39-427E-8BF3-446959549EA9}
+		{C32D30F6-FA95-4C84-A2F0-298031555D91} = {2A8DD4F0-CA39-427E-8BF3-446959549EA9}
 	EndGlobalSection
 EndGlobal

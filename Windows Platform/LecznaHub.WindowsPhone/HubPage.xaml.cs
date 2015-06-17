@@ -1,12 +1,18 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Linq;
 using Windows.ApplicationModel.Resources;
 using Windows.Graphics.Display;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using LecznaHub.Common;
 using LecznaHub.Core.Model;
 using LecznaHub.Core.ViewModel;
 using LecznaHub.Data;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Background;
+using LecznaHub.BackgroundTasks;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
 
@@ -33,6 +39,8 @@ namespace LecznaHub
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+
+
         }
 
         /// <summary>
@@ -68,7 +76,9 @@ namespace LecznaHub
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
             var myDataGroups = await MainViewModel.GetGroupsAsync();
             this.DefaultViewModel["Groups"] = myDataGroups;
+
         }
+
 
         /// <summary>
         /// Preserves state associated with this page in case the application is suspended or the
@@ -127,7 +137,10 @@ namespace LecznaHub
         /// <param name="e">Event data that describes how this page was reached.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+
             this.navigationHelper.OnNavigatedTo(e);
+
+            RegisterTask();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -136,5 +149,34 @@ namespace LecznaHub
         }
 
         #endregion
+
+        private async void RegisterTask()
+        {
+            try
+            {
+                BackgroundAccessStatus status = await BackgroundExecutionManager.RequestAccessAsync();
+                if (status == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity || status == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity)
+                {
+                    bool isRegistered = BackgroundTaskRegistration.AllTasks.Any(x => x.Value.Name == "Notification task");
+                    if (isRegistered)
+                    {
+                        BackgroundTaskBuilder builder = new BackgroundTaskBuilder
+                        {
+                            Name = "Notification task",
+                            TaskEntryPoint =
+                                "LecznaHub.BackgroundTasks.TileUpdateTask"
+                        };
+                        builder.SetTrigger(new TimeTrigger(15, false));
+                        //builder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
+                        BackgroundTaskRegistration task = builder.Register();
+                        Debug.WriteLine("Task registered");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("The access has already been granted");
+            }
+        }
     }
 }
