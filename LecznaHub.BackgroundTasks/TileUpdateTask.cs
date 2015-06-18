@@ -50,13 +50,14 @@ namespace LecznaHub.BackgroundTasks
 
                 CreateMediumTile(item);
                 CreateWideTile(item);
+                CreateLargeTile(item);
 
                 // Don't create more than 5 notifications.
                 if (itemCount++ > 5) break;
             }
             Debug.WriteLine("Live tile update completed");
         }
-
+        //tile creation functions inb4 DRY
         private void CreateWideTile(NewsItemBase item)
         {
             XmlDocument tileXml = TileUpdateManager.GetTemplateContent(TileTemplateType.TileWide310x150ImageAndText01);
@@ -73,6 +74,19 @@ namespace LecznaHub.BackgroundTasks
         private void CreateMediumTile(NewsItemBase item)
         {
             XmlDocument tileXml = TileUpdateManager.GetTemplateContent(TileTemplateType.TileSquare150x150PeekImageAndText04);
+            //string titleText = title.Text == null ? String.Empty : title.Text;
+            tileXml.GetElementsByTagName("image")[0].Attributes[1].NodeValue = item.WebArticle.ImagePath;
+            tileXml.GetElementsByTagName("text")[0].InnerText = item.Title;
+            //tileXml.GetElementsByTagName("text")[1].InnerText = item.Description;
+
+            var s = tileXml.GetXml();
+            // Create a new tile notification. 
+            _updater.Update(new TileNotification(tileXml));
+        }
+
+        private void CreateLargeTile(NewsItemBase item)
+        {
+            XmlDocument tileXml = TileUpdateManager.GetTemplateContent(TileTemplateType.TileSquare310x310ImageAndText01);
             //string titleText = title.Text == null ? String.Empty : title.Text;
             tileXml.GetElementsByTagName("image")[0].Attributes[1].NodeValue = item.WebArticle.ImagePath;
             tileXml.GetElementsByTagName("text")[0].InnerText = item.Title;
