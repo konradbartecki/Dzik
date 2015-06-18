@@ -26,7 +26,6 @@ namespace LecznaHub.Core.Model
         public string Title { get; private set; }
         public string Description { get; private set; }
         public string ImagePath { get; private set; }
-        //public Bitmap BitmapImage => GetImageBitmapFromUrl(ImagePath);
         public string ProviderNamespace { get; private set; }
         public NewsProviderBase NewsProvider { get; private set; }
         public WebArticleBase WebArticle { get; private set; }

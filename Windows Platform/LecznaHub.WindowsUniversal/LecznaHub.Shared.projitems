@@ -17,6 +17,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Common\LauncherHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\ThemeToStringHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\BackgroundTasksHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Config.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\SampleDataSource.cs" />
     <Content Include="$(MSBuildThisFileDirectory)Model\SampleData.json" />
@@ -27,6 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\RelayCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\SuspensionManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\ObservableDictionary.cs" />
+    <Content Include="$(MSBuildThisFileDirectory)Views\WideTile.xml" />
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en-US\Resources.resw" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<tile>
+  <visual version="2">
+    <binding template="TileWide310x150ImageAndText01" fallback="TileWideImageAndText01">
+      <image id="1" src="image1.png" alt="alt text"/>
+      <text id="1">Text Field 1</text>
+    </binding>
+  </visual>
+</tile>

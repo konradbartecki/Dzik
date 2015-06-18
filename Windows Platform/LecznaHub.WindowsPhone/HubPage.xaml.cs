@@ -13,6 +13,7 @@ using LecznaHub.Data;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using LecznaHub.BackgroundTasks;
+using Windows.ApplicationModel.Background;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
 
@@ -139,8 +140,6 @@ namespace LecznaHub
         {
 
             this.navigationHelper.OnNavigatedTo(e);
-
-            RegisterTask();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -157,26 +156,34 @@ namespace LecznaHub
                 BackgroundAccessStatus status = await BackgroundExecutionManager.RequestAccessAsync();
                 if (status == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity || status == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity)
                 {
-                    bool isRegistered = BackgroundTaskRegistration.AllTasks.Any(x => x.Value.Name == "Notification task");
-                    if (isRegistered)
-                    {
-                        BackgroundTaskBuilder builder = new BackgroundTaskBuilder
-                        {
-                            Name = "Notification task",
-                            TaskEntryPoint =
-                                "LecznaHub.BackgroundTasks.TileUpdateTask"
-                        };
-                        builder.SetTrigger(new TimeTrigger(15, false));
-                        //builder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
-                        BackgroundTaskRegistration task = builder.Register();
-                        Debug.WriteLine("Task registered");
-                    }
+                    //bool isRegistered = BackgroundTaskRegistration.AllTasks.Any(x => x.Value.Name == "Notification task");
+                    //if (!isRegistered)
+                    //{
+
+                        TimeTrigger myTimeTrigger = new TimeTrigger(15, false);
+
+                        BackgroundTaskRegistration task = Helpers.BackgroundTasksHelper.RegisterBackgroundTask(
+                            "LecznaHub.BackgroundTasks.TileUpdateTask",
+                            "Live tile updater", myTimeTrigger, null);
+                    //}
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("The access has already been granted");
             }
+        }
+
+        private void Grid_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+             RegisterTask();
+        }
+
+        private async void Grid_Tapped_1(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            var feed = await MainViewModel.GetGroupsAsync();
+
+            BackgroundTasks.TileUpdateTask.UpdateTile(feed);
         }
     }
 }
