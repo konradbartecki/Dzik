@@ -13,7 +13,6 @@ using LecznaHub.Data;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using LecznaHub.BackgroundTasks;
-using Windows.ApplicationModel.Background;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
 
@@ -138,7 +137,7 @@ namespace LecznaHub
         /// <param name="e">Event data that describes how this page was reached.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-
+            Helpers.BackgroundTasksHelper.RegisterLiveTileUpdaterTask();
             this.navigationHelper.OnNavigatedTo(e);
         }
 
@@ -149,41 +148,5 @@ namespace LecznaHub
 
         #endregion
 
-        private async void RegisterTask()
-        {
-            try
-            {
-                BackgroundAccessStatus status = await BackgroundExecutionManager.RequestAccessAsync();
-                if (status == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity || status == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity)
-                {
-                    //bool isRegistered = BackgroundTaskRegistration.AllTasks.Any(x => x.Value.Name == "Notification task");
-                    //if (!isRegistered)
-                    //{
-
-                        TimeTrigger myTimeTrigger = new TimeTrigger(15, false);
-
-                        BackgroundTaskRegistration task = Helpers.BackgroundTasksHelper.RegisterBackgroundTask(
-                            "LecznaHub.BackgroundTasks.TileUpdateTask",
-                            "Live tile updater", myTimeTrigger, null);
-                    //}
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("The access has already been granted");
-            }
-        }
-
-        private void Grid_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
-        {
-             RegisterTask();
-        }
-
-        private async void Grid_Tapped_1(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
-        {
-            var feed = await MainViewModel.GetGroupsAsync();
-
-            //BackgroundTasks.TileUpdateTask.UpdateTile(feed);
-        }
     }
 }

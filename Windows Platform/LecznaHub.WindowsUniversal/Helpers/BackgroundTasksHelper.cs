@@ -1,4 +1,6 @@
-﻿using Windows.ApplicationModel.Background;
+﻿using System;
+using System.Diagnostics;
+using Windows.ApplicationModel.Background;
 
 namespace LecznaHub.Helpers
 {
@@ -14,9 +16,9 @@ namespace LecznaHub.Helpers
         // condition: Optional parameter. A conditional event that must be true for the task to fire.
         //
         public static BackgroundTaskRegistration RegisterBackgroundTask(string taskEntryPoint,
-                                                                        string taskName,
-                                                                        IBackgroundTrigger trigger,
-                                                                        IBackgroundCondition condition)
+            string taskName,
+            IBackgroundTrigger trigger,
+            IBackgroundCondition condition)
         {
             //
             // Check for existing registrations of this background task.
@@ -31,7 +33,7 @@ namespace LecznaHub.Helpers
                     // The task is already registered.
                     // 
 
-                    return (BackgroundTaskRegistration)(cur.Value);
+                    return (BackgroundTaskRegistration) (cur.Value);
                 }
             }
 
@@ -56,6 +58,31 @@ namespace LecznaHub.Helpers
 
             return task;
         }
+
+        public static async void RegisterLiveTileUpdaterTask()
+        {
+            try
+            {
+                BackgroundAccessStatus status = await BackgroundExecutionManager.RequestAccessAsync();
+                if (status == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity ||
+                    status == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity)
+                {
+                    //bool isRegistered = BackgroundTaskRegistration.AllTasks.Any(x => x.Value.Name == "Notification task");
+                    //if (!isRegistered)
+                    //{
+
+                    TimeTrigger myTimeTrigger = new TimeTrigger(15, false);
+
+                    BackgroundTaskRegistration task = Helpers.BackgroundTasksHelper.RegisterBackgroundTask(
+                        "LecznaHub.BackgroundTasks.TileUpdateTask",
+                        "Live tile updater", myTimeTrigger, null);
+                    //}
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("The access has already been granted");
+            }
+        }
     }
-   
 }

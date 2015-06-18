@@ -122,6 +122,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\BadgeLogo.scale-180.png" />
     <Content Include="Assets\Logo.scale-100.png" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
@@ -169,6 +170,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\LecznaHub.BackgroundTasks\LecznaHub.BackgroundTasks.csproj">
+      <Project>{c32d30f6-fa95-4c84-a2f0-298031555d91}</Project>
+      <Name>LecznaHub.BackgroundTasks</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\LecznaHub.Core\LecznaHub.Core.csproj">
       <Project>{5cfd10d8-04cd-4f8b-b772-758cd21d90ae}</Project>
       <Name>LecznaHub.Core</Name>

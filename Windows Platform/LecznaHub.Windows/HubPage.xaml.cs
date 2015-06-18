@@ -108,6 +108,7 @@ namespace LecznaHub
         /// </summary>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            Helpers.BackgroundTasksHelper.RegisterLiveTileUpdaterTask();
             this.navigationHelper.OnNavigatedTo(e);
         }
 
