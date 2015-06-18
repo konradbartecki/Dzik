@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -75,13 +76,13 @@ namespace LecznaHub.Core.Providers
         }
     }
 
+    [DataContract]
     public class Leczna24WebArticle : WebArticleBase
     {
         public Leczna24WebArticle(string uniqueId, NewsProviderBase provider) : base(uniqueId, provider)
         {
             
         }
-
         class Leczna24WebArticleDownloader : Downloader
         {
             public Leczna24WebArticleDownloader(Uri feedUri) : base(feedUri)

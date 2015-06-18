@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -48,8 +49,19 @@ namespace LecznaHub
         public HubPage()
         {
             this.InitializeComponent();
+            //this.NavigationCacheMode =
+            // Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
+            
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
+            this.NavigationHelper.SaveState += this.NavigationHelper_SaveState;
+
+            
+        }
+
+        private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
+        {
+             e.PageState["Groups"] = DefaultViewModel["Groups"];             
         }
 
         /// <summary>
@@ -66,7 +78,20 @@ namespace LecznaHub
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
+            Helpers.BackgroundTasksHelper.RegisterLiveTileUpdaterTask();
+
+            if (e.PageState != null)
+            {
+                this.DefaultViewModel["Groups"] = e.PageState["Groups"] as ObservableCollection<NewsCollection>;
+                return;
+            }
+            //Download news for the first time
             var sampleDataGroup = await MainViewModel.GetGroupsAsync();
+
+            foreach (var newsCollection in sampleDataGroup)
+            {
+                await newsCollection.DownloadAllArticlesAsync();
+            }
             this.DefaultViewModel["Groups"] = sampleDataGroup;
         }
 
@@ -107,8 +132,7 @@ namespace LecznaHub
         /// in addition to page state preserved during an earlier session.
         /// </summary>
         protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            Helpers.BackgroundTasksHelper.RegisterLiveTileUpdaterTask();
+        {           
             this.navigationHelper.OnNavigatedTo(e);
         }
 

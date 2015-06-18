@@ -69,12 +69,12 @@ namespace LecznaHub
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
-            var item = await MainViewModel.GetItemAsync((string)e.NavigationParameter);
-            webView.Source = new Uri(item.UniqueId);
+            //var item = await MainViewModel.GetItemAsync((string)e.NavigationParameter);
+            webView.Source = new Uri((string)e.NavigationParameter);
             //commented because temporarily we want to test out how displaying arcitles will look if we will navigate to actual web page
             //var html = WebViewerHelper.WrapHtml(item.WebArticle.ToString(), App.Current.RequestedTheme, ActualWidth, ActualHeight);
             //this.webView.NavigateToString(html);
-            this.DefaultViewModel["Item"] = item;
+            //this.DefaultViewModel["Item"] = item;
         }
 
         #region NavigationHelper registration

@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
@@ -15,6 +17,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using System.Reflection;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -67,6 +70,12 @@ namespace LecznaHub
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            var thisPackage = Windows.ApplicationModel.Package.Current;
+            var version = thisPackage.Id.Version;
+
+            var appVersion = string.Format("{0}.{1}.{2}.{3}",
+    version.Major, version.Minor, version.Build, version.Revision);
+            _versionText.Text = appVersion;
         }
 
         /// <summary>

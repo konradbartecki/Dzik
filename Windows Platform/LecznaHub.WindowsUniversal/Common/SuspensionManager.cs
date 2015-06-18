@@ -10,6 +10,7 @@ using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using LecznaHub.Core.Model;
 
 namespace LecznaHub.Common
 {

@@ -148,5 +148,12 @@ namespace LecznaHub
 
         #endregion
 
+        private void Grid_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            if (!Frame.Navigate(typeof(AboutPage)))
+            {
+                throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
+            }
+        }
     }
 }

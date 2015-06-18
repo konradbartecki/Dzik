@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
@@ -8,9 +9,12 @@ using System.Xml.Linq;
 using HtmlAgilityPack;
 using LecznaHub.Core.Helpers;
 using LecznaHub.Core.Providers;
+using System.IO;
+using System.Runtime.Serialization;
 
 namespace LecznaHub.Core.Model
 {
+    [DataContract]
     public abstract class WebArticleBase
     {
         protected WebArticleBase(string uniqueId, NewsProviderBase provider)
@@ -21,14 +25,27 @@ namespace LecznaHub.Core.Model
         }
 
         public bool IsPrepared { get; protected set; }
+        [DataMember]
         public string UniqueId { get; private set; }
+        [DataMember]
         public string Title { get; private set; }
+        [DataMember]
         public string Headline { get; private set; }
+        [DataMember]
         public string ImagePath { get; private set; }
         protected HtmlDocument DownloadedHtmlDocument { get; set; }
+        [DataMember]
         public string ArticleBody { get; private set; }
+        [DataMember]
         public string FormattedHtmlDocument { get; private set; }
-        public NewsProviderBase Provider { get; private set; }
+        public NewsProviderBase Provider { get; private set;}
+
+        //[OnDeserialized]
+        //internal void Initialize(StreamingContext context)
+        //{
+        //    this.car is already in place, we've been deserialized
+        //    Debug.WriteLine("test");
+        //}
 
         /// <summary>
         /// Override this class if you need custom downloader with custom encoding

@@ -22,6 +22,14 @@ namespace LecznaHub.Core.Model
         public string Title { get; private set; }
         public ObservableCollection<NewsItemBase> Items { get; private set; }
 
+        public async Task DownloadAllArticlesAsync()
+        {
+            foreach (var item in Items)
+            {
+                if (item.WebArticle != null) await item.WebArticle.DownloadAsync();
+            }
+        }
+
         public override string ToString()
         {
             return this.Title;

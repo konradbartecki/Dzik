@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -7,6 +8,8 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using LecznaHub.Common;
+using LecznaHub.Core.Model;
+using LecznaHub.Core.Providers;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
 
@@ -29,6 +32,13 @@ namespace LecznaHub
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
+            SuspensionManager.KnownTypes.Add(typeof(WebArticleBase));
+            SuspensionManager.KnownTypes.Add(typeof(Leczna24WebArticle));
+            SuspensionManager.KnownTypes.Add(typeof(NewsItemBase));
+            SuspensionManager.KnownTypes.Add(typeof(Leczna24NewsItem));
+            SuspensionManager.KnownTypes.Add(typeof(NewsCollection));
+            SuspensionManager.KnownTypes.Add(typeof(ObservableCollection<NewsCollection>));
+            //SuspensionManager.KnownTypes.Add(typeof(Obser));
         }
 
         /// <summary>
