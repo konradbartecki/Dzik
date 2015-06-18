@@ -14,6 +14,7 @@ using LecznaHub.Core.Model;
 
 namespace LecznaHub.Core.Providers
 {
+    [DataContract]
     public class Leczna24 : NewsProviderBase
     {
         public Leczna24() : base ("Łęczna24", "http://leczna24.pl", new Uri("http://leczna24.pl/rss/informacje_utf8.php"))
@@ -42,6 +43,7 @@ namespace LecznaHub.Core.Providers
 
     }
 
+    [DataContract]
     public class Leczna24NewsItem : NewsItemBase
     {
         /// <summary>

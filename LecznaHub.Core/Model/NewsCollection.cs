@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +11,7 @@ namespace LecznaHub.Core.Model
     /// <summary>
     /// Collection of news items from given provider
     /// </summary>
+    [DataContract]
     public class NewsCollection
     {
         public NewsCollection(string title)
@@ -18,8 +20,9 @@ namespace LecznaHub.Core.Model
             this.Title = title;
             this.Items = new ObservableCollection<NewsItemBase>();
         }
-
+        [DataMember]
         public string Title { get; private set; }
+        [DataMember]
         public ObservableCollection<NewsItemBase> Items { get; private set; }
 
         public async Task DownloadAllArticlesAsync()

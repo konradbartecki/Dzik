@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using LecznaHub.Core.Model;
@@ -11,6 +12,7 @@ namespace LecznaHub.Core.Providers
     /// This is an implementation of news provider. It can be derived from and provide custom data manipulation for each provider.
     /// All implementations should specify own 
     /// </summary>
+    [DataContract]
     public abstract class NewsProviderBase
     {
         protected NewsProviderBase(string name, string providerNamespace, Uri newsFeedUri)
@@ -19,15 +21,17 @@ namespace LecznaHub.Core.Providers
             this.NewsFeedUri = newsFeedUri;
             this.ProviderNamespace = providerNamespace;
         }
-
+        [DataMember]
         public string Name { get; private set; }
         /// <summary>
         /// Root of the website: ex. "http://leczna24.pl"
         /// </summary>
+        [DataMember]
         public string ProviderNamespace { get; private set; }
         /// <summary>
         /// This Uri contains address of where will news be downloaded from. Most likely address of RSS
         /// </summary>
+        [DataMember]
         public Uri NewsFeedUri { get; private set; }
 
 
