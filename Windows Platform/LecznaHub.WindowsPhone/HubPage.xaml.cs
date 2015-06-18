@@ -183,7 +183,7 @@ namespace LecznaHub
         {
             var feed = await MainViewModel.GetGroupsAsync();
 
-            BackgroundTasks.TileUpdateTask.UpdateTile(feed);
+            //BackgroundTasks.TileUpdateTask.UpdateTile(feed);
         }
     }
 }
