@@ -91,9 +91,7 @@ namespace LecznaHub.Core.ViewModel
             if (matches.Count() == 1)
             {
                 var item = matches.First();
-                if(item.WebArticle == null)
-                    //will download article if it's not downloaded yet
-                    await item.WebArticle.DownloadAsync();
+                await item.WebArticle.DownloadAsync();
                 return item;
             }
             return null;
