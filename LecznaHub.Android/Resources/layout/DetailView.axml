@@ -4,7 +4,8 @@
     xmlns:controls="http://schemas.android.com/apk/res/lecznahub.android.controls"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="#000000">
     <BindableWebView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

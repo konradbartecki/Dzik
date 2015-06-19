@@ -12,6 +12,7 @@ using LecznaHub.Core.ViewModel;
 using LecznaHub.Data;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
+using Windows.ApplicationModel.Store;
 using LecznaHub.BackgroundTasks;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
@@ -148,12 +149,32 @@ namespace LecznaHub
 
         #endregion
 
-        private void Grid_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void Grid_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
+            //review
+            var uri = new Uri(string.Format("ms-windows-store:reviewapp?appid={0}", CurrentApp.AppId));
+            await Windows.System.Launcher.LaunchUriAsync(uri);
+        }
+
+        private void Grid_Tapped_1(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            //About
             if (!Frame.Navigate(typeof(AboutPage)))
             {
                 throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
             }
+        }
+
+        private async void moreApps_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            var uri = new Uri(string.Format(@"ms-windows-store:search?keyword={0}", "Konrad Bartecki"));
+            await Windows.System.Launcher.LaunchUriAsync(uri);
+        }
+
+        private async void Share_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            var uri = new Uri(string.Format("ms-windows-store:navigate?appid={0}", CurrentApp.AppId));
+            await Windows.System.Launcher.LaunchUriAsync(uri);
         }
     }
 }

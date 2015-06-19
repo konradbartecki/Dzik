@@ -24,7 +24,7 @@ namespace LecznaHub.Shared.Common
             head.AppendFormat("background-color:{0};", theme);
             head.AppendFormat("color:{0};", font);
             head.Append("font-family:'Segoe UI';" +
-                        "font-size:12px;" +
+                        "font-size:14px;" +
                         "margin:0;" +
                         "padding:0;" +
                         "display: block;" +
@@ -33,13 +33,17 @@ namespace LecznaHub.Shared.Common
                         "z-index: 0;" +
                         "}");
             head.Append("h1 {" +
-                        "font-size: 16px;" +
+                        "font-size: 18px;" +
                         "}");
             head.Append("h2 {" +
-                        "font-size: 14px;" +
+                        "font-size: 16px;" +
                         "}");
             head.Append("img{" +
                         "width:100%;" +
+                        "}");
+            head.Append("a{" +
+                        "color: #008B8B;" +
+                        "mix-blend-mode: difference;" +
                         "}");
         
             //head.Append(string.Format("a {{color:blue}}"));

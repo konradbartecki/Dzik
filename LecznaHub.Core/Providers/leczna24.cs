@@ -156,12 +156,29 @@ namespace LecznaHub.Core.Providers
                 if (node.Attributes.Contains("class") && (node.GetAttributeValue("class", "") == "artykul_tresc"))
                 {
                     this.IsPrepared = true;
-                    return node.InnerHtml;
+                    return PrepareImgElements(node);
                 }
             }
             return "Unable to download article body";
             //    .Where(elements => (string)elements.Attribute("class") == "artykul_tresc")
             //    .Select(elements => elements.Value).FirstOrDefault();
+        }
+
+        private string PrepareImgElements(HtmlNode ArticleBody)
+        {
+            foreach (var node in ArticleBody.Descendants())
+            {
+                if (node.Attributes.Contains("src"))
+                {
+                    node.Attributes["src"].Value = this.Provider.ProviderNamespace + node.Attributes["src"].Value;
+                    if(node.Attributes.Contains("style"))
+                    {
+                        node.Attributes["style"].Remove();
+                    }
+                }
+            }
+
+            return ArticleBody.InnerHtml;
         }
     }
 }

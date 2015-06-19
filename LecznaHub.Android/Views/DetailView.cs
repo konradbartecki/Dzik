@@ -5,6 +5,7 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Util;
@@ -29,6 +30,8 @@ namespace LecznaHub.Android.Views
             SetContentView(Resource.Layout.DetailView);
 
             var web_view = FindViewById<WebView>(Resource.Id.webView1);
+            //white flash on load hack
+            web_view.SetBackgroundColor(Color.Black);
             web_view.Settings.JavaScriptEnabled = true;
 
             //var nativeWebview = this.FindViewById<WebView>(Resource.Id.webView2);
