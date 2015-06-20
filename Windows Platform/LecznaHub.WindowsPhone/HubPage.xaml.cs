@@ -74,9 +74,11 @@ namespace LecznaHub
         /// session.  The state will be null the first time a page is visited.</param>
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            ProgressIndicator.ShowLoader("Pobieranie wiadomości...", true);
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
             var myDataGroups = await MainViewModel.GetGroupsAsync();
             this.DefaultViewModel["Groups"] = myDataGroups;
+            ProgressIndicator.ShowLoader("", false);
 
         }
 

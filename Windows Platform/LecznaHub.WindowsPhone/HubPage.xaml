@@ -113,28 +113,120 @@
             <HubSection x:Uid="HubSection1" Header="OTHER" DataContext="{Binding Groups}" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
                     <GridView>
-                        <Grid x:Name="moreApps" Margin="0,0,9.5,9.5" Background="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" Tapped="moreApps_Tapped">
-                            <Image Source="{Binding ImagePath}" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}" Height="138.5" Width="138.5"/>
+                        <Grid x:Name="moreApps" Margin="0,0,9.5,9.5" Background="{ThemeResource PhoneAccentBrush}" Tapped="moreApps_Tapped">
+                            <Viewbox Width="159" Height="159">
+                                <Grid>
+                                    <Grid Width="32" Height="32" Visibility="Collapsed" />
+                                    <Path Data="M20.698999,37.680001L20.728297,47.16587 33.61,48.981002 33.61,37.680001z M10.143999,37.680001L10.143999,45.847396 20.156999,47.165 20.156999,37.680001z M20.025199,27.401999L10.275801,28.895499 10.1,37.151998 20.113,37.151998z M33.638999,25.660998L20.728,27.286056 20.728,37.107999 33.638999,37.107999z M44.969753,12.589L54.221,15.750469 54.221,60.485732 45.08625,63.999999 0,55.216289 0,20.904119z M26.158921,4.0209999L26.395999,5.3842993C24.468168,6.2397809,22.635324,7.6746707,22.837091,10.019763L22.837091,15.251596 21.43,15.512 21.43,9.0262496C21.43,9.0262494,21.570728,5.7488637,26.158921,4.0209999z M32.518852,2.9860001C32.518852,2.9860001,37.235877,3.4820871,37.649997,8.4481478L37.649997,12.513213 36.325736,12.758 36.325736,8.0340929C36.325736,8.0340924 35.829513,3.8128014 30.532497,4.2268629 30.532497,4.2268629 30.39635,4.2437935 30.162599,4.2828627L29.982999,3.1474352C30.757728,3.0575933,31.597007,3.0003119,32.518852,2.9860001z M23.714635,0C23.714635,0,28.721195,0.52604294,29.159999,5.7970142L29.159999,14.083626 27.899585,14.316731 27.755082,14.316731 27.755082,5.356904C27.755082,5.3569036 27.227678,0.87761402 21.606511,1.3164406 21.606511,1.3164406 12.999011,2.3711443 13.438517,7.4650126L13.438517,16.989993 11.944999,17.265999 11.944999,6.4116182C11.944999,6.4116182,12.208602,0.17447281,23.714635,0z" Stretch="Uniform" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5" Fill="White">
+                                        <Path.RenderTransform>
+                                            <TransformGroup>
+                                                <TransformGroup.Children>
+                                                    <RotateTransform Angle="0" />
+                                                    <ScaleTransform ScaleX="0.5" ScaleY="0.5" />
+                                                </TransformGroup.Children>
+                                            </TransformGroup>
+                                        </Path.RenderTransform>
+                                    </Path>
+                                </Grid>
+                            </Viewbox>
+
                             <TextBlock Text="More apps" VerticalAlignment="Bottom" Margin="9.5,0,0,6.5" Style="{ThemeResource BaseTextBlockStyle}"/>
                         </Grid>
-                        <Grid x:Name="About" Margin="0,0,9.5,9.5" Background="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" Tapped="Grid_Tapped_1">
-                            <Image Source="{Binding ImagePath}" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}" Height="138.5" Width="138.5"/>
+                        <Grid x:Name="About" Margin="0,0,9.5,9.5" Background="{ThemeResource PhoneAccentBrush}" Tapped="Grid_Tapped_1">
+                            <Viewbox>
+                                <Grid>
+                                    <Grid Width="32" Height="32" Visibility="Collapsed" />
+                                    <Path Data="M389.241,286.874C371.743,296.253 356.153,303.094 342.417,307.414 328.664,311.717 311.796,315.101 291.597,317.495L291.597,347.72 354.658,347.72 354.658,562.336C354.658,581.976 353.488,594.504 351.184,599.833 348.88,605.233 344.938,609.319 339.375,612.271 333.723,615.17 322.813,616.628 306.557,616.628L291.597,616.628 291.597,647.232 478.171,647.232 478.171,616.628 461.015,616.628C447.189,616.628 437.63,615.458 432.427,613.154 427.225,610.849 423.138,607.105 420.24,602.047 417.324,596.953 415.812,589.302 415.812,579.095L415.812,286.874z M384.128,122.573C372.516,122.573 362.525,126.624 354.28,134.742 346.018,142.897 341.895,152.798 341.895,164.463 341.895,176.091 346.018,186.083 354.28,194.31 362.525,202.59 372.516,206.695 384.128,206.695 395.794,206.695 405.785,202.59 414.047,194.31 422.292,186.083 426.432,176.091 426.432,164.463 426.432,152.798 422.292,142.897 414.047,134.742 405.785,126.624 395.794,122.573 384.128,122.573z M384.884,0C597.452,-1.1E-05 769.768,172.33 769.768,384.875 769.768,597.456 597.452,769.768 384.884,769.768 172.334,769.768 0,597.456 0,384.875 0,172.33 172.334,-1.1E-05 384.884,0z" Stretch="Uniform" Fill="#FFFFFFFF" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                                        <Path.RenderTransform>
+                                            <TransformGroup>
+                                                <TransformGroup.Children>
+                                                    <RotateTransform Angle="0" />
+                                                    <ScaleTransform ScaleX="0.5" ScaleY="0.5" />
+                                                </TransformGroup.Children>
+                                            </TransformGroup>
+                                        </Path.RenderTransform>
+                                    </Path>
+                                </Grid>
+                            </Viewbox>
+
                             <TextBlock Text="About" VerticalAlignment="Bottom" Margin="9.5,0,0,6.5" Style="{ThemeResource BaseTextBlockStyle}"/>
                         </Grid>
-                        <Grid x:Name="Feedback" Margin="0,0,9.5,9.5" Background="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}">
-                            <Image Source="{Binding ImagePath}" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}" Height="138.5" Width="138.5"/>
+                        <Grid x:Name="Feedback" Margin="0,0,9.5,9.5" Background="{ThemeResource PhoneAccentBrush}">
+                            <Viewbox>
+                                <Grid>
+                                    <Grid Width="32" Height="32" Visibility="Collapsed" />
+                                    <Path Data="M63.999996,18.073C75.039375,18.073 83.987999,27.021107 83.987999,38.060093 83.987999,45.185016 80.249702,51.420254 74.638161,54.960716L78.53746,66.255996 67.361382,57.743488C66.266457,57.929485 65.14843,58.048084 63.999996,58.048084 52.960621,58.048084 44.012001,49.098976 44.012001,38.060093 44.012001,27.021107 52.960621,18.073 63.999996,18.073z M0,0L64,0 64,11.406C49.302826,11.405999 37.346001,23.36313 37.346001,38.060093 37.346001,41.045597 37.839336,43.918018 38.748764,46.600113L38.955521,47.186001 21.946999,47.186001 11.108,63.462002 11.108,47.186001 0,47.186001z" Stretch="Uniform" Fill="#FFFFFFFF" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                                        <Path.RenderTransform>
+                                            <TransformGroup>
+                                                <TransformGroup.Children>
+                                                    <RotateTransform Angle="0" />
+                                                    <ScaleTransform ScaleX="0.5" ScaleY="0.5" />
+                                                </TransformGroup.Children>
+                                            </TransformGroup>
+                                        </Path.RenderTransform>
+                                    </Path>
+                                </Grid>
+                            </Viewbox>
+
+
+
                             <TextBlock Text="Feedback" VerticalAlignment="Bottom" Margin="9.5,0,0,6.5" Style="{ThemeResource BaseTextBlockStyle}"/>
                         </Grid>
-                        <Grid x:Name="Share" Margin="0,0,9.5,9.5" Background="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" Tapped="Share_Tapped">
-                            <Image Source="{Binding ImagePath}" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}" Height="138.5" Width="138.5"/>
+                        <Grid x:Name="Share" Margin="0,0,9.5,9.5" Background="{ThemeResource PhoneAccentBrush}" Tapped="Share_Tapped">
+                            <Viewbox>
+                                <Grid>
+                                    <Grid Width="32" Height="32" Visibility="Collapsed" />
+                                    <Path Data="M8.6276054,20.288C13.393148,20.288 17.255001,24.151413 17.255001,28.91715 17.255001,31.300018 16.289537,33.456982 14.728382,35.018227L14.539989,35.197853 14.618679,35.41201C17.135284,42.031853,23.067958,46.967979,30.263642,48.067356L30.494701,48.099686 30.490417,48.136543C30.450464,48.53767 30.430002,48.944519 30.430002,49.356152 30.430002,51.469261 30.9671,53.459148 31.911995,55.196476L32.018209,55.381001 31.912869,55.376995C20.948722,54.821301,11.704531,47.750938,7.9735947,37.959263L7.8067379,37.505131 7.7453671,37.500465C3.3943481,37.058708 0,33.385029 0,28.91715 0,24.151413 3.8620129,20.288 8.6276054,20.288z M54.368111,11.253589L54.62896,11.577476C58.249641,16.184826 60.409,21.995144 60.409,28.310675 60.409,36.350529 56.90888,43.572262 51.349154,48.535328L51.284399,48.591248 51.308777,48.911942C51.316231,49.059017 51.320002,49.207066 51.320002,49.355999 51.320002,54.121822 47.457924,57.984001 42.692451,57.984001 37.926879,57.984001 34.065002,54.121822 34.065002,49.355999 34.065002,44.590179 37.926879,40.728001 42.692451,40.728001 44.479504,40.728001 46.139516,41.271118 47.516464,42.20134L47.611805,42.269138 48.041821,41.816082C51.303757,38.259216 53.294502,33.517559 53.294502,28.310675 53.294502,24.515972 52.237183,20.968374 50.401058,17.946394L50.382874,17.917267 50.632385,17.701092C52.375431,16.116703,53.661556,14.03825,54.267319,11.689239z M42.39045,3.3306691E-15C47.155922,-4.8393041E-08 51.018002,3.862098 51.018002,8.6278791 51.018002,13.3936 47.155922,17.256998 42.39045,17.256998 37.624781,17.256998 33.763002,13.3936 33.763003,8.6278791L33.770525,8.3302011 33.307602,8.3236122C25.71822,8.3236122,19.117211,12.552906,15.732731,18.783394L15.674902,18.893002 15.227575,18.59062C13.481487,17.468006,11.432825,16.777121,9.2319889,16.669769L8.8316307,16.660027 8.8783436,16.559973C13.255033,7.4761658 22.548777,1.2089999 33.307602,1.2089998 34.62321,1.209 35.916911,1.3027132 37.182393,1.4838299L37.484619,1.5314548 37.566384,1.4733124C38.943308,0.54310751,40.603324,-4.8393041E-08,42.39045,3.3306691E-15z" Stretch="Uniform" Fill="#FFFFFFFF" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                                        <Path.RenderTransform>
+                                            <TransformGroup>
+                                                <TransformGroup.Children>
+                                                    <RotateTransform Angle="0" />
+                                                    <ScaleTransform ScaleX="0.5" ScaleY="0.5" />
+                                                </TransformGroup.Children>
+                                            </TransformGroup>
+                                        </Path.RenderTransform>
+                                    </Path>
+                                </Grid>
+                            </Viewbox>
+
+
                             <TextBlock Text="Share" VerticalAlignment="Bottom" Margin="9.5,0,0,6.5" Style="{ThemeResource BaseTextBlockStyle}"/>
                         </Grid>
-                        <Grid x:Name="Settings" Margin="0,0,9.5,9.5" Background="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}">
-                            <Image Source="{Binding ImagePath}" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}" Height="138.5" Width="138.5"/>
+                        <Grid x:Name="Settings" Margin="0,0,9.5,9.5" Background="{ThemeResource PhoneAccentBrush}">
+                            <Viewbox>
+                                <Grid>
+                                    <Grid Width="32" Height="32" Visibility="Collapsed" />
+                                    <Path Data="M31.679651,15.723C22.841078,15.723 15.677,22.887022 15.677,31.724249 15.677,40.562878 22.841078,47.727002 31.679651,47.727002 40.518124,47.727002 47.682003,40.562878 47.682003,31.724249 47.682003,22.887022 40.518124,15.723 31.679651,15.723z M25.174641,0L30.947304,8.1649995 30.977009,8.163671C31.891628,8.1361193,32.811726,8.1617675,33.732849,8.2423577L34.116646,8.2807278 40.096367,0.5289996 49.181995,4.5158782 47.510448,14.236901 47.626137,14.339919C48.479649,15.11912,49.268909,15.955267,49.990528,16.839653L50.234638,17.14785 60.403648,15.836 64.007996,25.079203 55.322643,31.217757 55.324234,31.258986C55.34618,32.174153,55.314838,33.094563,55.22847,34.015755L55.226952,34.030385 63.345997,40.294331 59.359104,49.380002 49.249798,47.645153 49.143776,47.764214C48.695721,48.255009,48.228832,48.72456,47.744774,49.172226L47.324875,49.549786 48.723995,60.394425 39.48156,64 33.403603,55.403061 33.023663,55.43042C32.149929,55.481137,31.270197,55.483376,30.38839,55.435608L29.679308,55.383191 23.130268,63.875 14.041999,59.886834 15.844025,49.393521 15.71986,49.282948C15.207753,48.815411,14.718776,48.32737,14.253661,47.820706L13.803129,47.315312 3.612031,48.630002 0.0080004195,39.385499 8.0905037,33.673707 8.0481892,33.048829C7.9875851,31.908507,8.0095654,30.758269,8.1175261,29.606822L8.1191311,29.59272 0,23.328246 3.9867127,14.242 14.093521,15.978928 14.104487,15.966273C15.033746,14.935561,16.045525,13.997155,17.124784,13.156928L17.159048,13.131042 15.929999,3.6040602z" Stretch="Uniform" Fill="#FFFFFFFF" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                                        <Path.RenderTransform>
+                                            <TransformGroup>
+                                                <TransformGroup.Children>
+                                                    <RotateTransform Angle="0" />
+                                                    <ScaleTransform ScaleX="0.5" ScaleY="0.5" />
+                                                </TransformGroup.Children>
+                                            </TransformGroup>
+                                        </Path.RenderTransform>
+                                    </Path>
+                                </Grid>
+                            </Viewbox>
+
                             <TextBlock Text="Settings" VerticalAlignment="Bottom" Margin="9.5,0,0,6.5" Style="{ThemeResource BaseTextBlockStyle}"/>
                         </Grid>
-                        <Grid x:Name="Review" Margin="0,0,9.5,9.5" Background="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" Tapped="Grid_Tapped">
-                            <Image Source="{Binding ImagePath}" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}" Height="138.5" Width="138.5"/>
+                        <Grid x:Name="Review" Margin="0,0,9.5,9.5" Background="{ThemeResource PhoneAccentBrush}" Tapped="Grid_Tapped">
+                            <Viewbox>
+                                <Grid>
+                                    <Grid Width="32" Height="32" Visibility="Collapsed" />
+                                    <Path Data="M215.68,0C292.242,0.004216 365.634,42.1602 404.47,114.292 458.543,13.9345 579.463,-28.3974 682.751,20.0872 791.16,70.9477 838.901,202.422 789.378,313.761 740.008,424.79 404.432,768 404.432,768 402.348,766.637 68.9311,424.79 19.5614,313.761 -29.9588,202.422 17.7792,70.9477 126.225,20.0872 155.275,6.45091 185.72,-0.001663 215.68,0z" Stretch="Uniform" Fill="#FFFFFFFF" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5">
+                                        <Path.RenderTransform>
+                                            <TransformGroup>
+                                                <TransformGroup.Children>
+                                                    <RotateTransform Angle="0" />
+                                                    <ScaleTransform ScaleX="0.5" ScaleY="0.5" />
+                                                </TransformGroup.Children>
+                                            </TransformGroup>
+                                        </Path.RenderTransform>
+                                    </Path>
+                                </Grid>
+                            </Viewbox>
                             <TextBlock Text="Review" VerticalAlignment="Bottom" Margin="9.5,0,0,6.5" Style="{ThemeResource BaseTextBlockStyle}"/>
                         </Grid>
                     </GridView>

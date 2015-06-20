@@ -20,6 +20,16 @@
         </TransitionCollection>
     </Page.Transitions>
 
+    <Page.BottomAppBar>
+        <CommandBar x:Name="myCommandBar" >
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Name="AppBarButton" Label="Open in IE" Icon="Globe" Click="AppBarButton_Click"/>
+                <AppBarButton x:Name="AppBarShare" Label="Share" Icon="ReShare"/>
+                <AppBarButton x:Name="AppBarRefresh" Label="Refresh" Icon="Refresh" Click="AppBarRefresh_Click"/>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
     <Grid x:Name="LayoutRoot">
         <Grid.ChildrenTransitions>
             <TransitionCollection>
@@ -41,7 +51,6 @@
                   to show details for the current item -->
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
             <WebView x:Name="webView"></WebView>
-
         </Grid>
     </Grid>
 </Page>

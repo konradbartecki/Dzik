@@ -71,7 +71,7 @@ namespace LecznaHub.Helpers
                     //if (!isRegistered)
                     //{
 
-                    TimeTrigger myTimeTrigger = new TimeTrigger(15, false);
+                    TimeTrigger myTimeTrigger = new TimeTrigger(30, false);
 
                     BackgroundTaskRegistration task = Helpers.BackgroundTasksHelper.RegisterBackgroundTask(
                         "LecznaHub.BackgroundTasks.TileUpdateTask",

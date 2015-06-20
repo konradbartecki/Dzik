@@ -3,6 +3,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using LecznaHub.Common;
+using LecznaHub.Core.Model;
 using LecznaHub.Data;
 using LecznaHub.Core.ViewModel;
 using LecznaHub.Shared.Common;
@@ -55,14 +56,21 @@ namespace LecznaHub
         /// <see cref="Frame.Navigate(Type, object)"/> when this page was initially requested and
         /// a dictionary of state preserved by this page during an earlier
         /// session.  The state will be null the first time a page is visited.</param>
-        private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
             //throw new NotImplementedException();
-            var item = await MainViewModel.GetItemAsync((string)e.NavigationParameter);
+            CreateDataModel((string)e.NavigationParameter);
+        }
+
+        private async void CreateDataModel(string uniqueId)
+        {
+            ProgressIndicator.ShowLoader("Pobieranie artykułu...", true);
+            var item = await MainViewModel.GetItemAsync(uniqueId);
             var html = WebViewerHelper.WrapHtml(item.WebArticle.ToString(), ThemeToStringHelper.GetCurrentThemeToString());
             this.webView.NavigateToString(html);
             this.DefaultViewModel["Item"] = item;
+            ProgressIndicator.ShowLoader("", false);
         }
 
         /// <summary>
@@ -103,5 +111,17 @@ namespace LecznaHub
         }
 
         #endregion
+
+        private async void AppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            NewsItemBase item = (NewsItemBase)this.DefaultViewModel["Item"];
+            await Windows.System.Launcher.LaunchUriAsync(new Uri(item.UniqueId));
+        }
+
+        private void AppBarRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            NewsItemBase item = (NewsItemBase)this.DefaultViewModel["Item"];
+            CreateDataModel(item.UniqueId);
+        }
     }
 }
