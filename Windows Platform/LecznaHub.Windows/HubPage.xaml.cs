@@ -142,5 +142,29 @@ namespace LecznaHub
         }
 
         #endregion
+
+        private void About_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Review_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            LauncherHelpers.ShowReviewDialog();
+        }
+
+        private void Feedback_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        private void Share_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            LauncherHelpers.ShareApp();
+        }
+
+        private void moreApps_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            LauncherHelpers.ShowMoreApps();
+        }
     }
 }

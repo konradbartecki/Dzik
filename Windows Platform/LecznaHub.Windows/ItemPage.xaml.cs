@@ -99,5 +99,28 @@ namespace LecznaHub
         }
 
         #endregion
+
+        private void Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            webView.Refresh();
+        }
+
+
+        private void NavWebBack_Click(object sender, RoutedEventArgs e)
+        {
+            if (webView.CanGoBack)
+            {
+                webView.GoBack();
+            }
+            else
+            {
+                NavigationHelper.GoBack();
+            }            
+        }
+
+        private async void OpenBrowser_Click(object sender, RoutedEventArgs e)
+        {
+            await Windows.System.Launcher.LaunchUriAsync(webView.Source);
+        }
     }
 }

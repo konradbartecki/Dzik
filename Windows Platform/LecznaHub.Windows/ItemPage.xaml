@@ -9,6 +9,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    
+
 
     <!--
         This grid acts as a root panel for the page that defines two rows:
@@ -27,19 +29,21 @@
             <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        
+
+
 
         <!--
             TODO: Content should be placed within the following grid 
                   to show details for the current item
         -->
-        <Grid Grid.Row="1" x:Name="contentRegion">
+        <Grid Grid.Row="0" Grid.RowSpan="2" x:Name="contentRegion">
             <WebView x:Name="webView" Margin="0"/>
         </Grid>
+        
+        
 
         <!-- Back button and page title -->
-        <Grid>
+        <!--<Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
@@ -52,6 +56,21 @@
                         AutomationProperties.ItemType="Navigation Button"/>
             <TextBlock x:Name="pageTitle" Text="{Binding NewsProvider.Name}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
-        </Grid>
+        </Grid>-->
     </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar x:Name="myCommandBar" IsOpen="True" IsSticky="True" >
+            
+            <AppBarButton x:Name="Refresh" Label="Refresh" Icon="Refresh" Click="Refresh_Click"/>
+            <AppBarButton x:Name="CopyLink" Label="Copy link" Icon="Paste"/>
+            <AppBarButton x:Name="AppBarShare" Label="Share" Icon="ReShare"/>            
+            <AppBarButton x:Name="OpenBrowser" Label="Open in browser" Icon="Globe" Click="OpenBrowser_Click"/>           
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Name="NavWebBack" Label="Go back" Icon="Back" Click="NavWebBack_Click"/>
+                <!--<AppBarButton x:Name="GoBack" Label="Return to menu" Icon="Home" Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"/>-->
+                
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>
