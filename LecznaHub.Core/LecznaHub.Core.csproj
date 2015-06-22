@@ -43,6 +43,7 @@
     <Compile Include="Helpers\AsyncHelpers.cs" />
     <Compile Include="Helpers\IsoEncoding.cs" />
     <Compile Include="Helpers\WebViewerHelper.cs" />
+    <Compile Include="Model\Config.cs" />
     <Compile Include="Model\Downloader.cs" />
     <Compile Include="ViewModel\DetailViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\Leczna24.cs" />
     <Compile Include="Providers\NewsProviderBase.cs" />
+    <Compile Include="ViewModel\StationsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Cirrious.CrossCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e16445fd9b451819, processorArchitecture=MSIL">
@@ -78,11 +80,21 @@
       <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid+MonoTouch\HtmlAgilityPack.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1-beta3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\OpenLeczna\OpenLeczna.DTOs\OpenLeczna.DTOs.csproj">
+      <Project>{7f5f91a0-a8d6-4bcf-8a13-57734eef05b1}</Project>
+      <Name>OpenLeczna.DTOs</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

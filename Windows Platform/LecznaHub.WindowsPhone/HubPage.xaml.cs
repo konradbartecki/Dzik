@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using Windows.ApplicationModel.Resources;
@@ -14,6 +15,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using Windows.ApplicationModel.Store;
 using LecznaHub.BackgroundTasks;
+using OpenLeczna.DTOs;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
 
@@ -74,10 +76,19 @@ namespace LecznaHub
         /// session.  The state will be null the first time a page is visited.</param>
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            Helpers.BackgroundTasksHelper.RegisterLiveTileUpdaterTask();
+            
+            if (e.PageState != null)
+            {
+                this.DefaultViewModel["Groups"] = e.PageState["Groups"] as ObservableCollection<NewsCollection>;
+                this.DefaultViewModel["Stations"] = e.PageState["Stations"] as ObservableCollection<StationDto>;
+                return;
+            }
+
             ProgressIndicator.ShowLoader("Pobieranie wiadomości...", true);
-            // TODO: Create an appropriate data model for your problem domain to replace the sample data
-            var myDataGroups = await MainViewModel.GetGroupsAsync();
-            this.DefaultViewModel["Groups"] = myDataGroups;
+            this.DefaultViewModel["Groups"] = await MainViewModel.GetGroupsAsync();
+            ProgressIndicator.ShowLoader("Pobieranie rozkładów jazdy...", true);
+            this.DefaultViewModel["Stations"] = await StationsViewModel.GetStationsAsync();
             ProgressIndicator.ShowLoader("", false);
 
         }
@@ -93,7 +104,8 @@ namespace LecznaHub
         /// serializable state.</param>
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
-            // TODO: Save the unique state of the page here.
+            e.PageState["Groups"] = DefaultViewModel["Groups"];
+            e.PageState["Stations"] = DefaultViewModel["Stations"];
         }
 
         /// <summary>
@@ -140,7 +152,7 @@ namespace LecznaHub
         /// <param name="e">Event data that describes how this page was reached.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Helpers.BackgroundTasksHelper.RegisterLiveTileUpdaterTask();
+            //
             this.navigationHelper.OnNavigatedTo(e);
         }
 
@@ -154,7 +166,7 @@ namespace LecznaHub
         private async void Grid_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             //review
-            var uri = new Uri(string.Format("ms-windows-store:reviewapp?appid={0}", CurrentApp.AppId));
+            var uri = new Uri($"ms-windows-store:reviewapp?appid={CurrentApp.AppId}");
             await Windows.System.Launcher.LaunchUriAsync(uri);
         }
 
@@ -169,13 +181,13 @@ namespace LecznaHub
 
         private async void moreApps_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            var uri = new Uri(string.Format(@"ms-windows-store:search?keyword={0}", "Konrad Bartecki"));
+            var uri = new Uri($@"ms-windows-store:search?keyword={"Konrad Bartecki"}");
             await Windows.System.Launcher.LaunchUriAsync(uri);
         }
 
         private async void Share_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            var uri = new Uri(string.Format("ms-windows-store:navigate?appid={0}", CurrentApp.AppId));
+            var uri = new Uri($"ms-windows-store:navigate?appid={CurrentApp.AppId}");
             await Windows.System.Launcher.LaunchUriAsync(uri);
         }
     }

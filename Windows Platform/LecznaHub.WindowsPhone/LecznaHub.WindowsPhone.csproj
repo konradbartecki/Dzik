@@ -148,6 +148,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\OpenLeczna\OpenLeczna.DTOs\OpenLeczna.DTOs.csproj">
+      <Project>{7F5F91A0-A8D6-4BCF-8A13-57734EEF05B1}</Project>
+      <Name>OpenLeczna.DTOs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\LecznaHub.BackgroundTasks\LecznaHub.BackgroundTasks.csproj">
       <Project>{c32d30f6-fa95-4c84-a2f0-298031555d91}</Project>
       <Name>LecznaHub.BackgroundTasks</Name>

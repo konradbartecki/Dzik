@@ -9,6 +9,7 @@ namespace LecznaHub.Core
 {
     public class App : Cirrious.MvvmCross.ViewModels.MvxApplication
     {
+
         public override void Initialize()
         {
             CreatableTypes()

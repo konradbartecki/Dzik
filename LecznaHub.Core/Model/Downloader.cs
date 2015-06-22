@@ -13,14 +13,23 @@ namespace LecznaHub.Core.Model
     {
         public Downloader(Uri feedUri)
         {
-            request = WebRequest.Create(feedUri);
+            Request = WebRequest.Create(feedUri);
         }
 
-        private WebRequest request { get; set; }
+        public Downloader(Uri feedUri, string requestContentType, string requestMethod)
+        {
+            Request = WebRequest.Create(feedUri);
+            Request.ContentType = requestContentType;
+            Request.Method = requestMethod;
+        }
+
+        private WebRequest Request { get; }
 
         public async Task<string> GetPageAsync()
         {
-            WebResponse response = await request.GetResponseAsync();
+            WebResponse response = await Request.GetResponseAsync();
+            //Request.ContentType = "application/json";
+            //Request.Method = "GET";
             // Get the stream containing content returned by the server.
             Stream dataStream = response.GetResponseStream();
             // Open the stream using a StreamReader for easy access.

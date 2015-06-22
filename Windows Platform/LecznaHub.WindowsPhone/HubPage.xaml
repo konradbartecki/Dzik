@@ -71,7 +71,7 @@
     </Page.Resources>
 
     <Grid x:Name="LayoutRoot">
-        <Hub x:Name="Hub" x:Uid="Hub" Header="application name" Background="{ThemeResource HubBackgroundImageBrush}">
+        <Hub x:Name="Hub" x:Uid="Hub" Header="application name">
             <!--<HubSection x:Uid="HubSection2" Header="SECTION 2" Width="Auto"
                          DataContext="{Binding Groups[0]}" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
@@ -94,7 +94,7 @@
                 </DataTemplate>
             </HubSection>-->
 
-            <HubSection x:Uid="Section3Header" Header="SECTION 3"
+            <HubSection x:Uid="Section3Header" Header="NEWS"
                         DataContext="{Binding Groups[0]}" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
                     <ListView 
@@ -110,7 +110,32 @@
                 </DataTemplate>
             </HubSection>
 
-            <HubSection x:Uid="HubSection1" Header="OTHER" DataContext="{Binding Groups}" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
+            <HubSection x:Uid="TransportSection" Header="ROZKŁAD JAZDY">
+                <DataTemplate>
+                    <Grid>
+                        <StackPanel>
+                            <AutoSuggestBox Visibility="Collapsed"/>
+                            <GridView Margin="0,0,0,10">
+                                <StackPanel>
+                                    <TextBlock Text="Przystanek początkowy" Foreground="{ThemeResource PhoneAccentBrush}" Style="{StaticResource TextStyleLargeFontSize}"/>
+                                    <TextBlock Text="Dworzec (Wamex), Łęczna" Style="{StaticResource TextStyleExtraLargePlusFontSize}"/>
+                                </StackPanel>
+                            </GridView>
+                            <GridView>
+                                <StackPanel Margin="0,0,0,10">
+                                    <TextBlock Text="Cel podróży" Foreground="{ThemeResource PhoneAccentBrush}" Style="{StaticResource TextStyleLargeFontSize}"/>
+                                    <TextBlock Text="Lublin" Style="{StaticResource TextStyleExtraLargePlusFontSize}"/>
+                                </StackPanel>
+                            </GridView>
+                            <TextBlock Margin="0,20,0,0" Style="{StaticResource TextStyleExtraLargeFontSize}" Text="Najbliższe busy odjeżdzają o 15:30, 15:40 i 15:50. Ostatni o 23:10." TextWrapping="WrapWholeWords"/>
+                            <Button Content="Pokaż więcej"/>
+                        </StackPanel>
+
+                    </Grid>
+                </DataTemplate>
+            </HubSection>
+
+            <HubSection x:Uid="HubSection1" Header="INNE" DataContext="{Binding Groups}" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
                     <GridView>
                         <Grid x:Name="moreApps" Margin="0,0,9.5,9.5" Background="{ThemeResource PhoneAccentBrush}" Tapped="moreApps_Tapped">
@@ -248,7 +273,7 @@
                 </DataTemplate>-->
             </HubSection>
 
-            <HubSection x:Uid="HubSection4" Header="SECTION 4"
+            <!--<HubSection x:Uid="HubSection4" Header="SECTION 4"
                         DataContext="{Binding Groups[2]}" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
                     <ListView 
@@ -269,9 +294,9 @@
                         </ListView.ItemTemplate>
                     </ListView>
                 </DataTemplate>
-            </HubSection>
+            </HubSection>-->
 
-            <HubSection x:Uid="HubSection5" Header="SECTION 5"
+            <!--<HubSection x:Uid="HubSection5" Header="SECTION 5"
                         DataContext="{Binding Groups[3]}" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
                     <ListView 
@@ -285,7 +310,7 @@
                         ContinuumNavigationTransitionInfo.ExitElementContainer="True">
                     </ListView>
                 </DataTemplate>
-            </HubSection>
+            </HubSection>-->
         </Hub>
     </Grid>
 </Page>

@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LecznaHub.Android", "Leczna
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LecznaHub.BackgroundTasks", "LecznaHub.BackgroundTasks\LecznaHub.BackgroundTasks.csproj", "{C32D30F6-FA95-4C84-A2F0-298031555D91}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenLeczna.DTOs", "..\OpenLeczna\OpenLeczna.DTOs\OpenLeczna.DTOs.csproj", "{7F5F91A0-A8D6-4BCF-8A13-57734EEF05B1}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Windows Platform\LecznaHub.WindowsUniversal\LecznaHub.Shared.projitems*{9b42b335-4366-468f-a6bb-5bf17ea50c92}*SharedItemsImports = 4
@@ -138,6 +140,22 @@ Global
 		{C32D30F6-FA95-4C84-A2F0-298031555D91}.Release|x64.Build.0 = Release|Any CPU
 		{C32D30F6-FA95-4C84-A2F0-298031555D91}.Release|x86.ActiveCfg = Release|Any CPU
 		{C32D30F6-FA95-4C84-A2F0-298031555D91}.Release|x86.Build.0 = Release|Any CPU
+		{7F5F91A0-A8D6-4BCF-8A13-57734EEF05B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F5F91A0-A8D6-4BCF-8A13-57734EEF05B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F5F91A0-A8D6-4BCF-8A13-57734EEF05B1}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{7F5F91A0-A8D6-4BCF-8A13-57734EEF05B1}.Debug|ARM.Build.0 = Debug|Any CPU
+		{7F5F91A0-A8D6-4BCF-8A13-57734EEF05B1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7F5F91A0-A8D6-4BCF-8A13-57734EEF05B1}.Debug|x64.Build.0 = Debug|Any CPU
+		{7F5F91A0-A8D6-4BCF-8A13-57734EEF05B1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7F5F91A0-A8D6-4BCF-8A13-57734EEF05B1}.Debug|x86.Build.0 = Debug|Any CPU
+		{7F5F91A0-A8D6-4BCF-8A13-57734EEF05B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F5F91A0-A8D6-4BCF-8A13-57734EEF05B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F5F91A0-A8D6-4BCF-8A13-57734EEF05B1}.Release|ARM.ActiveCfg = Release|Any CPU
+		{7F5F91A0-A8D6-4BCF-8A13-57734EEF05B1}.Release|ARM.Build.0 = Release|Any CPU
+		{7F5F91A0-A8D6-4BCF-8A13-57734EEF05B1}.Release|x64.ActiveCfg = Release|Any CPU
+		{7F5F91A0-A8D6-4BCF-8A13-57734EEF05B1}.Release|x64.Build.0 = Release|Any CPU
+		{7F5F91A0-A8D6-4BCF-8A13-57734EEF05B1}.Release|x86.ActiveCfg = Release|Any CPU
+		{7F5F91A0-A8D6-4BCF-8A13-57734EEF05B1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
