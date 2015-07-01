@@ -20,6 +20,11 @@ namespace LecznaHub
     /// </summary>
     public sealed partial class App : Application
     {
+        /// <summary>
+        /// Allows tracking page views, exceptions and other telemetry through the Microsoft Application Insights service.
+        /// </summary>
+        public static Microsoft.ApplicationInsights.TelemetryClient TelemetryClient;
+
 #if WINDOWS_PHONE_APP
         private TransitionCollection transitions;
 #endif
@@ -30,6 +35,8 @@ namespace LecznaHub
         /// </summary>
         public App()
         {
+            TelemetryClient = new Microsoft.ApplicationInsights.TelemetryClient();
+
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
             SuspensionManager.KnownTypes.Add(typeof(WebArticleBase));
@@ -55,7 +62,7 @@ namespace LecznaHub
 #if DEBUG
             if (Debugger.IsAttached)
             {
-                this.DebugSettings.EnableFrameRateCounter = true;
+                this.DebugSettings.EnableFrameRateCounter = false;
             }
 #endif
 

@@ -1,0 +1,22 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="TextStyleSmallFontSize" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="10.66"></Setter>
+    </Style>
+    <Style x:Key="TextStyleMediumFontSize" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="16"></Setter>
+    </Style>
+    <Style x:Key="TextStyleLargeFontSize" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="18.14"></Setter>
+    </Style>
+    <Style x:Key="TextStyleExtraLargeFontSize" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="25.5"></Setter>
+    </Style>
+    <Style x:Key="TextStyleExtraLargePlusFontSize" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="29.86"></Setter>
+    </Style>
+    <Style x:Key="TextStyleExtraExtraLargeFontSize" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="34.14"></Setter>
+    </Style>
+</ResourceDictionary>

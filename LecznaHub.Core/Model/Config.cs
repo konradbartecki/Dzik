@@ -8,6 +8,6 @@ namespace LecznaHub.Core.Model
 {
     public static class Config
     {
-        public const string OpenLecznaApiEndpoint = "http://openleczna.azurewebsites.net/api/v1/";
+        public const string OpenLecznaApiEndpoint = "http://otwartaleczna.azurewebsites.net/api/v1/";
     }
 }

@@ -1,0 +1,17 @@
+﻿<DTOs:StationDto xmlns:DTOs="using:OpenLeczna.DTOs" City="Curabitur class parturient duis praesent" Name="Maecenas vestibulum cras adipiscing nam">
+	<DTOs:StationDto.GeoPosition>
+		<DTOs:GeoPosDto Longitude="961.45" Latitude="954.72"/>
+	</DTOs:StationDto.GeoPosition>
+	<DTOs:StationDto.Schedules>
+		<DTOs:ScheduleDTO ApplicableDays="Vestibulum integer curae aenean donec" Carrier="Consequat dictumst vestibulum nunc" DestinationCity="Phasellus accumsan bibendum aliquam"/>
+		<DTOs:ScheduleDTO ApplicableDays="Etiam facilisi nullam aptent" Carrier="Ante mauris" DestinationCity="Convallis eleifend adipiscing amet"/>
+		<DTOs:ScheduleDTO ApplicableDays="Dignissim auctor lorem congue sed" Carrier="Parturient vestibulum vestibulum vivamus" DestinationCity="Fusce quisque"/>
+		<DTOs:ScheduleDTO ApplicableDays="Dis aliquam morbi fermentum adipiscing" Carrier="Faucibus facilisis" DestinationCity="Elementum arcu"/>
+		<DTOs:ScheduleDTO ApplicableDays="Elit commodo fringilla" Carrier="Aliquet dictum nulla eget blandit" DestinationCity="Parturient cursus diam"/>
+		<DTOs:ScheduleDTO ApplicableDays="Hac habitasse hendrerit vestibulum habitant" Carrier="Enim libero" DestinationCity="Est lectus"/>
+		<DTOs:ScheduleDTO ApplicableDays="Eros augue nec himenaeos" Carrier="Proin adipiscing ligula" DestinationCity="Erat leo vestibulum mus"/>
+		<DTOs:ScheduleDTO ApplicableDays="Nibh nisi imperdiet cubilia" Carrier="Luctus magnis mattis inceptos mauris" DestinationCity="Parturient vestibulum conubia litora vestibulum"/>
+		<DTOs:ScheduleDTO ApplicableDays="Montes nunc porttitor vestibulum nostra" Carrier="Dolor malesuada nisl penatibus" DestinationCity="Adipiscing mollis parturient"/>
+		<DTOs:ScheduleDTO ApplicableDays="Adipiscing pede parturient ultricies platea" Carrier="Tincidunt vestibulum odio orci tristique" DestinationCity="Non fames ornare"/>
+	</DTOs:StationDto.Schedules>
+</DTOs:StationDto>

@@ -37,7 +37,7 @@
                     <StackPanel Margin="0,0,0,24">
                         <TextBlock
                             Style="{StaticResource TextStyleExtraLargeFontSize}"
-                            Text="Łęczna"
+                            Text="Dzik"
                             Foreground="{StaticResource PhoneAccentBrush}" />
                         <TextBlock x:Name="author"
                             Style="{StaticResource TextStyleLargeFontSize}"

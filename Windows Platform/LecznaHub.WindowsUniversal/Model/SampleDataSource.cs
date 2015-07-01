@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Windows.Data.Json;
 using Windows.Storage;
+using OpenLeczna.DTOs;
 
 // The data model defined by this file serves as a representative example of a strongly-typed
 // model.  The property names chosen coincide with data bindings in the standard item templates.
@@ -87,6 +88,9 @@ namespace LecznaHub.Data
         {
             get { return this._groups; }
         }
+
+        public ObservableCollection<StationDto> Stations = new ObservableCollection<StationDto>();
+        public ObservableCollection<CityDTO> Cities = new ObservableCollection<CityDTO>();
 
         public static async Task<IEnumerable<SampleDataGroup>> GetGroupsAsync()
         {

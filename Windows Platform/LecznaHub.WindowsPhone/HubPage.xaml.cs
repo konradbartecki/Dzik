@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using Windows.ApplicationModel.Resources;
 using Windows.Graphics.Display;
 using Windows.UI.Xaml.Controls;
@@ -14,7 +16,12 @@ using LecznaHub.Data;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using Windows.ApplicationModel.Store;
+using Windows.UI.Core;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
 using LecznaHub.BackgroundTasks;
+using LecznaHub.Controls;
 using OpenLeczna.DTOs;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
@@ -30,6 +37,7 @@ namespace LecznaHub
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
         private readonly ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView("Resources");
 
+        private AutoSuggestBox _myAutoSuggestBox;
         public HubPage()
         {
             this.InitializeComponent();
@@ -42,8 +50,6 @@ namespace LecznaHub
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-
-
         }
 
         /// <summary>
@@ -63,6 +69,8 @@ namespace LecznaHub
             get { return this.defaultViewModel; }
         }
 
+        public StationsViewModel stationsVM;
+
         /// <summary>
         /// Populates the page with content passed during navigation.  Any saved state is also
         /// provided when recreating a page from a prior session.
@@ -78,19 +86,30 @@ namespace LecznaHub
         {
             Helpers.BackgroundTasksHelper.RegisterLiveTileUpdaterTask();
             
-            if (e.PageState != null)
-            {
-                this.DefaultViewModel["Groups"] = e.PageState["Groups"] as ObservableCollection<NewsCollection>;
-                this.DefaultViewModel["Stations"] = e.PageState["Stations"] as ObservableCollection<StationDto>;
-                return;
-            }
+            //if (e.PageState != null)
+           // {
+                //this.DefaultViewModel["Groups"] = e.PageState["Groups"] as ObservableCollection<NewsCollection>;
+                //this.DefaultViewModel["Stations"] = e.PageState["Stations"] as ObservableCollection<StationDto>;
+               // return;
+           // }
 
+
+            //stationsVM = svm;
             ProgressIndicator.ShowLoader("Pobieranie wiadomości...", true);
             this.DefaultViewModel["Groups"] = await MainViewModel.GetGroupsAsync();
+   
             ProgressIndicator.ShowLoader("Pobieranie rozkładów jazdy...", true);
-            this.DefaultViewModel["Stations"] = await StationsViewModel.GetStationsAsync();
-            ProgressIndicator.ShowLoader("", false);
 
+            var stations = await StationsViewModel.GetStationsAsync();
+            var cities = await StationsViewModel.GetCitiesAsync();
+            var carriers = await StationsViewModel.GetCarriersAsync();
+
+            this.DefaultViewModel["Stations"] = stations;
+            this.DefaultViewModel["Cities"] = cities;
+            this.DefaultViewModel["Carriers"] = carriers;
+            ProgressIndicator.ShowLoader("", false);
+            this.DefaultViewModel["ChosenStation"] = stations[0];
+            this.DefaultViewModel["ChosenCity"] = cities[1];
         }
 
 
@@ -105,7 +124,7 @@ namespace LecznaHub
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
             e.PageState["Groups"] = DefaultViewModel["Groups"];
-            e.PageState["Stations"] = DefaultViewModel["Stations"];
+            //e.PageState["Stations"] = DefaultViewModel["Stations"];
         }
 
         /// <summary>
@@ -152,7 +171,6 @@ namespace LecznaHub
         /// <param name="e">Event data that describes how this page was reached.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            //
             this.navigationHelper.OnNavigatedTo(e);
         }
 
@@ -189,6 +207,98 @@ namespace LecznaHub
         {
             var uri = new Uri($"ms-windows-store:navigate?appid={CurrentApp.AppId}");
             await Windows.System.Launcher.LaunchUriAsync(uri);
+        }
+
+        //private enum SuggestBoxMode
+        //{
+        //    Station,
+        //    City
+        //}
+
+        //private SuggestBoxMode CurrentSuggestBoxMode;
+
+        //private void MyAutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        //{
+        //    if (args.Reason != AutoSuggestionBoxTextChangeReason.UserInput) return;
+
+        //    //var svm = this.DefaultViewModel["Stations"] as StationsViewModel;
+        //    //if (svm == null)
+        //       // return;
+ 
+        //    // You can set a threshold when to start looking for suggestions
+        //    if (sender.Text.Length >= 1)
+        //    {
+        //        if (CurrentSuggestBoxMode == SuggestBoxMode.Station)
+        //            sender.ItemsSource = stationsVM.GetStationsSuggestions(sender.Text);
+        //        else
+        //            sender.ItemsSource = stationsVM.GetCitiesSuggestions(sender.Text);
+        //    }
+        //    else
+        //    {
+        //        sender.ItemsSource = new List<string> { };
+        //    }
+        //}
+
+        //private void DestinationGridView_Tapped(object sender, TappedRoutedEventArgs e)
+        //{
+
+        //}
+
+        private void ShowMoreDeparturesButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //private void StartingStationGridView_Tapped(object sender, TappedRoutedEventArgs e)
+        //{
+
+        //}
+
+        //private void MyAutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        //{
+        //    sender.Visibility = Visibility.Collapsed;
+        //    sender.Text = "";
+        //    if (this.CurrentSuggestBoxMode == SuggestBoxMode.City)
+        //        this.DestinationGridView.DataContext = args.SelectedItem as CityDTO;
+        //    else
+        //        this.StartingStationGridView.DataContext = args.SelectedItem as StationDto;
+
+        //}
+
+        //private void MyAutoSuggestBox_OnLoaded(object sender, RoutedEventArgs e)
+        //{
+        //    this._myAutoSuggestBox = (AutoSuggestBox) sender;
+        //}
+
+        //private void CommandButton_Tapped(object sender, TappedRoutedEventArgs e)
+        //{
+        //    _myAutoSuggestBox.Visibility = Visibility.Visible;
+        //    //starting station select button
+        //    _myAutoSuggestBox.Text = "";
+        //    _myAutoSuggestBox.PlaceholderText = "Wyszukaj przystanek";
+        //    CurrentSuggestBoxMode = SuggestBoxMode.Station;
+        //    _myAutoSuggestBox.Focus(FocusState.Programmatic);
+        //}
+
+        //private void CommandButton_Tapped_1(object sender, TappedRoutedEventArgs e)
+        //{
+        //    _myAutoSuggestBox.Visibility = Visibility.Visible;
+        //    //City select button
+        //    _myAutoSuggestBox.Text = "";
+        //    _myAutoSuggestBox.PlaceholderText = "Wyszukaj miasto";
+        //    CurrentSuggestBoxMode = SuggestBoxMode.City;
+        //    _myAutoSuggestBox.Focus(FocusState.Programmatic);
+        //}
+
+        private void GridView_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var stations = DefaultViewModel["Stations"] as ObservableCollection<StationDto>;
+            if (stations == null) return;
+
+            if (!Frame.Navigate(typeof(ListPickerView), stations))
+             {
+                throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
+            }
         }
     }
 }

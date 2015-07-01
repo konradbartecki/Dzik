@@ -1,0 +1,154 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LecznaHub"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Class="LecznaHub.ListPickerView"
+    mc:Ignorable="d"
+    Background="{ThemeResource ContentDialogBackgroundThemeBrush}">
+    <Page.Resources>
+        <Style x:Key="GenericJumpListStyle"
+           TargetType="SemanticZoom">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="SemanticZoom">
+                        <Grid>
+                            <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}">
+                                <Grid Margin="{TemplateBinding Padding}">
+                                    <ContentPresenter x:Name="ZoomedInPresenter"
+                                                  Content="{TemplateBinding ZoomedInView}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                    <Popup x:Name="Popup">
+                                        <Popup.ChildTransitions>
+                                            <TransitionCollection>
+                                                <PopupThemeTransition />
+                                            </TransitionCollection>
+                                        </Popup.ChildTransitions>
+                                        <Grid>
+                                            <Rectangle Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                                                   Opacity=".67" />
+                                            <Border x:Name="PopupBorder">
+                                                <ContentPresenter x:Name="ZoomedOutPresenter"
+                                                              Content="{TemplateBinding ZoomedOutView}"
+                                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                              Margin="19,15,19,0" />
+                                            </Border>
+                                        </Grid>
+                                    </Popup>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--<Style x:Key="GenericJumpListPickerStyle"
+           TargetType="ListView">
+            <Setter Property="ItemTemplate"
+                Value="{StaticResource GenericJumpListPickerItemTemplate}" />
+            <Setter Property="HorizontalContentAlignment"
+                Value="Stretch" />
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment"
+                            Value="Stretch" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>-->
+    </Page.Resources>
+
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition>
+                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                    <ContinuumNavigationTransitionInfo></ContinuumNavigationTransitionInfo>
+                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+            </NavigationThemeTransition>
+        </TransitionCollection>
+    </Page.Transitions>
+
+    <Grid x:Name="LayoutRoot">
+
+        <!--<Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>-->
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0"
+			Margin="20,12,0,25">
+            <TextBlock Text="DZIK"
+				Style="{ThemeResource TitleTextBlockStyle}"
+				Typography.Capitals="SmallCaps" />
+            <TextBlock Text="przystanki"
+				Margin="0,-6,0,0"
+				Style="{ThemeResource HeaderTextBlockStyle}" />
+        </StackPanel>
+        
+
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,0,19,0">
+
+
+            <SemanticZoom Margin="0,0,0,0" Style="{StaticResource GenericJumpListStyle}">
+                <SemanticZoom.ZoomedInView>
+                    <ListView x:Name="listView">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="0,5,0,0" 
+                                   Style="{ThemeResource ListViewItemTextBlockStyle}" 
+                                   Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.GroupStyle>
+                            <GroupStyle>
+                                <GroupStyle.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Key}"
+                                           Margin="0,10,0,0"
+                                           Style="{ThemeResource ListViewItemTextBlockStyle}"
+                                           Foreground="{ThemeResource PhoneAccentBrush}"/>
+                                    </DataTemplate>
+                                </GroupStyle.HeaderTemplate>
+                            </GroupStyle>
+                        </ListView.GroupStyle>
+                    </ListView>
+                </SemanticZoom.ZoomedInView>
+                <SemanticZoom.ZoomedOutView>
+                    <ListView x:Name="GridView" Margin="0,50,0,0">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Height="50" 
+                                      Background="{ThemeResource PhoneAccentBrush}" 
+                                      HorizontalAlignment="Stretch"
+                                      Margin="0,0,0,10">
+                                    <TextBlock Margin="5.5,0,0,9.5" 
+                                               Text="{Binding Group.Key, FallbackValue=Puchaczów}"
+                                               Style="{StaticResource TextStyleLargeFontSize}"
+                                               VerticalAlignment="Center"/>
+                                </Grid>
+                                
+                            </DataTemplate>
+                         </ListView.ItemTemplate>
+                    </ListView>
+                </SemanticZoom.ZoomedOutView>
+            </SemanticZoom>
+        </Grid>
+    </Grid>
+</Page>
