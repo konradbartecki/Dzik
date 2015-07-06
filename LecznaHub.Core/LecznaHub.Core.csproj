@@ -35,7 +35,6 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <Content Include="Model\SampleWebArticle.xml" />
     <Content Include="Assets\css\WebArticle.css" />
   </ItemGroup>
   <ItemGroup>
@@ -46,16 +45,17 @@
     <Compile Include="Helpers\WebViewerHelper.cs" />
     <Compile Include="Model\Config.cs" />
     <Compile Include="Model\Downloader.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModel\DetailViewModel.cs" />
     <Compile Include="ViewModel\ListPickerViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\NewsViewModel.cs" />
     <Compile Include="Model\NewsCollection.cs" />
     <Compile Include="Model\NewsItemBase.cs" />
-    <Compile Include="Model\WebArticleBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\Leczna24.cs" />
     <Compile Include="Providers\NewsProviderBase.cs" />
-    <Compile Include="ViewModel\StationsViewModel.cs" />
+    <Compile Include="ViewModel\TransportViewModel.cs" />
+    <Compile Include="ViewModel\TabbedViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Cirrious.CrossCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e16445fd9b451819, processorArchitecture=MSIL">

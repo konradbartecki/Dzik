@@ -17,7 +17,7 @@ namespace LecznaHub.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-            RegisterAppStart<ViewModel.MainViewModel>();
+            RegisterAppStart<ViewModel.NewsViewModel>();
         }
     }
 }

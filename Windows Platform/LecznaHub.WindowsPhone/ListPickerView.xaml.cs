@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -16,6 +17,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using LecznaHub.Core.ViewModel;
 using LecznaHub.ViewModels;
 using OpenLeczna.DTOs;
 
@@ -30,7 +32,7 @@ namespace LecznaHub
     {
         private NavigationHelper navigationHelper;
         private CollectionViewSource defaultViewModel;
-        //private CollectionViewSource groupedItems; 
+        private TransportViewModel transportViewModel; 
 
         public ListPickerView()
         {
@@ -74,18 +76,15 @@ namespace LecznaHub
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             defaultViewModel = new CollectionViewSource();
-            var items = (ObservableCollection<StationDto>) e.NavigationParameter;
+            transportViewModel = e.NavigationParameter as TransportViewModel;
+            if (transportViewModel == null) return;
+            var items = transportViewModel.StationsCollection;
             var groupedItems = from item in items group item by item.City into grp orderby grp.Key select grp;
             defaultViewModel.Source = groupedItems;
             defaultViewModel.IsSourceGrouped = true;
             listView.ItemsSource = defaultViewModel.View;
             GridView.ItemsSource = defaultViewModel.View.CollectionGroups;
         }
-
-        //private void CreateDataModel(object itemsList)
-        //{
-        //    //myListView.ItemsSource = itemsList;
-        //}
 
         /// <summary>
         /// Preserves state associated with this page in case the application is suspended or the
@@ -125,5 +124,17 @@ namespace LecznaHub
         }
 
         #endregion
+
+        private void listView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (e.ClickedItem.GetType() == typeof (CityDTO))
+                return;
+            var item = (StationDto) e.ClickedItem;
+            if (transportViewModel == null) return;
+            transportViewModel.ChosenStation = item;
+            Debug.WriteLine("Chosen station is now: {0}", transportViewModel.ChosenStation);
+            NavigationHelper.GoBack();
+
+        }
     }
 }

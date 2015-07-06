@@ -66,7 +66,7 @@ namespace LecznaHub
         private async void CreateDataModel(string uniqueId)
         {
             ProgressIndicator.ShowLoader("Pobieranie artykułu...", true);
-            var item = await MainViewModel.GetItemAsync(uniqueId);
+            var item = await NewsViewModel.GetItemAsync(uniqueId);
             var html = WebViewerHelper.WrapHtml(item.WebArticle.ToString(), ThemeToStringHelper.GetCurrentThemeToString());
             this.webView.NavigateToString(html);
             this.DefaultViewModel["Item"] = item;

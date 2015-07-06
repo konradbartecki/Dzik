@@ -92,9 +92,9 @@
             <TextBlock Text="DZIK"
 				Style="{ThemeResource TitleTextBlockStyle}"
 				Typography.Capitals="SmallCaps" />
-            <TextBlock Text="przystanki"
+            <TextBlock Text="wybierz przystanek"
 				Margin="0,-6,0,0"
-				Style="{ThemeResource HeaderTextBlockStyle}" />
+				Style="{ThemeResource HeaderTextBlockStyle}" FontSize="45.333" />
         </StackPanel>
         
 
@@ -103,7 +103,11 @@
 
             <SemanticZoom Margin="0,0,0,0" Style="{StaticResource GenericJumpListStyle}">
                 <SemanticZoom.ZoomedInView>
-                    <ListView x:Name="listView">
+                    <ListView x:Name="listView" 
+                              ItemClick="listView_ItemClick"
+                              IsItemClickEnabled="True"
+                              SelectionMode="None"
+                              >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Margin="0,5,0,0" 

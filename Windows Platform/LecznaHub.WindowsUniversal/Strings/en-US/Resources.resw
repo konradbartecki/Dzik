@@ -251,10 +251,10 @@
     <value>Quisque in porta lorem dolor amet sed consectetuer ising elit, sed diam non my nibh uis mod wisi quip.</value>
   </data>
   <data name="Header.Text" xml:space="preserve">
-    <value>Łęczna</value>
+    <value>Dzik</value>
   </data>
   <data name="Hub.Header" xml:space="preserve">
-    <value>Łęczna</value>
+    <value>Dzik</value>
   </data>
   <data name="HubSection1" xml:space="preserve">
     <value>SECTION 1</value>
@@ -275,7 +275,7 @@
     <value>Navigation failed.</value>
   </data>
   <data name="aboutPivot.Title" xml:space="preserve">
-    <value>Łęczna</value>
+    <value>Dzik</value>
   </data>
   <data name="author.Text" xml:space="preserve">
     <value>by Konrad Bartecki</value>

@@ -34,10 +34,9 @@ namespace LecznaHub
     public sealed partial class HubPage : Page
     {
         private readonly NavigationHelper navigationHelper;
-        private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private TabbedViewModel defaultViewModel = new TabbedViewModel();
         private readonly ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView("Resources");
 
-        private AutoSuggestBox _myAutoSuggestBox;
         public HubPage()
         {
             this.InitializeComponent();
@@ -64,12 +63,10 @@ namespace LecznaHub
         /// Gets the view model for this <see cref="Page"/>.
         /// This can be changed to a strongly typed view model.
         /// </summary>
-        public ObservableDictionary DefaultViewModel
+        public TabbedViewModel DefaultViewModel
         {
             get { return this.defaultViewModel; }
         }
-
-        public StationsViewModel stationsVM;
 
         /// <summary>
         /// Populates the page with content passed during navigation.  Any saved state is also
@@ -85,31 +82,32 @@ namespace LecznaHub
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             Helpers.BackgroundTasksHelper.RegisterLiveTileUpdaterTask();
-            
-            //if (e.PageState != null)
-           // {
-                //this.DefaultViewModel["Groups"] = e.PageState["Groups"] as ObservableCollection<NewsCollection>;
-                //this.DefaultViewModel["Stations"] = e.PageState["Stations"] as ObservableCollection<StationDto>;
-               // return;
-           // }
 
+            if (e.PageState != null)
+            {
+                return;
+            }
+            else
+            {
+                ProgressIndicator.ShowLoader("Pobieranie...", true);
+                await this.DefaultViewModel.DownloadViewModelsDataAsync();
+                ProgressIndicator.ShowLoader("", false);
+            }
 
-            //stationsVM = svm;
-            ProgressIndicator.ShowLoader("Pobieranie wiadomości...", true);
-            this.DefaultViewModel["Groups"] = await MainViewModel.GetGroupsAsync();
-   
-            ProgressIndicator.ShowLoader("Pobieranie rozkładów jazdy...", true);
+            //this.DefaultViewModel["Groups"] = await NewsViewModel.GetGroupsAsync();
 
-            var stations = await StationsViewModel.GetStationsAsync();
-            var cities = await StationsViewModel.GetCitiesAsync();
-            var carriers = await StationsViewModel.GetCarriersAsync();
+            //ProgressIndicator.ShowLoader("Pobieranie rozkładów jazdy...", true);
 
-            this.DefaultViewModel["Stations"] = stations;
-            this.DefaultViewModel["Cities"] = cities;
-            this.DefaultViewModel["Carriers"] = carriers;
-            ProgressIndicator.ShowLoader("", false);
-            this.DefaultViewModel["ChosenStation"] = stations[0];
-            this.DefaultViewModel["ChosenCity"] = cities[1];
+            //var stations = await TransportViewModel.GetStationsAsync();
+            //var cities = await TransportViewModel.GetCitiesAsync();
+            //var carriers = await TransportViewModel.GetCarriersAsync();
+
+            //this.DefaultViewModel["Stations"] = stations;
+            //this.DefaultViewModel["Cities"] = cities;
+            //this.DefaultViewModel["Carriers"] = carriers;
+            //ProgressIndicator.ShowLoader("", false);
+            //this.DefaultViewModel["ChosenStation"] = stations[0];
+            //this.DefaultViewModel["ChosenCity"] = cities[1];
         }
 
 
@@ -123,7 +121,7 @@ namespace LecznaHub
         /// serializable state.</param>
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
-            e.PageState["Groups"] = DefaultViewModel["Groups"];
+            //e.PageState["Groups"] = DefaultViewModel["Groups"];
             //e.PageState["Stations"] = DefaultViewModel["Stations"];
         }
 
@@ -239,10 +237,6 @@ namespace LecznaHub
         //    }
         //}
 
-        //private void DestinationGridView_Tapped(object sender, TappedRoutedEventArgs e)
-        //{
-
-        //}
 
         private void ShowMoreDeparturesButton_Click(object sender, RoutedEventArgs e)
         {
@@ -292,10 +286,10 @@ namespace LecznaHub
 
         private void GridView_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            var stations = DefaultViewModel["Stations"] as ObservableCollection<StationDto>;
-            if (stations == null) return;
+            var stationsVM = DefaultViewModel.Transport;
+            if (stationsVM == null) return;
 
-            if (!Frame.Navigate(typeof(ListPickerView), stations))
+            if (!Frame.Navigate(typeof(ListPickerView), stationsVM))
              {
                 throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
             }

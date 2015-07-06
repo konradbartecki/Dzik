@@ -7,6 +7,11 @@ using OpenLeczna.DTOs;
 
 namespace LecznaHub.ViewModels
 {
+
+    /// <summary>
+    /// This one is limited to WinRT only because I was unable to find 
+    /// proper crossplatform alternative for CollectionViewSource
+    /// </summary>
     public class ListPickerViewModel
     {
         public IList Data { get; private set; }
@@ -20,31 +25,6 @@ namespace LecznaHub.ViewModels
             Collection.Source = Data;
             Collection.IsSourceGrouped = true;
         }
-        //public IList Data
-        //{
-        //    get
-        //    {
-        //        if (data == null)
-        //        {
-        //            var items = MovieModel.CreateSampleData();
-        //            data = items.ToGroups(x => x.Name, x => x.Category);
-        //        }
-        //        return data;
-        //    }
-        //}
-        //private CollectionViewSource collection;
-
-        //public CollectionViewSource Collection
-        //{
-        //    get
-        //    {
-        //        if (collection == null)
-        //        {
-
-        //        }
-        //        return collection;
-        //    }
-        //}
 
     }
 }

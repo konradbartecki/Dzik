@@ -25,7 +25,7 @@ namespace LecznaHub.BackgroundTasks
 
             Debug.WriteLine("Task fired");
 
-            var feed = await MainViewModel.GetGroupsAsync();
+            var feed = await NewsViewModel.GetGroupsAsync();
             newsCollection = feed[0];
             await UpdateTile();
 

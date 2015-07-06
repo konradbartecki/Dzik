@@ -86,7 +86,7 @@ namespace LecznaHub
                 return;
             }
             //Download news for the first time
-            var sampleDataGroup = await MainViewModel.GetGroupsAsync();
+            var sampleDataGroup = await NewsViewModel.GetGroupsAsync();
 
             foreach (var newsCollection in sampleDataGroup)
             {

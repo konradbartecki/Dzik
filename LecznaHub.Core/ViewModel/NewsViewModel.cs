@@ -23,7 +23,7 @@ using LecznaHub.Core.Providers;
 
 namespace LecznaHub.Core.ViewModel
 {
-    public class MainViewModel : MvxViewModel
+    public class NewsViewModel : MvxViewModel
     {
         /// <summary>
         /// Init task for MvvmCross
@@ -57,7 +57,7 @@ namespace LecznaHub.Core.ViewModel
             new Leczna24()
         }; 
 
-        private static MainViewModel _sampleViewModel = new MainViewModel();
+        private static NewsViewModel _sampleViewModel = new NewsViewModel();
 
         private ObservableCollection<NewsCollection> _groups = new ObservableCollection<NewsCollection>();
         public ObservableCollection<NewsCollection> Groups
@@ -97,6 +97,10 @@ namespace LecznaHub.Core.ViewModel
             return null;
         }
 
+        /// <summary>
+        /// Downloads news collection for each available news provider
+        /// </summary>
+        /// <returns></returns>
         public async Task GetNewsDataAsync()
         {
             foreach (var provider in NewsProvidersList)

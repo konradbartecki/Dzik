@@ -136,7 +136,7 @@
             </HubSection>-->
 
             <HubSection x:Uid="Section3Header" Header="NEWS"
-				DataContext="{Binding Groups[0]}" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
+				DataContext="{Binding News.Groups[0]}" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
                     <ListView 
 						AutomationProperties.AutomationId="ItemListViewSection3"
@@ -150,19 +150,19 @@
                 </DataTemplate>
             </HubSection>
 
-            <HubSection x:Name="TransportSection" x:Uid="TransportSection" Header="ROZKŁAD JAZDY">
+            <HubSection x:Name="TransportSection" x:Uid="TransportSection" Header="ROZKŁAD JAZDY" DataContext="{Binding Transport}">
                 <DataTemplate>
                     <StackPanel>
                         <GridView Margin="0,0,0,10" Tapped="GridView_Tapped">
                             <StackPanel>
                                 <TextBlock Text="Przystanek początkowy" Foreground="{ThemeResource PhoneAccentBrush}" Style="{StaticResource TextStyleLargeFontSize}"/>
-                                <TextBlock DataContext="{Binding ChosenStation}" Style="{StaticResource TextStyleExtraLargePlusFontSize}" d:Text="Dworzec (Wamex), Łęczna" Text="{Binding FallbackValue=Dworzec (Wamex)}"/>
+                                <TextBlock Style="{StaticResource TextStyleExtraLargePlusFontSize}" Text="{Binding ChosenStation}"/>
                             </StackPanel>
                         </GridView>
                         <GridView Margin="0,0,0,10">
                             <StackPanel>
                                 <TextBlock Text="Do miejscowości" Foreground="{ThemeResource PhoneAccentBrush}" Style="{StaticResource TextStyleLargeFontSize}"/>
-                                <TextBlock DataContext="{Binding ChosenCity}" Style="{StaticResource TextStyleExtraLargePlusFontSize}"  Text="{Binding Name, FallbackValue=Lublin}"/>
+                                <TextBlock Style="{StaticResource TextStyleExtraLargePlusFontSize}"  Text="Brak"/>
                             </StackPanel>
                         </GridView>
                         <StackPanel x:Name="DeparturesStackPanel">
@@ -173,7 +173,7 @@
                 </DataTemplate>
             </HubSection>
 
-            <HubSection x:Uid="HubSection1" Header="INNE" DataContext="{Binding Groups}" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
+            <HubSection x:Uid="HubSection1" Header="INNE" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
                     <GridView>
                         <Grid x:Name="moreApps" Margin="0,0,9.5,9.5" Background="{ThemeResource PhoneAccentBrush}" Tapped="moreApps_Tapped">

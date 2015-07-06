@@ -18,14 +18,14 @@ namespace LecznaHub.Core.ViewModel
         //    Init(new MainViewModel.DetailParameter() {Id = uniqueId});
         //}
 
-        public void Init(MainViewModel.DetailParameter parameter)
+        public void Init(NewsViewModel.DetailParameter parameter)
         {
             if (string.IsNullOrEmpty(parameter.Id))
                 return;
             try
             {
                 //Item = MainViewModel.GetItemAsync(parameter.Id).Result;
-                this.Item = AsyncHelpers.RunSync<NewsItemBase>(() => MainViewModel.GetItemAsync(parameter.Id));
+                this.Item = AsyncHelpers.RunSync<NewsItemBase>(() => NewsViewModel.GetItemAsync(parameter.Id));
                 this.HtmlText = WebViewerHelper.WrapHtml(Item.WebArticle.ToString(), "black");
             }
             catch (Exception e)
