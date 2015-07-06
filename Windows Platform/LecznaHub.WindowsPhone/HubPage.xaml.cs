@@ -22,6 +22,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using LecznaHub.BackgroundTasks;
 using LecznaHub.Controls;
+using LecznaHub.Views;
 using OpenLeczna.DTOs;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
@@ -291,6 +292,17 @@ namespace LecznaHub
 
             if (!Frame.Navigate(typeof(ListPickerView), stationsVM))
              {
+                throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
+            }
+        }
+
+        private void GridView_Tapped_1(object sender, TappedRoutedEventArgs e)
+        {
+            var stationsVM = DefaultViewModel.Transport;
+            if (stationsVM == null) return;
+
+            if (!Frame.Navigate(typeof (PickCityView), stationsVM))
+            {
                 throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
             }
         }

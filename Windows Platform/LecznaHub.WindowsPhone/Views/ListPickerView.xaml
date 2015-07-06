@@ -47,21 +47,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <!--<Style x:Key="GenericJumpListPickerStyle"
-           TargetType="ListView">
-            <Setter Property="ItemTemplate"
-                Value="{StaticResource GenericJumpListPickerItemTemplate}" />
-            <Setter Property="HorizontalContentAlignment"
-                Value="Stretch" />
-            <Setter Property="ItemContainerStyle">
-                <Setter.Value>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment"
-                            Value="Stretch" />
-                    </Style>
-                </Setter.Value>
-            </Setter>
-        </Style>-->
     </Page.Resources>
 
     <Page.Transitions>
@@ -75,13 +60,6 @@
     </Page.Transitions>
 
     <Grid x:Name="LayoutRoot">
-
-        <!--<Grid.ChildrenTransitions>
-            <TransitionCollection>
-                <EntranceThemeTransition/>
-            </TransitionCollection>
-        </Grid.ChildrenTransitions>-->
-
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>

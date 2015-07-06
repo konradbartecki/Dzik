@@ -86,7 +86,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AboutPage.xaml.cs">
+    <Compile Include="Views\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\ProgressIndicator.cs" />
@@ -102,7 +102,7 @@
     <Compile Include="HubPage.xaml.cs">
       <DependentUpon>HubPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ListPickerView.xaml.cs">
+    <Compile Include="Views\ListPickerView.xaml.cs">
       <DependentUpon>ListPickerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -112,10 +112,13 @@
     <Compile Include="SampleData\SampleStations\SampleStations.xaml.cs">
       <DependentUpon>SampleStations.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SectionPage.xaml.cs">
+    <Compile Include="Views\PickCityView.xaml.cs">
+      <DependentUpon>PickCityView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SectionPage.xaml.cs">
       <DependentUpon>SectionPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ItemPage.xaml.cs">
+    <Compile Include="Views\ItemPage.xaml.cs">
       <DependentUpon>ItemPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ListPickerViewModel.cs" />
@@ -147,7 +150,7 @@
     <Content Include="SampleData\SampleStations\SampleStations_Files\image05.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="AboutPage.xaml">
+    <Page Include="Views\AboutPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -171,7 +174,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </DesignData>
-    <Page Include="ListPickerView.xaml">
+    <Page Include="Views\ListPickerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -183,11 +186,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SectionPage.xaml">
+    <Page Include="Views\PickCityView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ItemPage.xaml">
+    <Page Include="Views\SectionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ItemPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

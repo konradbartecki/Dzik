@@ -156,13 +156,13 @@
                         <GridView Margin="0,0,0,10" Tapped="GridView_Tapped">
                             <StackPanel>
                                 <TextBlock Text="Przystanek początkowy" Foreground="{ThemeResource PhoneAccentBrush}" Style="{StaticResource TextStyleLargeFontSize}"/>
-                                <TextBlock Style="{StaticResource TextStyleExtraLargePlusFontSize}" Text="{Binding ChosenStation}"/>
+                                <TextBlock Style="{StaticResource TextStyleExtraLargePlusFontSize}" Text="{Binding ChosenStation, FallbackValue=_______________}"/>
                             </StackPanel>
                         </GridView>
-                        <GridView Margin="0,0,0,10">
+                        <GridView Margin="0,0,0,10" Tapped="GridView_Tapped_1">
                             <StackPanel>
                                 <TextBlock Text="Do miejscowości" Foreground="{ThemeResource PhoneAccentBrush}" Style="{StaticResource TextStyleLargeFontSize}"/>
-                                <TextBlock Style="{StaticResource TextStyleExtraLargePlusFontSize}"  Text="Brak"/>
+                                <TextBlock Style="{StaticResource TextStyleExtraLargePlusFontSize}"  Text="{Binding ChosenCity.Name, FallbackValue=___________}"/>
                             </StackPanel>
                         </GridView>
                         <StackPanel x:Name="DeparturesStackPanel">
