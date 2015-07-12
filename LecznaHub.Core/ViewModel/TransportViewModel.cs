@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -14,6 +15,7 @@ using LecznaHub.Core.Helpers;
 using LecznaHub.Core.Model;
 using Newtonsoft.Json;
 using OpenLeczna.DTOs;
+using static LecznaHub.Core.Helpers.DateTimeHelper;
 
 namespace LecznaHub.Core.ViewModel
 {
@@ -33,6 +35,11 @@ namespace LecznaHub.Core.ViewModel
         public ObservableCollection<CityDTO> CitiesCollection { get; set; }
         public ObservableCollection<CarrierDTO> CarriersCollection { get; set; }
 
+        private CityDTO _chosenCity;
+        private StationDto _chosenStation;
+        private StationDetailsDto _chosenStationDetails;
+        private string _busDeparturesShort;
+
         public CityDTO ChosenCity
         {
             get { return _chosenCity; }
@@ -40,11 +47,10 @@ namespace LecznaHub.Core.ViewModel
             {
                 if (Equals(value, _chosenCity)) return;
                 _chosenCity = value;
+                BuildBusDepartureStringAsync();
                 OnPropertyChanged();
             }
         }
-        private CityDTO _chosenCity;
-        private StationDto _chosenStation;
 
         public StationDto ChosenStation
         {
@@ -53,8 +59,79 @@ namespace LecznaHub.Core.ViewModel
             {
                 if (Equals(value, _chosenStation)) return;
                 _chosenStation = value;
-                OnPropertyChanged();
+                BuildBusDepartureStringAsync();
+                OnPropertyChanged();             
+            }   
+        }
+
+        public string BusDeparturesShort
+        {
+            get { return _busDeparturesShort; }
+            set
+            {
+                if (value == _busDeparturesShort) return;
+                _busDeparturesShort = value;
+                BuildBusDepartureStringAsync();
+                OnPropertyChanged();               
             }
+        }
+
+        private async Task<StationDetailsDto> DownloadStationDetailsAsync(string stationName, string city)
+        {
+            Downloader stationsDownloader = new Downloader(
+                new Uri(String.Format("{0}Stations?name={1}&city={2}",
+                Config.OpenLecznaApiEndpoint,
+                stationName, city)));
+
+            var json = await stationsDownloader.GetPageAsync();
+            var details = JsonConvert.DeserializeObject<StationDetailsDto>(json);
+            return details;
+        }
+
+        private async void BuildBusDepartureStringAsync()
+        {
+            if (_chosenStation == null && _chosenCity == null)
+                return;
+            //Download station details
+            if (string.IsNullOrWhiteSpace(ChosenStation.Name) || string.IsNullOrWhiteSpace(ChosenCity.Name)) return;
+            StationDetailsDto stationDetails = await DownloadStationDetailsAsync(ChosenStation.Name, ChosenStation.City);
+
+            if(stationDetails.Schedules.Count == 0)
+                throw new ArgumentNullException("stationDetails", "This station contains no schedules");
+            //Select departures only to chosen city
+            //var schedulesToDestination = from s in stationDetails.Schedules
+            //    where s.DestinationCity == ChosenCity.Name &&
+            //          s.ApplicableDays == "Weekdays"
+            //    select s;
+            var schedulesToDestination = stationDetails.Schedules
+                .Where(x => x.DestinationCity == ChosenCity.Name &&
+                            x.ApplicableDays == "Weekdays").ToList();
+            var departures = schedulesToDestination.SelectMany(x => x.Departures).ToList();
+            //TODO: Change designtime DateTime
+            var nowTime = DateTime.Parse("15:06");
+
+            var times =
+                departures.Where(x => 
+                CompareStringAndDateTime(x.Time, nowTime) == DateTimeCompared.SecondParamIsEarlier)
+                .ToList();
+            times = times.OrderBy(x => x.Time).ToList();
+            var lastDeparture = times.Last();
+            Debug.WriteLine("Last time is {0}", lastDeparture);
+            //var schedulesToDestination = stationDetails.Schedules.SelectMany<IEnumerable<ScheduleDetailsDTO>>(x => x.DestinationCity == ChosenCity.Name);
+
+            //var departuresToDestination = from s in stationDetails.Schedules
+            //    where s.DestinationCity == ChosenCity.Name
+            //          && s.ApplicableDays == "Weekdays"
+            //    select s;
+            //Select departures from
+
+            //var departures = departuresToDestination.Where(
+            //    sch => sch.Departures.Where(
+            //        departure => 
+            //            CompareStringAndDateTime(departure.Time, nowTime) == DateTimeCompared.SecondParamIsEarlier
+            //            )
+            //var departures = from schedule in departuresToDestination
+            //    select schedule.Departures;
         }
 
 
@@ -75,7 +152,7 @@ namespace LecznaHub.Core.ViewModel
             this.CitiesCollection = await GetCitiesAsync();
             //TODO: Load/Save chosen stuff
             ChosenStation = StationsCollection[0];
-            ChosenCity = CitiesCollection[0];
+            ChosenCity = CitiesCollection[1];
         }
 
         public static async Task<ObservableCollection<StationDto>> GetStationsAsync()

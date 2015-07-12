@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="Helpers\AsyncHelpers.cs" />
+    <Compile Include="Helpers\DateTimeHelper.cs" />
     <Compile Include="Helpers\IsoEncoding.cs" />
     <Compile Include="Helpers\RemoveDiacritics.cs" />
     <Compile Include="Helpers\WebViewerHelper.cs" />

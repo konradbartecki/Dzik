@@ -26,6 +26,7 @@ namespace LecznaHub.Shared.Common
             head.Append("font-family:'Segoe UI';" +
                         "font-size:14px;" +
                         "margin:0;" +
+                        "margin-bottom:15px;" +
                         "padding:0;" +
                         "display: block;" +
                         "height: 100%;" +
