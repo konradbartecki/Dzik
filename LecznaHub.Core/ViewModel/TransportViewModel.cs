@@ -38,7 +38,7 @@ namespace LecznaHub.Core.ViewModel
         private CityDTO _chosenCity;
         private StationDto _chosenStation;
         private StationDetailsDto _chosenStationDetails;
-        private string _busDeparturesShort;
+        private string _busDeparturesGlanceString;
 
         public CityDTO ChosenCity
         {
@@ -64,13 +64,13 @@ namespace LecznaHub.Core.ViewModel
             }   
         }
 
-        public string BusDeparturesShort
+        public string BusDeparturesGlanceString
         {
-            get { return _busDeparturesShort; }
+            get { return _busDeparturesGlanceString; }
             set
             {
-                if (value == _busDeparturesShort) return;
-                _busDeparturesShort = value;
+                if (value == _busDeparturesGlanceString) return;
+                _busDeparturesGlanceString = value;
                 BuildBusDepartureStringAsync();
                 OnPropertyChanged();               
             }
@@ -107,16 +107,18 @@ namespace LecznaHub.Core.ViewModel
                 .Where(x => x.DestinationCity == ChosenCity.Name &&
                             x.ApplicableDays == "Weekdays").ToList();
             var departures = schedulesToDestination.SelectMany(x => x.Departures).ToList();
-            //TODO: Change designtime DateTime
-            var nowTime = DateTime.Parse("15:06");
+            var nowTime = DateTime.Now;
 
             var times =
                 departures.Where(x => 
                 CompareStringAndDateTime(x.Time, nowTime) == DateTimeCompared.SecondParamIsEarlier)
                 .ToList();
-            times = times.OrderBy(x => x.Time).ToList();
-            var lastDeparture = times.Last();
-            Debug.WriteLine("Last time is {0}", lastDeparture);
+            times = times.OrderBy(x => DateTime.Parse(x.Time)).ToList();
+
+            BusDeparturesGlanceString = String.Format("Najbliższe busy odjeżdzają o {0}, {1}, {2}. Ostatni o {3}", 
+                times[0], times[1], times[2], times.Last());
+
+
             //var schedulesToDestination = stationDetails.Schedules.SelectMany<IEnumerable<ScheduleDetailsDTO>>(x => x.DestinationCity == ChosenCity.Name);
 
             //var departuresToDestination = from s in stationDetails.Schedules

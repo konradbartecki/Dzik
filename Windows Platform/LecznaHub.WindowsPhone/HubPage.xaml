@@ -166,8 +166,8 @@
                             </StackPanel>
                         </GridView>
                         <StackPanel x:Name="DeparturesStackPanel">
-                            <TextBlock Margin="0,20,0,0" Style="{StaticResource TextStyleExtraLargeFontSize}" Text="Najbliższe busy odjeżdzają o 15:30, 15:40 i 15:50. Ostatni o 23:10." TextWrapping="WrapWholeWords"/>
-                            <Button x:Name="ShowMoreDeparturesButton" Content="Pokaż więcej" Click="ShowMoreDeparturesButton_Click" FontSize="18.139999389648438" FontFamily="Segoe WP"/>
+                            <TextBlock Margin="0,20,0,0" Style="{StaticResource TextStyleExtraLargeFontSize}" Text="{Binding BusDeparturesGlanceString}" TextWrapping="WrapWholeWords"/>
+                            <Button x:Name="ShowMoreDeparturesButton" Content="Pokaż więcej" Click="ShowMoreDeparturesButton_Click" FontSize="18.139999389648438" FontFamily="Segoe WP" IsEnabled="False"/>
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>
