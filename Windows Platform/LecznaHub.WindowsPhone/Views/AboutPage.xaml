@@ -31,7 +31,7 @@
         <!-- Title Panel -->
 
         <!--TODO: Content should be placed within the following grid-->
-        <Pivot x:Name="aboutPivot" Title="Łęczna" Margin="0,0,19,26.667" d:LayoutOverrides="Height, TopPosition, BottomPosition">
+        <Pivot x:Name="aboutPivot" Title="Dzik" Margin="0,0,19,26.667" d:LayoutOverrides="Height, TopPosition, BottomPosition">
             <PivotItem x:Name="pivotItemAbout" Header="about">
                 <ScrollViewer>
                     <StackPanel Margin="0,0,0,24">
