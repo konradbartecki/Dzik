@@ -1,50 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Background;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 using LecznaHub.Core.Model;
-using LecznaHub.Core.ViewModel;
 
-namespace LecznaHub.BackgroundTasks
+namespace LecznaHub.Common
 {
-    public sealed class TileUpdateTask : IBackgroundTask
+    public static class MyTileUpdater
     {
         private static TileUpdater _updater;
-        private static NewsCollection newsCollection;
 
-        public async void Run(IBackgroundTaskInstance taskInstance)
-        {
-            BackgroundTaskDeferral deferral = taskInstance.GetDeferral();
-
-            Debug.WriteLine("Task fired");
-
-            var feed = await NewsViewModel.GetGroupsAsync();
-            newsCollection = feed[0];
-            await UpdateTile();
-
-            deferral.Complete();
-        }
-
-        public async void UpdateTilePublic()
-        {
-            if (newsCollection == null)
-            {
-                var feed = await NewsViewModel.GetGroupsAsync();
-                newsCollection = feed[0];
-            }
-            await UpdateTile();
-
-
-        }
-
-        private async Task UpdateTile()
+        public static async Task UpdateTile(NewsCollection newsCollection)
         {
             // Create a tile update manager for the specified syndication feed.
             _updater = TileUpdateManager.CreateTileUpdaterForApplication();
@@ -55,6 +24,7 @@ namespace LecznaHub.BackgroundTasks
             int itemCount = 0;
 
             // Create a tile notification for each feed item.
+
             foreach (var item in newsCollection.Items)
             {
                 //We need to download article for each item to get url for HD image
@@ -70,7 +40,7 @@ namespace LecznaHub.BackgroundTasks
             Debug.WriteLine("Live tile update completed");
         }
         //tile creation functions inb4 DRY
-        private void CreateWideTile(NewsItemBase item)
+        private static void CreateWideTile(NewsItemBase item)
         {
             XmlDocument tileXml = TileUpdateManager.GetTemplateContent(TileTemplateType.TileWide310x150ImageAndText01);
             //string titleText = title.Text == null ? String.Empty : title.Text;
@@ -83,7 +53,7 @@ namespace LecznaHub.BackgroundTasks
             _updater.Update(new TileNotification(tileXml));
         }
 
-        private void CreateMediumTile(NewsItemBase item)
+        private static void CreateMediumTile(NewsItemBase item)
         {
             XmlDocument tileXml = TileUpdateManager.GetTemplateContent(TileTemplateType.TileSquare150x150PeekImageAndText04);
             //string titleText = title.Text == null ? String.Empty : title.Text;
@@ -96,7 +66,7 @@ namespace LecznaHub.BackgroundTasks
             _updater.Update(new TileNotification(tileXml));
         }
 
-        private void CreateLargeTile(NewsItemBase item)
+        private static void CreateLargeTile(NewsItemBase item)
         {
             XmlDocument tileXml = TileUpdateManager.GetTemplateContent(TileTemplateType.TileSquare310x310ImageAndText01);
             //string titleText = title.Text == null ? String.Empty : title.Text;

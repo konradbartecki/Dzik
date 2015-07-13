@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="d18650b1-b52e-4b90-b49b-269ae29d92d0" Publisher="CN=Konrad" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="d18650b1-b52e-4b90-b49b-269ae29d92d0" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="14040KonradBartecki.Dzik" Publisher="CN=4890740B-31FC-4347-8C6C-0FEC02DBDD56" Version="1.1.0.1" />
+  <mp:PhoneIdentity PhoneProductId="750db97e-44de-40c0-b70d-a594b841dbd5" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>Dzik.WP</DisplayName>
+    <DisplayName>Dzik</DisplayName>
     <PublisherDisplayName>Konrad Bartecki</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -18,8 +18,12 @@
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="LecznaHub.WindowsPhone.App">
       <m3:VisualElements DisplayName="Dzik Beta" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo.png" Description="Lokalne informacje i rozkład jazdy z okolic Łęcznej" ForegroundText="light" BackgroundColor="transparent" ToastCapable="true">
         <m3:DefaultTile Wide310x150Logo="Assets\WideLogo.png" Square71x71Logo="Assets\Square71x71Logo.png">
+          <m3:ShowNameOnTiles>
+            <m3:ShowOn Tile="square150x150Logo" />
+            <m3:ShowOn Tile="wide310x150Logo" />
+          </m3:ShowNameOnTiles>
         </m3:DefaultTile>
-        <m3:SplashScreen Image="Assets\SplashScreen.png" />
+        <m3:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="red" />
       </m3:VisualElements>
       <Extensions>
         <Extension Category="windows.backgroundTasks" EntryPoint="LecznaHub.BackgroundTasks.TileUpdateTask">

@@ -25,8 +25,7 @@ namespace LecznaHub.Shared.Common
             head.AppendFormat("color:{0};", font);
             head.Append("font-family:'Segoe UI';" +
                         "font-size:14px;" +
-                        "margin:0;" +
-                        "margin-bottom:15px;" +
+                        "margin:0px;" +
                         "padding:0;" +
                         "display: block;" +
                         "height: 100%;" +
@@ -82,7 +81,7 @@ namespace LecznaHub.Shared.Common
             }
 
             html.Append(HtmlHeader(theme, font));
-            html.Append("<body><article class=\"content\">");
+            html.Append("<body><article class=\"content\" style=\"padding-bottom: 5px;\">");
             html.Append(htmlSubString);
             html.Append("</article></body>");
             html.Append("</html>");

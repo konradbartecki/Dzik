@@ -17,6 +17,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Common\LauncherHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\ThemeToStringHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\MyTileUpdater.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\BackgroundTasksHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\JumpListHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Config.cs" />

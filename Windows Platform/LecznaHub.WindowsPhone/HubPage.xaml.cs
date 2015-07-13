@@ -93,6 +93,7 @@ namespace LecznaHub
                 ProgressIndicator.ShowLoader("Pobieranie...", true);
                 await this.DefaultViewModel.DownloadViewModelsDataAsync();
                 ProgressIndicator.ShowLoader("", false);
+                await MyTileUpdater.UpdateTile(this.DefaultViewModel.News.Groups[0]);
             }
 
             //this.DefaultViewModel["Groups"] = await NewsViewModel.GetGroupsAsync();

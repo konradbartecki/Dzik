@@ -138,6 +138,7 @@
     <Content Include="Assets\WideLogo.scale-240.png" />
     <Content Include="Assets\HubBackground.theme-dark.png" />
     <Content Include="Assets\HubBackground.theme-light.png" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="SampleData\SampleDataSource\SampleDataSource_Files\image01.png" />
     <Content Include="SampleData\SampleDataSource\SampleDataSource_Files\image02.png" />
     <Content Include="SampleData\SampleDataSource\SampleDataSource_Files\image03.png" />
