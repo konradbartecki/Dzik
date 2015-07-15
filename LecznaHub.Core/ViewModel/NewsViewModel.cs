@@ -110,7 +110,7 @@ namespace LecznaHub.Core.ViewModel
                 //Check if news from this provider are already stored
                 if (this.Groups.Any(x => x.Title == newsCollection.Title))
                 {
-                    //Search for collection of news and replace
+                    //Search for collection of news and replace older collections with the same title
                     for (int i = 0; i < this.Groups.Count; i++)
                     {
                         if (Groups[i].Title == newsCollection.Title)
