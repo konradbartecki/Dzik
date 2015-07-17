@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Konrad Bartecki (C) 2015
+// konradbartecki@outlook.com
+// bartecki.org
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -30,16 +33,11 @@ namespace LecznaHub.Core.ViewModel
             this.ChosenStation = new StationDto();
             this.ChosenCity = new CityDTO();
         }
-
+        //Public observable collections
         public ObservableCollection<StationDto> StationsCollection { get; set; }
         public ObservableCollection<CityDTO> CitiesCollection { get; set; }
         public ObservableCollection<CarrierDTO> CarriersCollection { get; set; }
-
-        private CityDTO _chosenCity;
-        private StationDto _chosenStation;
-        private StationDetailsDto _chosenStationDetails;
-        private string _busDeparturesGlanceString;
-
+        //Public observable properties
         public CityDTO ChosenCity
         {
             get { return _chosenCity; }
@@ -51,7 +49,6 @@ namespace LecznaHub.Core.ViewModel
                 OnPropertyChanged();
             }
         }
-
         public StationDto ChosenStation
         {
             get { return _chosenStation; }
@@ -60,10 +57,9 @@ namespace LecznaHub.Core.ViewModel
                 if (Equals(value, _chosenStation)) return;
                 _chosenStation = value;
                 BuildBusDepartureStringAsync();
-                OnPropertyChanged();             
-            }   
+                OnPropertyChanged();
+            }
         }
-
         public string BusDeparturesGlanceString
         {
             get { return _busDeparturesGlanceString; }
@@ -71,41 +67,46 @@ namespace LecznaHub.Core.ViewModel
             {
                 if (value == _busDeparturesGlanceString) return;
                 _busDeparturesGlanceString = value;
-                BuildBusDepartureStringAsync();
-                OnPropertyChanged();               
+                OnPropertyChanged();
             }
         }
+        //Private properties
+        private CityDTO _chosenCity;
+        private StationDto _chosenStation;
+        private string _busDeparturesGlanceString;
 
-        private async Task<StationDetailsDto> DownloadStationDetailsAsync(string stationName, string city)
-        {
-            Downloader stationsDownloader = new Downloader(
-                new Uri(String.Format("{0}Stations?name={1}&city={2}",
-                Config.OpenLecznaApiEndpoint,
-                stationName, city)));
-
-            var json = await stationsDownloader.GetPageAsync();
-            var details = JsonConvert.DeserializeObject<StationDetailsDto>(json);
-            return details;
-        }
-
+        //Functions
         private async void BuildBusDepartureStringAsync()
         {
-            if (_chosenStation == null && _chosenCity == null)
-                return;
-            //Download station details
+            if (_chosenStation == null && _chosenCity == null) return;           
             if (string.IsNullOrWhiteSpace(ChosenStation.Name) || string.IsNullOrWhiteSpace(ChosenCity.Name)) return;
+
+            if (_chosenStation.City == _chosenCity.Name)
+            {
+                BusDeparturesGlanceString = "Proszę wybrać miasto inne, niż to, w któym znajduje się przystanek początkowy.";
+                return;
+            }
+            //Download station details
+            BusDeparturesGlanceString = "Pobieranie rozkładu jazdy...";
             StationDetailsDto stationDetails = await DownloadStationDetailsAsync(ChosenStation.Name, ChosenStation.City);
 
-            if(stationDetails.Schedules.Count == 0)
-                throw new ArgumentNullException("stationDetails", "This station contains no schedules");
-            //Select departures only to chosen city
-            //var schedulesToDestination = from s in stationDetails.Schedules
-            //    where s.DestinationCity == ChosenCity.Name &&
-            //          s.ApplicableDays == "Weekdays"
-            //    select s;
+            if (stationDetails.Schedules.Count == 0)
+            {
+                BusDeparturesGlanceString = "Ten przystanek nie posiada jeszcze rozkładu jazdy.";
+                return;
+            }
+                
+
             var schedulesToDestination = stationDetails.Schedules
                 .Where(x => x.DestinationCity == ChosenCity.Name &&
-                            x.ApplicableDays == "Weekdays").ToList();
+                            x.ApplicableDays == GetDayType()).ToList();
+
+            if (schedulesToDestination.Count == 0)
+            {
+                BusDeparturesGlanceString = "Nie znaleziono rozkładów jazdy dla takiego połączenia.";
+                return;
+            }
+
             var departures = schedulesToDestination.SelectMany(x => x.Departures).ToList();
             var nowTime = DateTime.Now;
 
@@ -136,11 +137,24 @@ namespace LecznaHub.Core.ViewModel
             //    select schedule.Departures;
         }
 
+        private string GetDayType()
+        {
+            return GetDayType(DateTime.Now);
+        }
 
-        //public StationsViewModel()
-        //{
-        //    Task.Run((Func<Task>)DownloadAllAsync).Wait();
-        //}
+        private string GetDayType(DateTime date)
+        {
+            switch (date.DayOfWeek)
+            {
+                case DayOfWeek.Saturday:
+                    return "Saturday";
+                case DayOfWeek.Sunday:
+                    return "Sunday";
+                default:
+                    return "Weekdays";
+            }
+        }
+
 
 
         /// <summary>
@@ -153,6 +167,7 @@ namespace LecznaHub.Core.ViewModel
             this.CarriersCollection = await GetCarriersAsync();
             this.CitiesCollection = await GetCitiesAsync();
             //TODO: Load/Save chosen stuff
+            //Sets default station and city
             ChosenStation = StationsCollection[0];
             ChosenCity = CitiesCollection[1];
         }
@@ -167,16 +182,16 @@ namespace LecznaHub.Core.ViewModel
             return objects;
 
         }
-        public static async Task<StationDetailsDto> GetStationDetailsAsync(string stationName)
+        private async Task<StationDetailsDto> DownloadStationDetailsAsync(string stationName, string city)
         {
             Downloader stationsDownloader = new Downloader(
-                new Uri(String.Format("{0}/{1}/",
+                new Uri(String.Format("{0}Stations?name={1}&city={2}",
                 Config.OpenLecznaApiEndpoint,
-                stationName)));
+                stationName, city)));
 
             var json = await stationsDownloader.GetPageAsync();
-            var objects = JsonConvert.DeserializeObject<StationDetailsDto>(json);
-            return objects;
+            var details = JsonConvert.DeserializeObject<StationDetailsDto>(json);
+            return details;
         }
         public static async Task<ObservableCollection<CityDTO>> GetCitiesAsync()
         {
