@@ -56,6 +56,7 @@ namespace LecznaHub.Core.ViewModel
             {
                 if (Equals(value, _chosenStation)) return;
                 _chosenStation = value;
+                SetPredictedDestination();
                 BuildBusDepartureStringAsync();
                 OnPropertyChanged();
             }
@@ -118,23 +119,21 @@ namespace LecznaHub.Core.ViewModel
 
             BusDeparturesGlanceString = String.Format("Najbliższe busy odjeżdzają o {0}, {1}, {2}. Ostatni o {3}", 
                 times[0], times[1], times[2], times.Last());
+        }
 
-
-            //var schedulesToDestination = stationDetails.Schedules.SelectMany<IEnumerable<ScheduleDetailsDTO>>(x => x.DestinationCity == ChosenCity.Name);
-
-            //var departuresToDestination = from s in stationDetails.Schedules
-            //    where s.DestinationCity == ChosenCity.Name
-            //          && s.ApplicableDays == "Weekdays"
-            //    select s;
-            //Select departures from
-
-            //var departures = departuresToDestination.Where(
-            //    sch => sch.Departures.Where(
-            //        departure => 
-            //            CompareStringAndDateTime(departure.Time, nowTime) == DateTimeCompared.SecondParamIsEarlier
-            //            )
-            //var departures = from schedule in departuresToDestination
-            //    select schedule.Departures;
+        private void SetPredictedDestination()
+        {
+            switch (ChosenStation.City)
+            {
+                case "Łęczna":
+                    //Łęczna -> Lublin
+                    ChosenCity = CitiesCollection[1];
+                    break;
+                case "Lublin":
+                    //Lublin -> Łęczna
+                    ChosenCity = CitiesCollection[0];
+                    break;
+            }
         }
 
         private string GetDayType()
