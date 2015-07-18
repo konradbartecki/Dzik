@@ -96,29 +96,61 @@ namespace LecznaHub.Core.ViewModel
                 BusDeparturesGlanceString = "Ten przystanek nie posiada jeszcze rozkładu jazdy.";
                 return;
             }
-                
 
-            var schedulesToDestination = stationDetails.Schedules
-                .Where(x => x.DestinationCity == ChosenCity.Name &&
-                            x.ApplicableDays == GetDayType()).ToList();
-
-            if (schedulesToDestination.Count == 0)
+            var allSelectedSchedules = GetAllSchedulesFromDesiredFilters(stationDetails, DateTime.Now);
+            if(allSelectedSchedules.Count == 0)
             {
+                //found no schedules using selected filters
                 BusDeparturesGlanceString = "Nie znaleziono rozkładów jazdy dla takiego połączenia.";
                 return;
             }
+            var orderedDepartures = GetDeparturesForDesiredTimeOrdered(
+                ConvertSchedulesToDeparturesAndOrder(allSelectedSchedules),
+                DateTime.Now);
+            if (orderedDepartures.Count == 0)
+            {
+                //If we have missed the last departure for this day we will skip check to the next day
+                var hoursToMidnight = 24 - DateTime.Now.Hour;
+                var tomorrowDate = DateTime.Now.AddHours(hoursToMidnight);
 
-            var departures = schedulesToDestination.SelectMany(x => x.Departures).ToList();
-            var nowTime = DateTime.Now;
+                var allSelectedSchedulesForTommorrow = GetAllSchedulesFromDesiredFilters(stationDetails, tomorrowDate);
+                if (allSelectedSchedulesForTommorrow.Count == 0)
+                {
+                    //found no schedules using selected filters
+                    BusDeparturesGlanceString = "Nie znaleziono rozkładów jazdy dla takiego połączenia.";
+                    return;
+                }
+                orderedDepartures = ConvertSchedulesToDeparturesAndOrder(allSelectedSchedulesForTommorrow);
 
-            var times =
-                departures.Where(x => 
-                CompareStringAndDateTime(x.Time, nowTime) == DateTimeCompared.SecondParamIsEarlier)
-                .ToList();
-            times = times.OrderBy(x => DateTime.Parse(x.Time)).ToList();
-
+            }
+            //var orderedDeparturesOnlyFromTime = GetDeparturesForDesiredTimeOrdered(departures, DateTime.Now);
             BusDeparturesGlanceString = String.Format("Najbliższe busy odjeżdzają o {0}, {1}, {2}. Ostatni o {3}", 
-                times[0], times[1], times[2], times.Last());
+                orderedDepartures[0], orderedDepartures[1], orderedDepartures[2], orderedDepartures.Last());
+        }
+
+        private List<DepartureDTO> ConvertSchedulesToDeparturesAndOrder(List<ScheduleDetailsDTO> selectedSchedules)
+        {
+            var departures = selectedSchedules.SelectMany(x => x.Departures).ToList();
+            return departures.OrderBy(x => DateTime.Parse(x.Time)).ToList();
+        } 
+
+        private List<ScheduleDetailsDTO> GetAllSchedulesFromDesiredFilters(StationDetailsDto stationDetails, DateTime date)
+        {
+            return stationDetails.Schedules
+                .Where(x => x.DestinationCity == ChosenCity.Name &&
+                x.ApplicableDays == GetDayType(date)).ToList();    
+        }
+
+        private List<DepartureDTO> GetDeparturesForDesiredTimeOrdered(List<DepartureDTO> departures, DateTime desiredTime)
+        {
+            var orderedDepartures =
+                departures.Where(x =>
+                CompareStringAndDateTime(x.Time, desiredTime) == DateTimeCompared.SecondParamIsEarlier)
+                .ToList();
+
+            orderedDepartures = orderedDepartures.OrderBy(x => DateTime.Parse(x.Time)).ToList();
+
+            return orderedDepartures;
         }
 
         private void SetPredictedDestination()
@@ -146,9 +178,9 @@ namespace LecznaHub.Core.ViewModel
             switch (date.DayOfWeek)
             {
                 case DayOfWeek.Saturday:
-                    return "Saturday";
+                    return "Saturdays";
                 case DayOfWeek.Sunday:
-                    return "Sunday";
+                    return "Sundays";
                 default:
                     return "Weekdays";
             }
