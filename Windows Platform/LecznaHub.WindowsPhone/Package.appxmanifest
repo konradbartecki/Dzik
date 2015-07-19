@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="14040KonradBartecki.Dzik" Publisher="CN=4890740B-31FC-4347-8C6C-0FEC02DBDD56" Version="1.1.1.3" />
+  <Identity Name="14040KonradBartecki.Dzik" Publisher="CN=4890740B-31FC-4347-8C6C-0FEC02DBDD56" Version="1.1.1.4" />
   <mp:PhoneIdentity PhoneProductId="750db97e-44de-40c0-b70d-a594b841dbd5" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Dzik</DisplayName>
