@@ -10,6 +10,7 @@ using Windows.UI.Xaml.Navigation;
 using LecznaHub.Common;
 using LecznaHub.Core.Model;
 using LecznaHub.Core.Providers;
+using Xamarin;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
 
@@ -36,6 +37,7 @@ namespace LecznaHub
         public App()
         {
             TelemetryClient = new Microsoft.ApplicationInsights.TelemetryClient();
+            Insights.Initialize("38d43e31b06bbe22addecf2ba22b829dbc99a179");
 
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
