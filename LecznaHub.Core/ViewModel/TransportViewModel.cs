@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Json;
 using System.Text;
@@ -107,6 +108,7 @@ namespace LecznaHub.Core.ViewModel
             var orderedDepartures = GetDeparturesForDesiredTimeOrdered(
                 ConvertSchedulesToDeparturesAndOrder(allSelectedSchedules),
                 DateTime.Now);
+
             if (orderedDepartures.Count == 0)
             {
                 //If we have missed the last departure for this day we will skip check to the next day
@@ -114,18 +116,31 @@ namespace LecznaHub.Core.ViewModel
                 var tomorrowDate = DateTime.Now.AddHours(hoursToMidnight);
 
                 var allSelectedSchedulesForTommorrow = GetAllSchedulesFromDesiredFilters(stationDetails, tomorrowDate);
-                if (allSelectedSchedulesForTommorrow.Count == 0)
-                {
-                    //found no schedules using selected filters
-                    BusDeparturesGlanceString = "Nie znaleziono rozkładów jazdy dla takiego połączenia.";
-                    return;
-                }
                 orderedDepartures = ConvertSchedulesToDeparturesAndOrder(allSelectedSchedulesForTommorrow);
-
             }
-            //var orderedDeparturesOnlyFromTime = GetDeparturesForDesiredTimeOrdered(departures, DateTime.Now);
-            BusDeparturesGlanceString = String.Format("Najbliższe busy odjeżdzają o {0}, {1}, {2}. Ostatni o {3}", 
-                orderedDepartures[0], orderedDepartures[1], orderedDepartures[2], orderedDepartures.Last());
+
+            //We will now select the best glance string depending on count of ordered departures
+            switch (orderedDepartures.Count)
+            {
+                case 0:
+                    BusDeparturesGlanceString = "Nie znaleziono rozkładów jazdy dla takiego połączenia.";
+                    break;
+                case 1:
+                    BusDeparturesGlanceString = String.Format("Ostatni bus odjeżdza o {0}", orderedDepartures.FirstOrDefault());
+                    break;
+                case 2:
+                    BusDeparturesGlanceString = String.Format("Najbliższy bus odjeżdza o {0}. Ostatni odjeżdza o {1}",
+                        orderedDepartures.First(), orderedDepartures.Last());
+                    break;
+                case 3:
+                    BusDeparturesGlanceString = String.Format("Najbliższe busy odjeżdzają o {0} i {1}. Ostatni o {2}",
+                        orderedDepartures[0], orderedDepartures[1], orderedDepartures.Last());
+                    break;
+                default:
+                    BusDeparturesGlanceString = String.Format("Najbliższe busy odjeżdzają o {0}, {1}, {2}. Ostatni o {3}",
+                        orderedDepartures[0], orderedDepartures[1], orderedDepartures[2], orderedDepartures.Last());
+                    break;
+            }
         }
 
         private List<DepartureDTO> ConvertSchedulesToDeparturesAndOrder(List<ScheduleDetailsDTO> selectedSchedules)
@@ -194,13 +209,30 @@ namespace LecznaHub.Core.ViewModel
         /// <returns></returns>
         public async Task GetTransportDataAsync()
         {
-            this.StationsCollection = await GetStationsAsync();
-            this.CarriersCollection = await GetCarriersAsync();
-            this.CitiesCollection = await GetCitiesAsync();
-            //TODO: Load/Save chosen stuff
-            //Sets default station and city
-            ChosenStation = StationsCollection[0];
-            ChosenCity = CitiesCollection[1];
+            try
+            {
+                this.StationsCollection = await GetStationsAsync();
+                this.CarriersCollection = await GetCarriersAsync();
+                this.CitiesCollection = await GetCitiesAsync();
+                //TODO: Load/Save chosen stuff
+                //Sets default station and city
+                ChosenStation = StationsCollection[0];
+                ChosenCity = CitiesCollection[1];
+            }
+            catch (WebException e)
+            {
+                var city = new CityDTO();
+                city.Name = " - ";
+                var station = new StationDto();
+                station.Name = " - ";
+
+                ChosenStation = station;
+                ChosenCity = city;
+                BusDeparturesGlanceString = "Nie udało się pobrać rozkładu jazdy";
+
+                Debug.WriteLine("WebException while downloading station schedules");
+            }
+
         }
 
         public static async Task<ObservableCollection<StationDto>> GetStationsAsync()

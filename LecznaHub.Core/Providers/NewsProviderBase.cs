@@ -49,7 +49,7 @@ namespace LecznaHub.Core.Providers
         }
 
         /// <summary>
-        /// Provides custom implementation of selecting items from downloaded data.
+        /// Provides custom implementation of selecting and preparing news items from downloaded data source like for example RSS address.
         /// Should cast items into NewsItemsBase
         /// </summary>
         /// <param name="data">Data or page received by HTTP</param>
