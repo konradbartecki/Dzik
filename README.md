@@ -30,13 +30,16 @@ Local news and bus schedules from the city of Łęczna for Windows Universal 8.1
 * ~~Glance at bus departures~~
 * ~~Departures full details~~
 * Options + settings
+* Offline support
 
 
 ### Stuff used to make this:
  * Xamarin
+ * Xamarin.Plugins.Settings
  * MvvmCross
  * HTMLAgilityPack
  * NewtonsoftJSON
+ * PCLStorage
 
 ### Screenshots
 #### Android
