@@ -265,7 +265,6 @@
     <Folder Include="Assets\Styles\" />
   </ItemGroup>
   <Import Project="..\LecznaHub.WindowsUniversal\LecznaHub.Shared.projitems" Label="Shared" />
-  <Import Project="..\..\LecznaHub.PlatformSpecific\LecznaHub.PlatformSpecific\LecznaHub.PlatformSpecific.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>

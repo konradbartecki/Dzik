@@ -47,7 +47,6 @@
     <Compile Include="Model\Config.cs" />
     <Compile Include="Model\Downloader.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="Providers\DzikMessenger.cs" />
     <Compile Include="ViewModel\DetailViewModel.cs" />
     <Compile Include="ViewModel\ListPickerViewModel.cs" />
     <Compile Include="ViewModel\NewsViewModel.cs" />
