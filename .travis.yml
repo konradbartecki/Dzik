@@ -1,0 +1,4 @@
+language: csharp
+solution: LecznaHub.sln
+install:
+  - nuget update --self
