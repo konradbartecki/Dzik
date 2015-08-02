@@ -22,6 +22,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <ApplicationInsightsResourceId>/subscriptions/26df17b5-6543-47e8-a9f1-5c25a7b80438/resourcegroups/Default-ApplicationInsights-CentralUS/providers/microsoft.insights/components/LecznaHub.WindowsPhone</ApplicationInsightsResourceId>
+    <PackageCertificateThumbprint>BBE2545164C9CA507B5E4F9081AA4A82B0C960DE</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
