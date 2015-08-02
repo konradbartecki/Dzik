@@ -42,7 +42,6 @@
     <Compile Include="Helpers\AsyncHelpers.cs" />
     <Compile Include="Helpers\DateTimeHelper.cs" />
     <Compile Include="Helpers\IsoEncoding.cs" />
-    <Compile Include="Helpers\OfflineDataManager.cs" />
     <Compile Include="Helpers\RemoveDiacritics.cs" />
     <Compile Include="Helpers\WebViewerHelper.cs" />
     <Compile Include="Model\Config.cs" />
@@ -116,7 +115,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\OpenLeczna\OpenLeczna.DTOs\OpenLeczna.DTOs.csproj">
+    <ProjectReference Include="..\OpenLeczna\OpenLeczna.DTOs\OpenLeczna.DTOs.csproj">
       <Project>{7f5f91a0-a8d6-4bcf-8a13-57734eef05b1}</Project>
       <Name>OpenLeczna.DTOs</Name>
     </ProjectReference>

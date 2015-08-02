@@ -243,10 +243,6 @@
     <None Include="SampleData\SampleStations\SampleStations.xsd" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\OpenLeczna\OpenLeczna.DTOs\OpenLeczna.DTOs.csproj">
-      <Project>{7F5F91A0-A8D6-4BCF-8A13-57734EEF05B1}</Project>
-      <Name>OpenLeczna.DTOs</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\LecznaHub.BackgroundTasks\LecznaHub.BackgroundTasks.csproj">
       <Project>{c32d30f6-fa95-4c84-a2f0-298031555d91}</Project>
       <Name>LecznaHub.BackgroundTasks</Name>
@@ -254,6 +250,10 @@
     <ProjectReference Include="..\..\LecznaHub.Core\LecznaHub.Core.csproj">
       <Project>{5cfd10d8-04cd-4f8b-b772-758cd21d90ae}</Project>
       <Name>LecznaHub.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OpenLeczna\OpenLeczna.DTOs\OpenLeczna.DTOs.csproj">
+      <Project>{7f5f91a0-a8d6-4bcf-8a13-57734eef05b1}</Project>
+      <Name>OpenLeczna.DTOs</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -265,6 +265,7 @@
     <Folder Include="Assets\Styles\" />
   </ItemGroup>
   <Import Project="..\LecznaHub.WindowsUniversal\LecznaHub.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\LecznaHub.PlatformSpecific\LecznaHub.PlatformSpecific\LecznaHub.PlatformSpecific.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
