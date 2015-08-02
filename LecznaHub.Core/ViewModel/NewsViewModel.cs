@@ -150,33 +150,20 @@ namespace LecznaHub.Core.ViewModel
                 var folderExist = await rootFolder.CheckExistsAsync("News");
                 if (folderExist == ExistenceCheckResult.NotFound)
                 {
-                    MessageBoxHelper.ShowMessage("Błąd przy pobieraniu wiadomości", "Sprawdź połączenie z internetem lub sprobuj ponownie później");
+
+                    //.ShowMessage("Błąd przy pobieraniu wiadomości", "Sprawdź połączenie z internetem lub sprobuj ponownie później");
                     throw new DirectoryNotFoundException(
                         "Unable to download news and there is no stored local version to load", e);
                 }
-                IFolder folder = await rootFolder.GetFolderAsync("News");
+                IFolder folder = await rootFolder.GetFolderAsync(Config.NewsStoreFolderName);
                 
-                var FileExist = await folder.CheckExistsAsync("news.json");
+                var FileExist = await folder.CheckExistsAsync(Config.NewsDataStoreFilename);
                 if (FileExist == ExistenceCheckResult.FileExists)
                 {
-                    var file = await folder.GetFileAsync("news.json");
+                    var file = await folder.GetFileAsync(Config.NewsDataStoreFilename);
                     var json = await file.ReadAllTextAsync();
                     _groups = JsonConvert.DeserializeObject<ObservableCollection<NewsCollection>>(json);
                 }
-
-                //DzikMessenger dzikMessenger = new DzikMessenger();
-                //DzikWebArticleItem dzikWebArticle = new DzikWebArticleItem("", dzikMessenger);
-                //DzikArticleItem item = new DzikArticleItem("", "Nie udało się pobrać wiadomości", "", "Sprawdź połączenie z internetem lub spróbuj ponownie później", dzikWebArticle, dzikMessenger);
-                //if (this.Groups.Count == 0)
-                //{
-                //    this.Groups.Add(new NewsCollection("Dzik informacje"));
-                //    this.Groups[0].Items.Add(item);
-                //}
-                //else
-                //{
-                //    this.Groups[0].Items.Insert(0, item);
-                //}              
-                //Debug.WriteLine("Exception while downloading news");
             }
 
 

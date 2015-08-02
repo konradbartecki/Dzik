@@ -26,19 +26,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LecznaHub.Android", "Leczna
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LecznaHub.BackgroundTasks", "LecznaHub.BackgroundTasks\LecznaHub.BackgroundTasks.csproj", "{C32D30F6-FA95-4C84-A2F0-298031555D91}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "LecznaHub.PlatformSpecific", "LecznaHub.PlatformSpecific\LecznaHub.PlatformSpecific\LecznaHub.PlatformSpecific.shproj", "{4F349E2E-AA0E-4965-8E84-A348AD8A20DC}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenLeczna.DTOs", "OpenLeczna\OpenLeczna.DTOs\OpenLeczna.DTOs.csproj", "{7F5F91A0-A8D6-4BCF-8A13-57734EEF05B1}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Windows Platform\LecznaHub.WindowsUniversal\LecznaHub.Shared.projitems*{9b42b335-4366-468f-a6bb-5bf17ea50c92}*SharedItemsImports = 4
-		LecznaHub.PlatformSpecific\LecznaHub.PlatformSpecific\LecznaHub.PlatformSpecific.projitems*{9b42b335-4366-468f-a6bb-5bf17ea50c92}*SharedItemsImports = 4
 		Windows Platform\LecznaHub.WindowsUniversal\LecznaHub.Shared.projitems*{820b7b44-eeed-461e-9d69-cbaac9718ff3}*SharedItemsImports = 13
 		Windows Platform\LecznaHub.WindowsUniversal\LecznaHub.Shared.projitems*{a6858d66-e3b7-4505-98a1-48752b0f7a8d}*SharedItemsImports = 4
-		LecznaHub.PlatformSpecific\LecznaHub.PlatformSpecific\LecznaHub.PlatformSpecific.projitems*{a6858d66-e3b7-4505-98a1-48752b0f7a8d}*SharedItemsImports = 4
-		LecznaHub.PlatformSpecific\LecznaHub.PlatformSpecific\LecznaHub.PlatformSpecific.projitems*{4f349e2e-aa0e-4965-8e84-a348ad8a20dc}*SharedItemsImports = 13
-		LecznaHub.PlatformSpecific\LecznaHub.PlatformSpecific\LecznaHub.PlatformSpecific.projitems*{86d49da4-032a-4f72-a4be-d1b4e466b641}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

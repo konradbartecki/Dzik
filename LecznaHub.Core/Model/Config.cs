@@ -9,5 +9,7 @@ namespace LecznaHub.Core.Model
     public static class Config
     {
         public const string OpenLecznaApiEndpoint = "http://otwartaleczna.azurewebsites.net/api/v1/";
+        public const string NewsStoreFolderName = "News";
+        public const string NewsDataStoreFilename = "NewsDataStore.json";
     }
 }
