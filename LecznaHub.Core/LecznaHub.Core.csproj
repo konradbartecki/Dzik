@@ -38,6 +38,9 @@
     <Content Include="Assets\css\WebArticle.css" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SharedAssemblyProperties.cs">
+      <Link>Properties\SharedAssemblyProperties.cs</Link>
+    </Compile>
     <Compile Include="App.cs" />
     <Compile Include="Helpers\AsyncHelpers.cs" />
     <Compile Include="Helpers\DateTimeHelper.cs" />
@@ -52,7 +55,6 @@
     <Compile Include="ViewModel\NewsViewModel.cs" />
     <Compile Include="Model\NewsCollection.cs" />
     <Compile Include="Model\NewsItemBase.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\Leczna24.cs" />
     <Compile Include="Providers\NewsProviderBase.cs" />
     <Compile Include="ViewModel\TransportViewModel.cs" />

@@ -70,12 +70,14 @@ namespace LecznaHub
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            var thisPackage = Windows.ApplicationModel.Package.Current;
-            var version = thisPackage.Id.Version;
+            var assemblyVersion = this.GetType().GetTypeInfo().Assembly.GetName().Version.ToString(4);
 
-            var appVersion = string.Format("{0}.{1}.{2}.{3}",
-    version.Major, version.Minor, version.Build, version.Revision);
-            _versionText.Text = appVersion;
+            //var thisPackage = Windows.ApplicationModel.Package.Current;
+            //var version = thisPackage.Id.Version;
+
+            //        var appVersion = string.Format("{0}.{1}.{2}.{3}",
+            //version.Major, version.Minor, version.Build, version.Revision);
+            _versionText.Text = assemblyVersion;
         }
 
         /// <summary>

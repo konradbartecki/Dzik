@@ -110,6 +110,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\..\SharedAssemblyProperties.cs">
+      <Link>Properties\SharedAssemblyProperties.cs</Link>
+    </Compile>
     <Compile Include="HubPage.xaml.cs">
       <DependentUpon>HubPage.xaml</DependentUpon>
     </Compile>
@@ -119,7 +122,6 @@
     <Compile Include="ItemPage.xaml.cs">
       <DependentUpon>ItemPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

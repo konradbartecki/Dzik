@@ -28,6 +28,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LecznaHub.BackgroundTasks",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenLeczna.DTOs", "OpenLeczna\OpenLeczna.DTOs\OpenLeczna.DTOs.csproj", "{7F5F91A0-A8D6-4BCF-8A13-57734EEF05B1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C67973FB-E5A4-46A9-909C-0C6973756E24}"
+	ProjectSection(SolutionItems) = preProject
+		SharedAssemblyProperties.cs = SharedAssemblyProperties.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Windows Platform\LecznaHub.WindowsUniversal\LecznaHub.Shared.projitems*{9b42b335-4366-468f-a6bb-5bf17ea50c92}*SharedItemsImports = 4
