@@ -135,45 +135,44 @@ namespace LecznaHub.Core.ViewModel
 
                 }
                 //Save to local storage
-                IFolder rootFolder = FileSystem.Current.LocalStorage;
-                IFolder folder = await rootFolder.CreateFolderAsync(Config.NewsStoreFolderName, CreationCollisionOption.OpenIfExists);
-                IFile file = await folder.CreateFileAsync(Config.NewsDataStoreFilename, CreationCollisionOption.ReplaceExisting);
-                string json = JsonConvert.SerializeObject(_groups, new JsonSerializerSettings {TypeNameHandling = TypeNameHandling.All});
-                await file.WriteAllTextAsync(json);
+                //IFolder rootFolder = FileSystem.Current.LocalStorage;
+                //IFolder folder = await rootFolder.CreateFolderAsync(Config.NewsStoreFolderName, CreationCollisionOption.OpenIfExists);
+                //IFile file = await folder.CreateFileAsync(Config.NewsDataStoreFilename, CreationCollisionOption.ReplaceExisting);
+                //string json = JsonConvert.SerializeObject(_groups, new JsonSerializerSettings {TypeNameHandling = TypeNameHandling.All});
+                //await file.WriteAllTextAsync(json);
 
             }
             catch (WebException e)
             {
-                //Unable to download some of the news we will fallback to the news in the local storage
+                ////Unable to download some of the news we will fallback to the news in the local storage
 
-                IFolder rootFolder = FileSystem.Current.LocalStorage;
-                var folderExist = await rootFolder.CheckExistsAsync("News");
-                if (folderExist == ExistenceCheckResult.NotFound)
-                {
+                //IFolder rootFolder = FileSystem.Current.LocalStorage;
+                //var folderExist = await rootFolder.CheckExistsAsync("News");
+                //if (folderExist == ExistenceCheckResult.NotFound)
+                //{
 
-                    //.ShowMessage("Błąd przy pobieraniu wiadomości", "Sprawdź połączenie z internetem lub sprobuj ponownie później");
-                    throw new DirectoryNotFoundException(
-                        "Unable to download news and there is no stored local version to load", e);
-                }
-                IFolder folder = await rootFolder.GetFolderAsync(Config.NewsStoreFolderName);
+                //    //.ShowMessage("Błąd przy pobieraniu wiadomości", "Sprawdź połączenie z internetem lub sprobuj ponownie później");
+                //    throw new DirectoryNotFoundException(
+                //        "Unable to download news and there is no stored local version to load", e);
+                //}
+                //IFolder folder = await rootFolder.GetFolderAsync(Config.NewsStoreFolderName);
                 
-                var FileExist = await folder.CheckExistsAsync(Config.NewsDataStoreFilename);
-                if (FileExist == ExistenceCheckResult.FileExists)
-                {
-                    var file = await folder.GetFileAsync(Config.NewsDataStoreFilename);
-                    var json = await file.ReadAllTextAsync();
-                    _groups = JsonConvert.DeserializeObject<ObservableCollection<NewsCollection>>(json,
-                        new NewsConverter());
-                    //var converter = new NewsConverter();
-                    //_groups = JsonConvert.DeserializeObject<ObservableCollection<NewsCollection>>(json, new JsonSerializerSettings()
-                    //{
-                    //    Converters = converter
-                    //});
-                }
-                else
-                {
-                    throw new FileNotFoundException("Unable download news and there is no news store file");
-                }
+                //var FileExist = await folder.CheckExistsAsync(Config.NewsDataStoreFilename);
+                //if (FileExist == ExistenceCheckResult.FileExists)
+                //{
+                //    //var file = await folder.GetFileAsync(Config.NewsDataStoreFilename);
+                //    //var json = await file.ReadAllTextAsync();
+                //    //_groups = JsonConvert.DeserializeObject<ObservableCollection<NewsCollection>>(json);
+                //    //var converter = new NewsConverter();
+                //    //_groups = JsonConvert.DeserializeObject<ObservableCollection<NewsCollection>>(json, new JsonSerializerSettings()
+                //    //{
+                //    //    Converters = converter
+                //    //});
+                //}
+                //else
+                //{
+                //    throw new FileNotFoundException("Unable download news and there is no news store file");
+                //}
             }
 
 

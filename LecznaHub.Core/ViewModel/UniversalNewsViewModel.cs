@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 using Cirrious.MvvmCross.ViewModels;
 using LecznaHub.Core.Model;
 using LecznaHub.Core.Model.News;
-using Microsoft.ApplicationInsights;
 using Newtonsoft.Json;
 using PCLStorage;
 using PCLStorage.Exceptions;
-using Xamarin;
 
 namespace LecznaHub.Core.ViewModel
 {
@@ -33,9 +31,13 @@ namespace LecznaHub.Core.ViewModel
 
         public async Task InitializeAsync()
         {
-            var savedStore = await GetSavedNewsStoreAsync();
+
+            //UniversalNewsItemStore savedStore = new UniversalNewsItemStore();
+            UniversalNewsItemStore savedStore = await GetSavedNewsStoreAsync();
             if (savedStore != null)
                 this.NewsStore = savedStore;
+            else
+                NewsStore = new UniversalNewsItemStore();
             await RefreshItemStoreAsync();
             IsInitialized = true;
         }
@@ -54,12 +56,11 @@ namespace LecznaHub.Core.ViewModel
             var json = await file.ReadAllTextAsync();
             try
             {
-                return JsonConvert.DeserializeObject<UniversalNewsItemStore>(json);
+                UniversalNewsItemStore store = JsonConvert.DeserializeObject<UniversalNewsItemStore>(json);
+                return store;
             }
             catch (JsonException jsonException)
             {
-                var telemetry = new TelemetryClient();
-                telemetry.TrackException(jsonException);
                 return null;
             }
         }
@@ -95,9 +96,7 @@ namespace LecznaHub.Core.ViewModel
                 {
                     //We do not have collection of news from this provider in groups
                     //so we will add this
-                    var collection = new UniversalNewsCollection();
-                    collection.ProviderName = newsCollection.Title;
-
+                    var collection = new UniversalNewsCollection(newsCollection.Title);
                     IsSaveNeeded = await ConvertCollection(newsCollection, collection);
                     this.NewsStore.NewsCollections.Add(collection);
                 }
@@ -117,7 +116,8 @@ namespace LecznaHub.Core.ViewModel
             UniversalNewsCollection universalNewsCollection)
         {
             bool IsSaveNeeded = false;
-
+            List<UniversalNewsItem> itemsToAdd = new List<UniversalNewsItem>();
+            List<UniversalNewsItem> combinedList;
             foreach (var item in oldCollection.Items)
             {
                 if (universalNewsCollection.Items.Any(x => x.Title == item.Title))
@@ -126,8 +126,13 @@ namespace LecznaHub.Core.ViewModel
                 //this is a new item that needs to be added
                 var convertedItem = await convertNewsitemAsync(item);
                 //TODO: Item order bug?
-                universalNewsCollection.Items.Insert(0, convertedItem);
+                itemsToAdd.Add(convertedItem);
                 IsSaveNeeded = true;
+            }
+            if (IsSaveNeeded)
+            {
+                combinedList = itemsToAdd.Concat(universalNewsCollection.Items).ToList();
+                universalNewsCollection.Items = combinedList;
             }
             return IsSaveNeeded;
         }

@@ -48,6 +48,16 @@ namespace LecznaHub.Core.Model.News
         public string ProviderName { get; set; }
         public List<UniversalNewsItem> Items { get; set; }
 
+        public UniversalNewsCollection(string name)
+        {
+            this.ProviderName = name;
+            this.Items = new List<UniversalNewsItem>();
+        }
+
+        public UniversalNewsCollection()
+        {
+            this.Items = new List<UniversalNewsItem>();
+        }
     }
 
     public class UniversalNewsItemStore
@@ -59,6 +69,7 @@ namespace LecznaHub.Core.Model.News
         public UniversalNewsItemStore()
         {
             this.Version = AssemblyVersionHelper.GetAssemblyVersion(this);
+            this.NewsCollections = new List<UniversalNewsCollection>();
         }
 
     }
