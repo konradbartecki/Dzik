@@ -58,6 +58,7 @@ namespace LecznaHub.Core.Model
         //    WebArticleBase webArticle = new WebArticleBase();
         //}
 
+
         public override string ToString()
         {
             return this.Title;
@@ -88,6 +89,7 @@ namespace LecznaHub.Core.Model
         public string ArticleBody { get; private set; }
         [DataMember]
         public string FormattedHtmlDocument { get; private set; }
+        [DataMember]
         public NewsProviderBase Provider { get; private set; }
 
         //[OnDeserialized]

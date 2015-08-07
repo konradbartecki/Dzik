@@ -136,9 +136,9 @@ namespace LecznaHub.Core.ViewModel
                 }
                 //Save to local storage
                 IFolder rootFolder = FileSystem.Current.LocalStorage;
-                IFolder folder = await rootFolder.CreateFolderAsync("News", CreationCollisionOption.OpenIfExists);
-                IFile file = await folder.CreateFileAsync("news.json", CreationCollisionOption.ReplaceExisting);
-                string json = JsonConvert.SerializeObject(Groups);
+                IFolder folder = await rootFolder.CreateFolderAsync(Config.NewsStoreFolderName, CreationCollisionOption.OpenIfExists);
+                IFile file = await folder.CreateFileAsync(Config.NewsDataStoreFilename, CreationCollisionOption.ReplaceExisting);
+                string json = JsonConvert.SerializeObject(_groups, new JsonSerializerSettings {TypeNameHandling = TypeNameHandling.All});
                 await file.WriteAllTextAsync(json);
 
             }
@@ -162,7 +162,17 @@ namespace LecznaHub.Core.ViewModel
                 {
                     var file = await folder.GetFileAsync(Config.NewsDataStoreFilename);
                     var json = await file.ReadAllTextAsync();
-                    _groups = JsonConvert.DeserializeObject<ObservableCollection<NewsCollection>>(json);
+                    _groups = JsonConvert.DeserializeObject<ObservableCollection<NewsCollection>>(json,
+                        new NewsConverter());
+                    //var converter = new NewsConverter();
+                    //_groups = JsonConvert.DeserializeObject<ObservableCollection<NewsCollection>>(json, new JsonSerializerSettings()
+                    //{
+                    //    Converters = converter
+                    //});
+                }
+                else
+                {
+                    throw new FileNotFoundException("Unable download news and there is no news store file");
                 }
             }
 

@@ -15,6 +15,8 @@
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,23 +44,28 @@
       <Link>Properties\SharedAssemblyProperties.cs</Link>
     </Compile>
     <Compile Include="App.cs" />
+    <Compile Include="Helpers\AssemblyVersionHelper.cs" />
     <Compile Include="Helpers\AsyncHelpers.cs" />
     <Compile Include="Helpers\DateTimeHelper.cs" />
     <Compile Include="Helpers\IsoEncoding.cs" />
     <Compile Include="Helpers\RemoveDiacritics.cs" />
     <Compile Include="Helpers\WebViewerHelper.cs" />
     <Compile Include="Model\Config.cs" />
-    <Compile Include="Model\Downloader.cs" />
+    <Compile Include="Model\Common\Downloader.cs" />
+    <Compile Include="Model\IDownloadable.cs" />
+    <Compile Include="Model\JsonConverters.cs" />
+    <Compile Include="Model\News\UniversalNews.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModel\DetailViewModel.cs" />
     <Compile Include="ViewModel\ListPickerViewModel.cs" />
     <Compile Include="ViewModel\NewsViewModel.cs" />
-    <Compile Include="Model\NewsCollection.cs" />
-    <Compile Include="Model\NewsItemBase.cs" />
-    <Compile Include="Providers\Leczna24.cs" />
-    <Compile Include="Providers\NewsProviderBase.cs" />
+    <Compile Include="Model\News\NewsCollection.cs" />
+    <Compile Include="Model\News\NewsItemBase.cs" />
+    <Compile Include="Model\News\Providers\Leczna24.cs" />
+    <Compile Include="Model\News\Providers\NewsProviderBase.cs" />
     <Compile Include="ViewModel\TransportViewModel.cs" />
     <Compile Include="ViewModel\TabbedViewModel.cs" />
+    <Compile Include="ViewModel\UniversalNewsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Cirrious.CrossCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e16445fd9b451819, processorArchitecture=MSIL">
@@ -84,6 +91,9 @@
     <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid+MonoTouch\HtmlAgilityPack.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.0.14.3-build00177\lib\portable-win81+wpa81\Microsoft.ApplicationInsights.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1-beta3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
@@ -122,6 +132,13 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

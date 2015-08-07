@@ -102,7 +102,6 @@ namespace LecznaHub.Core.Providers
             return new Leczna24WebArticleDownloader(new Uri(this.UniqueId));
         }
 
-        //sorry for not using LINQ but I had some problems with it - probably because of HtmlAgilityPack
         protected override string GetTitle()
         {
 
@@ -114,9 +113,6 @@ namespace LecznaHub.Core.Providers
                 }
             }
             return "Unable to download article title";
-            //return HtmlDocument.DocumentNode
-            //        .Descendants()
-            //        .FirstOrDefault(x => x.Attributes["class"].Value == "artykul_tytul").ToString();
         }
 
         protected override string GetHeadline()
@@ -145,8 +141,6 @@ namespace LecznaHub.Core.Providers
                 }
             }
             return "Unable to download article image";
-            //    .Where(elements => (string) elements.Attribute("class") == "noprint informacje_content_img")
-            //    .Select(elements => elements.Attribute("style").Value).FirstOrDefault();
         }
 
         protected override string GetArticleBody()
@@ -160,8 +154,6 @@ namespace LecznaHub.Core.Providers
                 }
             }
             return "Unable to download article body";
-            //    .Where(elements => (string)elements.Attribute("class") == "artykul_tresc")
-            //    .Select(elements => elements.Value).FirstOrDefault();
         }
 
         private string PrepareImgElements(HtmlNode ArticleBody)

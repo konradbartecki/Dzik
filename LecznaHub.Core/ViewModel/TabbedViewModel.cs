@@ -20,16 +20,19 @@ namespace LecznaHub.Core.ViewModel
 
         public NewsViewModel News { get; private set; }
         public TransportViewModel Transport { get; private set; }
+        public UniversalNewsViewModel UniversalNewsViewModel { get; private set; }
 
         public TabbedViewModel()
         {
             this.News = new NewsViewModel();
             this.Transport = new TransportViewModel();
+            this.UniversalNewsViewModel = new UniversalNewsViewModel();
         }
 
         public async Task DownloadViewModelsDataAsync()
         {
             await this.News.GetNewsDataAsync();
+            await this.UniversalNewsViewModel.InitializeAsync();
             await this.Transport.GetTransportDataAsync();
         }
     }
