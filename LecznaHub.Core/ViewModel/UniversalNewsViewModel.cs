@@ -40,6 +40,7 @@ namespace LecznaHub.Core.ViewModel
             else
                 NewsStore = new UniversalNewsItemStore();
             await RefreshItemStoreAsync();
+            FilterItems();
             IsInitialized = true;
         }
 
@@ -148,6 +149,16 @@ namespace LecznaHub.Core.ViewModel
             var universalitem = new UniversalNewsItem(item);
             await universalitem.CacheImageAsync();
             return universalitem;
+        }
+
+        public void FilterItems()
+        {
+            FilteredNewsItems.Clear();
+            var itemsToAdd = NewsStore.NewsCollections.SelectMany(x => x.Items);
+            foreach (var universalNewsItem in itemsToAdd)
+            {
+                FilteredNewsItems.Add(universalNewsItem);
+            }
         }
 
     }

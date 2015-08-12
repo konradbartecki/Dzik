@@ -15,9 +15,6 @@ namespace LecznaHub.Core.ViewModel
     /// </summary>
     public class TabbedViewModel : MvxViewModel
     {
-        //public ObservableCollection<NewsCollection> News { get; set; }
-        //public ObservableCollection<StationDto> Stations { get; set; }
-
         public NewsViewModel News { get; private set; }
         public TransportViewModel Transport { get; private set; }
         public UniversalNewsViewModel UniversalNewsViewModel { get; private set; }
