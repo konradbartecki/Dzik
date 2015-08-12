@@ -110,8 +110,6 @@ namespace LecznaHub.Core.ViewModel
         /// <returns></returns>
         public async Task GetNewsDataAsync()
         {
-            try
-            {
                 foreach (var provider in NewsProvidersList)
                 {
                     //Download new collection of news
@@ -141,9 +139,6 @@ namespace LecznaHub.Core.ViewModel
                 //string json = JsonConvert.SerializeObject(_groups, new JsonSerializerSettings {TypeNameHandling = TypeNameHandling.All});
                 //await file.WriteAllTextAsync(json);
 
-            }
-            catch (WebException e)
-            {
                 ////Unable to download some of the news we will fallback to the news in the local storage
 
                 //IFolder rootFolder = FileSystem.Current.LocalStorage;
@@ -174,8 +169,5 @@ namespace LecznaHub.Core.ViewModel
                 //    throw new FileNotFoundException("Unable download news and there is no news store file");
                 //}
             }
-
-
         }
     }
-}
