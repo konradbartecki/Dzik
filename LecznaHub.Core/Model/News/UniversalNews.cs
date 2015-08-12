@@ -98,8 +98,8 @@ namespace LecznaHub.Core.Model.News
             this.Version = AssemblyVersionHelper.GetAssemblyVersion(this);
             this.NewsCollections = new List<UniversalNewsCollection>();
             //create news store folder
-            //IFolder rootFolder = FileSystem.Current.LocalStorage;
-            //rootFolder.CreateFolderAsync(Config.NewsStoreFolderName, CreationCollisionOption.OpenIfExists).Wait();
+            IFolder rootFolder = FileSystem.Current.LocalStorage;
+            rootFolder.CreateFolderAsync(Config.NewsStoreFolderName, CreationCollisionOption.OpenIfExists).Wait();
         }
 
     }

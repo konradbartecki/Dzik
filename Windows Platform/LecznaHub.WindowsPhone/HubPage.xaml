@@ -136,14 +136,14 @@
             </HubSection>-->
 
             <HubSection x:Uid="Section3Header" Header="NEWS"
-				DataContext="{Binding News.Groups[0]}" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
+				DataContext="{Binding UniversalNewsViewModel}" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
                     <ListView 
 						AutomationProperties.AutomationId="ItemListViewSection3"
 						AutomationProperties.Name="Items In Group"
 						SelectionMode="None"
 						IsItemClickEnabled="True"
-						ItemsSource="{Binding Items}"
+						ItemsSource="{Binding FilteredNewsItems}"
 						ItemTemplate="{StaticResource StandardDoubleLineItemTemplate}"
 						ItemClick="ItemView_ItemClick"
 						ContinuumNavigationTransitionInfo.ExitElementContainer="True"/>

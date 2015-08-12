@@ -17,7 +17,11 @@ namespace LecznaHub.Core.ViewModel
 {
     public class UniversalNewsViewModel : MvxViewModel
     {
-        public ObservableCollection<UniversalNewsItem> FilteredNewsItems { get; set; }
+        private ObservableCollection<UniversalNewsItem> _filteredNewsItems = new ObservableCollection<UniversalNewsItem>();
+        public ObservableCollection<UniversalNewsItem> FilteredNewsItems
+        {
+            get { return this._filteredNewsItems; }
+        }
         public UniversalNewsItemStore NewsStore { get; set; }
 
         private bool IsInitialized;
@@ -153,11 +157,11 @@ namespace LecznaHub.Core.ViewModel
 
         public void FilterItems()
         {
-            FilteredNewsItems.Clear();
+            _filteredNewsItems.Clear();
             var itemsToAdd = NewsStore.NewsCollections.SelectMany(x => x.Items);
             foreach (var universalNewsItem in itemsToAdd)
             {
-                FilteredNewsItems.Add(universalNewsItem);
+                _filteredNewsItems.Add(universalNewsItem);
             }
         }
 
