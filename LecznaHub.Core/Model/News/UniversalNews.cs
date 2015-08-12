@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using LecznaHub.Core.Helpers;
+using PCLStorage;
 
 namespace LecznaHub.Core.Model.News
 {
@@ -17,9 +19,14 @@ namespace LecznaHub.Core.Model.News
         public string Title { get; set; }
         public string ProviderName { get; set; }
         public string Description { get; set; }
+
         public string ImagePath { get; set; }
+
         public string DownloadedArticleHtml { get; set; }
         public Uri WebsiteArticleUri => new Uri(this.UniqueId);
+
+        //private string _filename;
+        private bool _isImageCached;
 
         public override string ToString()
         {
@@ -40,6 +47,26 @@ namespace LecznaHub.Core.Model.News
             //TODO: Check formatted html article theme against current theme
             DownloadedArticleHtml = newsBase.WebArticle.FormattedHtmlDocument;
             ImagePath = newsBase.WebArticle.ImagePath;
+        }
+
+        public async Task CacheImageAsync()
+        {
+            if (_isImageCached) return;
+            //prepare folder
+            var folder = await StorageHelper.GetNewsFolderAsync();
+            //download image
+            var imagebytes = await BytesDownloader.DownloadBytesAsync(ImagePath);
+
+            var extension = ImagePath.Substring(ImagePath.Length - 4);
+            var filename = String.Format("{0}{1}", Guid.NewGuid(), extension);
+
+            var file = await folder.CreateFileAsync(filename, CreationCollisionOption.GenerateUniqueName);          
+            
+            var stream = await file.OpenAsync(FileAccess.ReadAndWrite);
+            await stream.WriteAsync(imagebytes, 0, imagebytes.Length);
+            await stream.FlushAsync();
+            ImagePath = file.Path;
+            _isImageCached = true;
         }
     }
 
@@ -70,6 +97,9 @@ namespace LecznaHub.Core.Model.News
         {
             this.Version = AssemblyVersionHelper.GetAssemblyVersion(this);
             this.NewsCollections = new List<UniversalNewsCollection>();
+            //create news store folder
+            //IFolder rootFolder = FileSystem.Current.LocalStorage;
+            //rootFolder.CreateFolderAsync(Config.NewsStoreFolderName, CreationCollisionOption.OpenIfExists).Wait();
         }
 
     }

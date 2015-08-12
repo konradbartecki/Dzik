@@ -49,6 +49,7 @@
     <Compile Include="Helpers\DateTimeHelper.cs" />
     <Compile Include="Helpers\IsoEncoding.cs" />
     <Compile Include="Helpers\RemoveDiacritics.cs" />
+    <Compile Include="Helpers\StorageHelper.cs" />
     <Compile Include="Helpers\WebViewerHelper.cs" />
     <Compile Include="Model\Config.cs" />
     <Compile Include="Model\Common\Downloader.cs" />

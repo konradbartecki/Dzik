@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Cirrious.MvvmCross.ViewModels;
+using LecznaHub.Core.Helpers;
 using LecznaHub.Core.Model;
 using LecznaHub.Core.Model.News;
 using Newtonsoft.Json;
@@ -31,7 +33,6 @@ namespace LecznaHub.Core.ViewModel
 
         public async Task InitializeAsync()
         {
-
             //UniversalNewsItemStore savedStore = new UniversalNewsItemStore();
             UniversalNewsItemStore savedStore = await GetSavedNewsStoreAsync();
             if (savedStore != null)
@@ -44,12 +45,8 @@ namespace LecznaHub.Core.ViewModel
 
         private async Task<UniversalNewsItemStore> GetSavedNewsStoreAsync()
         {
-            IFolder rootFolder = FileSystem.Current.LocalStorage;
-            var folderExist = await rootFolder.CheckExistsAsync(Config.NewsStoreFolderName);
-            if (folderExist == ExistenceCheckResult.NotFound)
-                return null;
-            IFolder folder = await rootFolder.GetFolderAsync(Config.NewsStoreFolderName);
-
+            var folder = await StorageHelper.GetNewsFolderAsync();
+            if (folder == null) return null;
             var fileExist = await folder.CheckExistsAsync(Config.NewsDataStoreFilename);
             if (fileExist != ExistenceCheckResult.FileExists) return null;
             var file = await folder.GetFileAsync(Config.NewsDataStoreFilename);
@@ -59,7 +56,7 @@ namespace LecznaHub.Core.ViewModel
                 UniversalNewsItemStore store = JsonConvert.DeserializeObject<UniversalNewsItemStore>(json);
                 return store;
             }
-            catch (JsonException jsonException)
+            catch (JsonException)
             {
                 return null;
             }
@@ -70,8 +67,16 @@ namespace LecznaHub.Core.ViewModel
             IFolder rootFolder = FileSystem.Current.LocalStorage;
             IFolder folder = await rootFolder.CreateFolderAsync(Config.NewsStoreFolderName, CreationCollisionOption.OpenIfExists);
             IFile file = await folder.CreateFileAsync(Config.NewsDataStoreFilename, CreationCollisionOption.ReplaceExisting);
-            string json = JsonConvert.SerializeObject(this.NewsStore);
-            await file.WriteAllTextAsync(json);
+            try
+            {
+                string json = JsonConvert.SerializeObject(this.NewsStore);
+                await file.WriteAllTextAsync(json);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                throw;
+            }                       
         }
 
         public async Task RefreshItemStoreAsync()
@@ -140,7 +145,9 @@ namespace LecznaHub.Core.ViewModel
         private async Task<UniversalNewsItem> convertNewsitemAsync(NewsItemBase item)
         {
             await item.WebArticle.DownloadAsync();
-            return new UniversalNewsItem(item);
+            var universalitem = new UniversalNewsItem(item);
+            await universalitem.CacheImageAsync();
+            return universalitem;
         }
 
     }
