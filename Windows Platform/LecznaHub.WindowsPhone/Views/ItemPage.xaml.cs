@@ -65,6 +65,9 @@ namespace LecznaHub
 
         private async void CreateDataModel(string uniqueId)
         {
+            //TODO: Offline support - https://github.com/konradbartecki/Dzik/issues/17
+            //Load offline cached version only if we cannot reach the website
+
             ProgressIndicator.ShowLoader("Pobieranie artykułu...", true);
             var item = await NewsViewModel.GetItemAsync(uniqueId);
             var html = WebViewerHelper.WrapHtml(item.WebArticle.ToString(), ThemeToStringHelper.GetCurrentThemeToString());

@@ -28,7 +28,7 @@ namespace LecznaHub.Core.ViewModel
 
         public async Task DownloadViewModelsDataAsync()
         {
-            await this.News.GetNewsDataAsync();
+            //await this.News.GetNewsDataAsync();
             await this.UniversalNewsViewModel.InitializeAsync();
             await this.Transport.GetTransportDataAsync();
         }

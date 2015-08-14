@@ -25,10 +25,6 @@ namespace LecznaHub.Core.ViewModel
         public UniversalNewsItemStore NewsStore { get; set; }
 
         private bool IsInitialized;
-        public UniversalNewsViewModel(ObservableCollection<UniversalNewsCollection> newsStore)
-        {
-
-        }
 
         public UniversalNewsViewModel()
         {
