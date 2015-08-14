@@ -177,7 +177,7 @@
                 <DataTemplate>
                     <GridView>
                         <Grid x:Name="moreApps" Margin="0,0,9.5,9.5" Background="{ThemeResource PhoneAccentBrush}" Tapped="moreApps_Tapped">
-                            <Viewbox Width="159" Height="159">
+                            <Viewbox Width="150" Height="150">
                                 <Grid>
                                     <Grid Width="32" Height="32" Visibility="Collapsed" />
                                     <Path Data="M20.698999,37.680001L20.728297,47.16587 33.61,48.981002 33.61,37.680001z M10.143999,37.680001L10.143999,45.847396 20.156999,47.165 20.156999,37.680001z M20.025199,27.401999L10.275801,28.895499 10.1,37.151998 20.113,37.151998z M33.638999,25.660998L20.728,27.286056 20.728,37.107999 33.638999,37.107999z M44.969753,12.589L54.221,15.750469 54.221,60.485732 45.08625,63.999999 0,55.216289 0,20.904119z M26.158921,4.0209999L26.395999,5.3842993C24.468168,6.2397809,22.635324,7.6746707,22.837091,10.019763L22.837091,15.251596 21.43,15.512 21.43,9.0262496C21.43,9.0262494,21.570728,5.7488637,26.158921,4.0209999z M32.518852,2.9860001C32.518852,2.9860001,37.235877,3.4820871,37.649997,8.4481478L37.649997,12.513213 36.325736,12.758 36.325736,8.0340929C36.325736,8.0340924 35.829513,3.8128014 30.532497,4.2268629 30.532497,4.2268629 30.39635,4.2437935 30.162599,4.2828627L29.982999,3.1474352C30.757728,3.0575933,31.597007,3.0003119,32.518852,2.9860001z M23.714635,0C23.714635,0,28.721195,0.52604294,29.159999,5.7970142L29.159999,14.083626 27.899585,14.316731 27.755082,14.316731 27.755082,5.356904C27.755082,5.3569036 27.227678,0.87761402 21.606511,1.3164406 21.606511,1.3164406 12.999011,2.3711443 13.438517,7.4650126L13.438517,16.989993 11.944999,17.265999 11.944999,6.4116182C11.944999,6.4116182,12.208602,0.17447281,23.714635,0z" Stretch="Uniform" Width="16" Height="16" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5" Fill="White">
@@ -191,7 +191,7 @@
                                 </Grid>
                             </Viewbox>
 
-                            <TextBlock Text="More apps" VerticalAlignment="Bottom" Margin="9.5,0,0,6.5" Style="{ThemeResource BaseTextBlockStyle}"/>
+                            <TextBlock Text="Więcej aplikacji" VerticalAlignment="Bottom" Margin="9.5,0,0,6.5" Style="{ThemeResource BaseTextBlockStyle}"/>
                         </Grid>
                         <Grid x:Name="About" Margin="0,0,9.5,9.5" Background="{ThemeResource PhoneAccentBrush}" Tapped="Grid_Tapped_1">
                             <Viewbox>
@@ -208,7 +208,7 @@
                                 </Grid>
                             </Viewbox>
 
-                            <TextBlock Text="About" VerticalAlignment="Bottom" Margin="9.5,0,0,6.5" Style="{ThemeResource BaseTextBlockStyle}"/>
+                            <TextBlock Text="O programie" VerticalAlignment="Bottom" Margin="9.5,0,0,6.5" Style="{ThemeResource BaseTextBlockStyle}"/>
                         </Grid>
                         <Grid x:Name="Feedback" Margin="0,0,9.5,9.5" Background="{ThemeResource PhoneAccentBrush}">
                             <Viewbox>
@@ -227,7 +227,7 @@
 
 
 
-                            <TextBlock Text="Feedback" VerticalAlignment="Bottom" Margin="9.5,0,0,6.5" Style="{ThemeResource BaseTextBlockStyle}"/>
+                            <TextBlock Text="Sugestie" VerticalAlignment="Bottom" Margin="9.5,0,0,6.5" Style="{ThemeResource BaseTextBlockStyle}"/>
                         </Grid>
                         <Grid x:Name="Share" Margin="0,0,9.5,9.5" Background="{ThemeResource PhoneAccentBrush}" Tapped="Share_Tapped">
                             <Viewbox>
@@ -245,7 +245,7 @@
                             </Viewbox>
 
 
-                            <TextBlock Text="Share" VerticalAlignment="Bottom" Margin="9.5,0,0,6.5" Style="{ThemeResource BaseTextBlockStyle}"/>
+                            <TextBlock Text="Udostępnij" VerticalAlignment="Bottom" Margin="9.5,0,0,6.5" Style="{ThemeResource BaseTextBlockStyle}"/>
                         </Grid>
                         <Grid x:Name="Settings" Margin="0,0,9.5,9.5" Background="{ThemeResource PhoneAccentBrush}">
                             <Viewbox>
@@ -262,7 +262,7 @@
                                 </Grid>
                             </Viewbox>
 
-                            <TextBlock Text="Settings" VerticalAlignment="Bottom" Margin="9.5,0,0,6.5" Style="{ThemeResource BaseTextBlockStyle}"/>
+                            <TextBlock Text="Ustawienia" VerticalAlignment="Bottom" Margin="9.5,0,0,6.5" Style="{ThemeResource BaseTextBlockStyle}"/>
                         </Grid>
                         <Grid x:Name="Review" Margin="0,0,9.5,9.5" Background="{ThemeResource PhoneAccentBrush}" Tapped="Grid_Tapped">
                             <Viewbox>
@@ -278,7 +278,7 @@
                                     </Path>
                                 </Grid>
                             </Viewbox>
-                            <TextBlock Text="Review" VerticalAlignment="Bottom" Margin="9.5,0,0,6.5" Style="{ThemeResource BaseTextBlockStyle}"/>
+                            <TextBlock Text="Oceń" VerticalAlignment="Bottom" Margin="9.5,0,0,6.5" Style="{ThemeResource BaseTextBlockStyle}"/>
                         </Grid>
                     </GridView>
                 </DataTemplate>
