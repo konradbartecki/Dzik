@@ -237,40 +237,40 @@ namespace LecznaHub.Core.ViewModel
 
         public static async Task<ObservableCollection<StationDto>> GetStationsAsync()
         {
-            Downloader stationsDownloader = new Downloader(
+            OldDownloader stationsOldDownloader = new OldDownloader(
                 new Uri(Config.OpenLecznaApiEndpoint + "Stations/"));
 
-            var json = await stationsDownloader.GetPageAsync();
+            var json = await stationsOldDownloader.GetPageAsync();
             var objects = JsonConvert.DeserializeObject<ObservableCollection<StationDto>>(json);
             return objects;
 
         }
         private async Task<StationDetailsDto> DownloadStationDetailsAsync(string stationName, string city)
         {
-            Downloader stationsDownloader = new Downloader(
+            OldDownloader stationsOldDownloader = new OldDownloader(
                 new Uri(String.Format("{0}Stations?name={1}&city={2}",
                 Config.OpenLecznaApiEndpoint,
                 stationName, city)));
 
-            var json = await stationsDownloader.GetPageAsync();
+            var json = await stationsOldDownloader.GetPageAsync();
             var details = JsonConvert.DeserializeObject<StationDetailsDto>(json);
             return details;
         }
         public static async Task<ObservableCollection<CityDTO>> GetCitiesAsync()
         {
-            Downloader stationsDownloader = new Downloader(
+            OldDownloader stationsOldDownloader = new OldDownloader(
                 new Uri(Config.OpenLecznaApiEndpoint + "Cities/"));
 
-            var json = await stationsDownloader.GetPageAsync();
+            var json = await stationsOldDownloader.GetPageAsync();
             var objects = JsonConvert.DeserializeObject<ObservableCollection<CityDTO>>(json);
             return objects;
         }
         public static async Task<ObservableCollection<CarrierDTO>> GetCarriersAsync()
         {
-            Downloader stationsDownloader = new Downloader(
+            OldDownloader stationsOldDownloader = new OldDownloader(
                 new Uri(Config.OpenLecznaApiEndpoint + "Carriers/"));
 
-            var json = await stationsDownloader.GetPageAsync();
+            var json = await stationsOldDownloader.GetPageAsync();
             var objects = JsonConvert.DeserializeObject<ObservableCollection<CarrierDTO>>(json);
             return objects;
         }

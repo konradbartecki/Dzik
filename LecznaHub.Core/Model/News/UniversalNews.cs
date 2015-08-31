@@ -11,7 +11,6 @@ namespace LecznaHub.Core.Model.News
     /// </summary>
     public class UniversalNewsItem
     {
-        //Work in progress
         /// <summary>
         /// HTTP Link to the full article
         /// </summary>
@@ -19,13 +18,10 @@ namespace LecznaHub.Core.Model.News
         public string Title { get; set; }
         public string ProviderName { get; set; }
         public string Description { get; set; }
-
         public string ImagePath { get; set; }
-
         public string DownloadedArticleHtml { get; set; }
         public Uri WebsiteArticleUri => new Uri(this.UniqueId);
 
-        //private string _filename;
         private bool _isImageCached;
 
         public override string ToString()

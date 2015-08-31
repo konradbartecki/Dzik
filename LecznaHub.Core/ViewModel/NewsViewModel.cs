@@ -59,7 +59,7 @@ namespace LecznaHub.Core.ViewModel
 
         private List<NewsProviderBase> NewsProvidersList = new List<NewsProviderBase>
         {
-            new Leczna24()
+            new Leczna24Old()
         }; 
 
         private static NewsViewModel _sampleViewModel = new NewsViewModel();

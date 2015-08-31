@@ -15,9 +15,9 @@ using LecznaHub.Core.Model;
 namespace LecznaHub.Core.Providers
 {
     [DataContract]
-    public class Leczna24 : NewsProviderBase
+    public class Leczna24Old : NewsProviderBase
     {
-        public Leczna24() : base ("Łęczna24", "http://leczna24.pl", new Uri("http://leczna24.pl/rss/informacje_utf8.php"))
+        public Leczna24Old() : base ("Łęczna24", "http://leczna24.pl", new Uri("http://leczna24.pl/rss/informacje_utf8.php"))
         {
 
         }
@@ -85,9 +85,9 @@ namespace LecznaHub.Core.Providers
         {
             
         }
-        class Leczna24WebArticleDownloader : Downloader
+        class Leczna24WebArticleOldDownloader : OldDownloader
         {
-            public Leczna24WebArticleDownloader(Uri feedUri) : base(feedUri)
+            public Leczna24WebArticleOldDownloader(Uri feedUri) : base(feedUri)
             {
             }
 
@@ -97,9 +97,9 @@ namespace LecznaHub.Core.Providers
             }
         }
 
-        public override Downloader CreateNewDownloader()
+        public override OldDownloader CreateNewDownloader()
         {
-            return new Leczna24WebArticleDownloader(new Uri(this.UniqueId));
+            return new Leczna24WebArticleOldDownloader(new Uri(this.UniqueId));
         }
 
         protected override string GetTitle()

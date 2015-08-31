@@ -103,15 +103,15 @@ namespace LecznaHub.Core.Model
         /// Override this class if you need custom downloader with custom encoding
         /// </summary>
         /// <returns></returns>
-        public virtual Downloader CreateNewDownloader()
+        public virtual OldDownloader CreateNewDownloader()
         {
-            return new Downloader(new Uri(this.UniqueId));
+            return new OldDownloader(new Uri(this.UniqueId));
         }
 
         public async Task DownloadAsync()
         {
-            Downloader downloader = CreateNewDownloader();
-            string download = await downloader.GetPageAsync();
+            OldDownloader oldDownloader = CreateNewDownloader();
+            string download = await oldDownloader.GetPageAsync();
 
             DownloadedHtmlDocument = new HtmlDocument();
             DownloadedHtmlDocument.LoadHtml(download);

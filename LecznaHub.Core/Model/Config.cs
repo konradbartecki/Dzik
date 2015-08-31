@@ -29,7 +29,7 @@ namespace LecznaHub.Core.Model
         {
             public static List<NewsProviderBase> NewsProvidersList = new List<NewsProviderBase>
             {
-                new Leczna24()
+                new Leczna24Old()
             };
         }
     }

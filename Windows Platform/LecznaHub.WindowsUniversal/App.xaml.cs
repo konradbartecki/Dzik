@@ -41,7 +41,7 @@ namespace LecznaHub
             this.Suspending += this.OnSuspending;
             SuspensionManager.KnownTypes.Add(typeof(WebArticleBase));
             SuspensionManager.KnownTypes.Add(typeof(Leczna24WebArticle));
-            SuspensionManager.KnownTypes.Add(typeof(Leczna24));
+            SuspensionManager.KnownTypes.Add(typeof(Leczna24Old));
             SuspensionManager.KnownTypes.Add(typeof(NewsProviderBase));
             SuspensionManager.KnownTypes.Add(typeof(NewsItemBase));
             SuspensionManager.KnownTypes.Add(typeof(Leczna24NewsItem));

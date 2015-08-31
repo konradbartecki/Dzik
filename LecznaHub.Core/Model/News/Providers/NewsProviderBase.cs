@@ -42,8 +42,8 @@ namespace LecznaHub.Core.Providers
         public virtual async Task<NewsCollection> GetNewsAsync()
         {
             //Download news as string
-            Downloader downloader = new Downloader(NewsFeedUri);
-            string news = await downloader.GetPageAsync();
+            OldDownloader oldDownloader = new OldDownloader(NewsFeedUri);
+            string news = await oldDownloader.GetPageAsync();
 
             return GetNewsFromDownloadedData(news);
         }
