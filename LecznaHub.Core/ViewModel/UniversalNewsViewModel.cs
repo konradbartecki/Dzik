@@ -95,7 +95,12 @@ namespace LecznaHub.Core.ViewModel
                     for (int i = 0; i < this.NewsStore.NewsCollections.Count; i++)
                     {
                         if (NewsStore.NewsCollections[i].ProviderName == newsCollection.Title)
-                            IsSaveNeeded = await ConvertCollection(newsCollection, NewsStore.NewsCollections[i]);
+                        {
+                            bool IsCollectionChanged = await ConvertCollection(newsCollection, NewsStore.NewsCollections[i]);
+                            if (IsCollectionChanged)
+                                IsSaveNeeded = true;
+                        }
+                            
                     }
                 }
                 else
@@ -103,7 +108,8 @@ namespace LecznaHub.Core.ViewModel
                     //We do not have collection of news from this provider in groups
                     //so we will add this
                     var collection = new UniversalNewsCollection(newsCollection.Title);
-                    IsSaveNeeded = await ConvertCollection(newsCollection, collection);
+                    await ConvertCollection(newsCollection, collection);
+                    IsSaveNeeded = true;
                     this.NewsStore.NewsCollections.Add(collection);
                 }
             }
@@ -126,12 +132,11 @@ namespace LecznaHub.Core.ViewModel
             List<UniversalNewsItem> combinedList;
             foreach (var item in oldCollection.Items)
             {
-                if (universalNewsCollection.Items.Any(x => x.Title == item.Title))
+                if (universalNewsCollection.Items.Any(x => x.UniqueId == item.UniqueId))
                     //we already have this item converted
                     continue;
                 //this is a new item that needs to be added
                 var convertedItem = await convertNewsitemAsync(item);
-                //TODO: Item order bug?
                 itemsToAdd.Add(convertedItem);
                 IsSaveNeeded = true;
             }
