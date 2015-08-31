@@ -9,8 +9,16 @@ using LecznaHub.Core.Helpers;
 
 namespace LecznaHub.Core.Model.Common
 {
+    /// <summary>
+    /// Static WebRequest downloader for HTTP/string content
+    /// </summary>
     public static class Downloader
     {
+        /// <summary>
+        /// Downloads string from the desired HTTP uri
+        /// </summary>
+        /// <param name="request">You can set custom encoding</param>
+        /// <returns>String of HTTP server response</returns>
         public static async Task<string> DownloadWebStringAsync(Request request)
         {
             WebRequest webrequest = request.AsWebRequest();
