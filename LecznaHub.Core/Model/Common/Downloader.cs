@@ -7,69 +7,68 @@ using System.Text;
 using System.Threading.Tasks;
 using LecznaHub.Core.Helpers;
 
-namespace LecznaHub.Core.Model
+namespace LecznaHub.Core.Model.Common
 {
-    public class Downloader
+    public static class Downloader
     {
-        public Downloader(Uri feedUri)
+        public static async Task<string> DownloadWebStringAsync(Request request)
         {
-            Request = WebRequest.Create(feedUri);
-        }
-
-        public Downloader(Uri feedUri, string requestContentType, string requestMethod)
-        {
-            Request = WebRequest.Create(feedUri);
-            Request.ContentType = requestContentType;
-            Request.Method = requestMethod;
-        }
-
-        private WebRequest Request { get; }
-
-        public async Task<string> GetPageAsync()
-        {
-            WebResponse response = await Request.GetResponseAsync();
-            //Request.ContentType = "application/json";
-            //Request.Method = "GET";
-            // Get the stream containing content returned by the server.
+            WebRequest webrequest = request.AsWebRequest();
+            WebResponse response = await webrequest.GetResponseAsync();
             Stream dataStream = response.GetResponseStream();
-            // Open the stream using a StreamReader for easy access.
-            // Create new reader through method below to allow other classes to override stream reader creation and specify own encoding
-            StreamReader reader = OverrideStreamReader(dataStream);
-            // Read the content.
+            StreamReader reader = GetCustomStreamReader(dataStream, request);
             string responseFromServer = reader.ReadToEnd();
-            // Cleanup the streams and the response.
             reader.Dispose();
             dataStream.Dispose();
             response.Dispose();
-
             return responseFromServer;
-
         }
 
-        /// <summary>
-        /// Override this class if you need to create new StreamReader with custom encoding
-        /// </summary>
-        /// <param name="dataStream"></param>
-        /// <returns>DataReader with dataStream and custom encoding</returns>
-        public virtual StreamReader OverrideStreamReader(Stream dataStream)
+        private static StreamReader GetCustomStreamReader(Stream datastream, Request request)
         {
-            return new StreamReader(dataStream);
+            switch (request.UsedEncoding)
+            {
+                case Request.Encoding.Latin2:
+                    return new StreamReader(datastream, new IsoEncoding(), true);
+                default:
+                    return new StreamReader(datastream);
+            }
         }
     }
 
-    public static class BytesDownloader
+    public class Request
     {
+        public Uri Uri { get; set; }
+        public Encoding UsedEncoding { get; set; }
 
-        public static async Task<byte[]> DownloadBytesAsync(string url)
+        public enum Encoding
         {
-            WebRequest request = WebRequest.Create(new Uri(url));
-            var response = await request.GetResponseAsync();
-            using (Stream dataStream = response.GetResponseStream())
-            using (var memoryStream = new MemoryStream())
-            {
-                dataStream.CopyTo(memoryStream);
-                return memoryStream.ToArray();
-            }
+            UTF8,
+            Latin2
+        }
+
+        public Request(Uri uri)
+        {
+            this.Uri = uri;
+            this.UsedEncoding = Encoding.UTF8;
+        }
+        public Request(string uri) : this(new Uri(uri))
+        {
+        }
+
+        public Request(Uri uri, Encoding encoding)
+        {
+            this.Uri = uri;
+            this.UsedEncoding = encoding;
+        }
+
+        public Request(string uri, Encoding encoding) : this(new Uri(uri), encoding)
+        {
+        }
+
+        public WebRequest AsWebRequest()
+        {
+            return WebRequest.Create(this.Uri);
         }
     }
 }
