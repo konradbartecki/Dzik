@@ -54,8 +54,9 @@
     <Compile Include="Model\Common\Downloader.cs" />
     <Compile Include="Model\Config.cs" />
     <Compile Include="Model\Common\OldDownloader.cs" />
+    <Compile Include="Model\News\Providers\INewsProvider.cs" />
+    <Compile Include="Model\News\Providers\Leczna24.cs" />
     <Compile Include="Model\News\Sources\AtomRSS.cs" />
-    <Compile Include="Model\News\Sources\IDownloadable.cs" />
     <Compile Include="Model\News\UniversalNews.cs" />
     <Compile Include="Model\News\UniversalWebArticle.cs" />
     <Compile Include="Properties\Annotations.cs" />

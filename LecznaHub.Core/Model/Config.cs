@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LecznaHub.Core.Model.News.Providers;
 using LecznaHub.Core.Providers;
 using Newtonsoft.Json;
 
@@ -30,6 +31,11 @@ namespace LecznaHub.Core.Model
             public static List<NewsProviderBase> NewsProvidersList = new List<NewsProviderBase>
             {
                 new Leczna24Old()
+            };
+
+            public static List<NewsProvider> NewsProviders = new List<NewsProvider>
+            {
+                new Leczna24()
             };
         }
     }
