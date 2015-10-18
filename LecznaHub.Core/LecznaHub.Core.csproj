@@ -49,6 +49,12 @@
     <Compile Include="Helpers\WebViewerHelper.cs" />
     <Compile Include="Model\Config.cs" />
     <Compile Include="Model\Downloader.cs" />
+    <Compile Include="Model\DTOs\CarrierDTO.cs" />
+    <Compile Include="Model\DTOs\CityDTO.cs" />
+    <Compile Include="Model\DTOs\DepartureDTO.cs" />
+    <Compile Include="Model\DTOs\GeoPosDto.cs" />
+    <Compile Include="Model\DTOs\ScheduleDTO.cs" />
+    <Compile Include="Model\DTOs\StationDTO.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModel\DetailViewModel.cs" />
     <Compile Include="ViewModel\ListPickerViewModel.cs" />
@@ -114,12 +120,6 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\OpenLeczna\OpenLeczna.DTOs\OpenLeczna.DTOs.csproj">
-      <Project>{7f5f91a0-a8d6-4bcf-8a13-57734eef05b1}</Project>
-      <Name>OpenLeczna.DTOs</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

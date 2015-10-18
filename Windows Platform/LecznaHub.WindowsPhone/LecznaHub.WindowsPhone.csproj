@@ -233,10 +233,6 @@
       <HintPath>..\..\packages\PCLStorage.1.0.2\lib\portable-win8+wpa81\PCLStorage.Abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Xamarin.Insights, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xamarin.Insights.1.10.4.112\lib\wpa\Xamarin.Insights.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="ApplicationInsights.config" />
@@ -252,10 +248,6 @@
     <ProjectReference Include="..\..\LecznaHub.Core\LecznaHub.Core.csproj">
       <Project>{5cfd10d8-04cd-4f8b-b772-758cd21d90ae}</Project>
       <Name>LecznaHub.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\OpenLeczna\OpenLeczna.DTOs\OpenLeczna.DTOs.csproj">
-      <Project>{7f5f91a0-a8d6-4bcf-8a13-57734eef05b1}</Project>
-      <Name>OpenLeczna.DTOs</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
